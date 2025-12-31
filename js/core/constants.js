@@ -1,0 +1,49 @@
+// Объект для перевода типов на русский
+export const typeTranslations = {
+    capitals: "Города",
+    elven_castles: "Замки эльфов",
+    forts: "Форты",
+    castles: "Замки",
+    fortresses: "Крепости",
+    inns: "Таверны",
+    settlements: "Поселения",
+    elvenwood_settlements: "Поселения",
+    towns: "Города",
+    dungeons: "Подземелья",
+    tombs: "Склепы",
+    caves: "Пещеры",
+    landmarks: "Место",
+    ruins: "Руины",
+    elder_ruins: "Руины",
+    town_ruins: "Руины",
+    temples: "Храмы",
+    forests: "Леса",
+    mountains: "Горы", 
+    rivers: "Рекя",
+    seas: "Моря"
+};
+
+// URL изображений для маркеров
+export const iconUrls = {
+    capitals: "images/icons/capitals.png",
+    elven_castles: "images/icons/elven_castle.png",
+    forts: "images/icons/forts.png",
+    castles: "images/icons/castles.png",
+    fortresses: "images/icons/fortresses.png",
+    inns: "images/icons/inns.png", 
+    settlements: "images/icons/settlements.png",
+    elvenwood_settlements: "images/icons/elvenwood_settlements.png",
+    towns: "images/icons/towns.png",
+    dungeons: "images/icons/dungeons.png",
+    tombs: "images/icons/tombs.png",
+    caves: "images/icons/caves.png",
+    landmarks: "images/icons/landmarks.png",
+    ruins: "images/icons/tower_ruins.png",
+    elder_ruins: "images/icons/elder_ruins.png",
+    town_ruins: "images/icons/town_ruins.png",
+    temples: "images/icons/temples.png",
+    forests: "images/icons/forests.png",
+    mountains: "images/icons/mountains.png",
+    rivers: "images/icons/rivers.png",
+    seas: "images/icons/seas.png"    
+};

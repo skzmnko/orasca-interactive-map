@@ -1,0 +1,10 @@
+/* Main CSS File - Imports all components */
+@import url('base.css');
+@import url('fonts.css');
+@import url('control-panel.css');
+@import url('search.css');
+@import url('markers.css');
+@import url('popups.css');
+@import url('map-controls.css');
+@import url('login.css'); /* ← ДОБАВИТЬ */
+@import url('responsive.css');

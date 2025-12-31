@@ -1,0 +1,149 @@
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .control-panel-container {
+        top: 5px;
+        left: 5px;
+    }
+    
+    #control-panel {
+        max-width: 280px;
+        padding: 12px;
+    }
+    
+    .panel-header h3 {
+        font-size: 1.1rem;
+        letter-spacing: 0.8px;
+    }
+    
+    .panel-toggle-btn {
+        width: 16px;
+        height: 36px;
+        margin-top: 12px;
+    }
+    
+    .panel-toggle-btn::before {
+        font-size: 0.6rem;
+    }
+    
+    #search {
+        height: 36px;
+        padding: 8px 12px;
+    }
+    
+    .all-layers-control {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .layer-toggle-btn {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+    
+    /* Location Counters */
+    .location-counter {
+        font-size: 0.7rem;
+        min-width: 25px;
+    }
+
+    /* Scrollbar */
+    #control-panel::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    /* Scale Control */
+    .leaflet-control-scale {
+        font-size: 10px !important;
+        padding: 4px 6px !important;
+        margin-bottom: 15px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .leaflet-control-zoom {
+        margin-bottom: 3px !important;
+    }
+    
+    /* Popup */
+    .leaflet-popup-content {
+        min-width: 280px !important;
+        max-width: 300px !important;
+        max-height: 450px !important;
+    }
+    
+    .popup-header {
+        padding: 10px 12px;
+    }
+    
+    .popup-header h3 {
+        font-size: 1rem;
+    }
+    
+    .location-alias {
+        font-size: 0.8rem;
+    }
+    
+    /* Адаптивная высота описания для мобильных */
+    .leaflet-popup-content .location-description {
+        padding: 10px 12px;
+        max-height: 160px;
+        min-height: 50px;
+        font-size: 0.9rem;
+        border-bottom: none;
+    }
+    
+    /* ИЗМЕНЕНО: Адаптивные стили для блока с информацией о роде правителя */
+    .leaflet-popup-content .location-family {
+        background: var(--mg-popup-header-bg);
+        padding: 6px 12px 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    /* Адаптивный скролл для мобильных */
+    .leaflet-popup-content .location-description::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    /* ИЗМЕНЕНО: Добавлена адаптивность для поиска */
+    .search-hidden-message {
+        max-width: 280px;
+        margin: 0 10px;
+    }
+    
+    .search-hidden-content {
+        padding: 16px;
+        gap: 10px;
+    }
+    
+    .search-hidden-icon {
+        font-size: 1.3rem;
+    }
+    
+    .search-hidden-text strong {
+        font-size: 0.9rem;
+    }
+    
+    .search-hidden-text p {
+        font-size: 0.8rem;
+    }
+    
+    .search-result-warning {
+        font-size: 0.7rem;
+    }
+    
+    /* Адаптивность для результатов поиска */
+    #search-results {
+        max-height: 180px;
+    }
+    
+    .search-result-item {
+        padding: 8px 10px;
+    }
+    
+    .search-result-item strong {
+        font-size: 0.85rem;
+    }
+    
+    .search-result-alias {
+        font-size: 0.8rem;
+    }
+}

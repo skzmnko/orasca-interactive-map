@@ -1,0 +1,75 @@
+/* Base Styles and Variables */
+:root {
+    --mg-bg-primary: #0a0a0a;
+    --mg-bg-secondary: #1a1a1a;
+    --mg-bg-panel: rgba(30, 30, 30, 0.95);
+    
+    /* Обновленные цвета с позолотой */
+    --mg-accent: #d4af37;
+    --mg-accent-hover: #e6c44c;
+    --mg-accent-light: rgba(212, 175, 55, 0.15);
+    --mg-accent-muted: rgba(212, 175, 55, 0.4);
+    
+    --mg-text-primary: #ffffff;
+    --mg-text-secondary: #a3a3a3;
+    --mg-text-muted: #6b7280;
+    --mg-text-accent: #d4af37;
+    
+    --mg-border: #374151;
+    --mg-border-light: #4b5563;
+    
+    --mg-hover: rgba(212, 175, 55, 0.08);
+    --mg-active: rgba(212, 175, 55, 0.2);
+    
+    --mg-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --mg-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+    --mg-gold-glow: 0 0 8px rgba(212, 175, 55, 0.3);
+    
+    /* Цвет для хедера попапа */
+    --mg-popup-header-bg: #1a1a1a;
+    --mg-popup-header-border: #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--mg-bg-primary);
+    color: var(--mg-text-primary);
+    overflow: hidden;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mg-bg-primary);
+}
+
+/* ИЗМЕНЕНО: Упрощенный фон без изображения */
+.map-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: 
+        radial-gradient(
+            ellipse at center,
+            rgba(26, 26, 46, 0.9) 0%,
+            rgba(15, 23, 42, 0.8) 50%,
+            rgba(8, 12, 24, 0.9) 100%
+        );
+}
+
+.leaflet-container {
+    background: transparent !important;
+}
