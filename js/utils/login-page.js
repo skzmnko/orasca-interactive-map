@@ -54,7 +54,6 @@ class LoginPage {
                     </button>
                 </form>
                 
-                <!-- ИЗМЕНЕНО: убираем текст ошибки по умолчанию и добавляем hidden -->
                 <div id="login-error" class="error-message hidden"></div>
                 
                 <div class="login-footer">
@@ -112,7 +111,7 @@ class LoginPage {
         loginBtn.disabled = false;
 
         if (result.success) {
-            console.log(`🎉 Добро пожаловать, ${result.user.displayName}!`);
+            console.log(`🎉 Welcome, ${result.user.displayName}!`);
             this.showSuccessAnimation();
             
             setTimeout(() => {
@@ -156,9 +155,9 @@ class LoginPage {
     }
 
     setupTestCredentials() {
-        console.log('👥 Тестовые пользователи:');
+        console.log('👥 Testing users:');
         console.log('DM: dungeonmaster / dm_access_2024');
-        console.log('Игрок: benevir / player_bene_2024');
+        console.log('Player: benevir / player_bene_2024');
     }
 
     show() {
