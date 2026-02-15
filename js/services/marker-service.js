@@ -42,7 +42,6 @@ class MarkerService {
                 icon: this.currentIcons[location.type]
             }).addTo(targetLayer);
             
-            // Сохраняем ссылки для быстрого доступа
             location.marker = marker;
             location.latLng = latLng;
 
@@ -69,14 +68,12 @@ class MarkerService {
         `;
     }
 
-    // Метод для управления высотой описания после создания попапа
     setupDescriptionHeight(location) {
         if (location.marker) {
             location.marker.on('popupopen', () => {
                 setTimeout(() => {
                     const descElement = document.getElementById(`desc-${location.id}`);
                     if (descElement) {
-                        // Проверяем, нужен ли скролл
                         if (descElement.scrollHeight > descElement.clientHeight) {
                             descElement.classList.add('has-scroll');
                         } else {

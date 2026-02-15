@@ -1,6 +1,5 @@
 import idGenerator from './id-generator.js';
 
-// Фабрика для создания локаций с автогенерацией ID
 class LocationFactory {
     static createLocation(data) {
         const {
@@ -15,10 +14,8 @@ class LocationFactory {
             known = false
         } = data;
 
-        // Генерируем ID
         const locationId = idGenerator.generateId();
         
-        // Используем указанное изображение или fallback
         const imagePath = image || fallbackLocationImage;
 
         return {
@@ -36,7 +33,6 @@ class LocationFactory {
         };
     }
 
-    // Создать несколько локаций
     static createLocations(locationsData) {
         return locationsData.map(data => this.createLocation(data));
     }

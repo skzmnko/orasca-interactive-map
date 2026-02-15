@@ -41,7 +41,6 @@ class LayerService {
         });
     }
 
-    // ИЗМЕНЕНО: добавлен метод для скрытия географических слоев после инициализации карты
     hideGeographicLayers() {
         if (MapService.map) {
             this.hideLayer('forests');
@@ -120,13 +119,11 @@ class LayerService {
             let totalCount = this.getAllLocationsCountForTypes(layerConfig);
         
             if (AuthService.isDM()) {
-            // Для DM: visibleCount = количество локаций с known:true (то что видят игроки)
                 visibleCount = DataService.allLocations.filter(location => 
                     types.includes(location.type) && 
                     location.known === true
                 ).length;
             } else {
-            // Для игроков: visibleCount = количество доступных локаций
                 visibleCount = DataService.allLocations.filter(location => 
                 types.includes(location.type) && 
                 LocationVisibilityService.shouldShowLocation(location)
@@ -155,28 +152,23 @@ class LayerService {
             }
         }
 
-    // Для DM показываем "видимые игрокам / всего"
         if (AuthService.isDM()) {
             if (totalCount > visibleCount) {
-                // Есть скрытые локации - показываем формат "7/12"
                 counterElement.textContent = `(${visibleCount}/${totalCount})`;
                 counterElement.style.color = 'var(--mg-text-muted)';
                 counterElement.title = `Игроки видят ${visibleCount} из ${totalCount} локаций`;
             } else {
-                // Все локации видны игрокам - показываем просто число
                 counterElement.textContent = `(${visibleCount})`;
                 counterElement.style.color = 'var(--mg-text-secondary)';
                 counterElement.title = `Все ${visibleCount} локаций видны игрокам`;
             }
         } else {
-            // Для игроков показываем только количество доступных локаций
             counterElement.textContent = `(${visibleCount})`;
             counterElement.style.color = 'var(--mg-text-accent)';
             counterElement.title = `Локаций доступно вашему персонажу: ${visibleCount}`;
         }
     }
 
-    // Вспомогательный метод для получения общего количества локаций по типам
     getAllLocationsCountForTypes(layerConfig) {
         const types = Array.isArray(layerConfig) ? layerConfig : [layerConfig];
         return types.reduce((sum, type) => {
@@ -184,7 +176,6 @@ class LayerService {
         }, 0);
     }
 
-    // Метод для принудительного обновления счетчиков (например, после изменения видимости)
     refreshCounters() {
         this.updateLocationCounters();
     }

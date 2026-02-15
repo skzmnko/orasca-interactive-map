@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Endorath Interactive Map</title>
 
-    <!-- Preload критических ресурсов -->
     <link rel="preload" href="css/vendor/leaflet.css" as="style">
     <link rel="preload" href="css/style.css" as="style">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="css/vendor/leaflet.css">
     <link rel="stylesheet" href="css/style.css">
 
@@ -17,31 +15,28 @@
 </head>
 <body>
     
-    <!-- Background Container - ИЗМЕНЕНО: убран фоновый рисунок -->
     <div class="map-background"></div>
     
     <div id="map"></div>
 
-    <!-- Контейнер для панели и кнопки -->
     <div class="control-panel-container">
         <div id="control-panel">
-            <!-- Заголовок -->
             <div class="panel-header">
-                <h3>Fading World Interactive Map</h3>
+                <h3>World of Orasca Interactive Map</h3>
             </div>
             
             <div class="search-section">
-                <input type="text" id="search" placeholder="Поиск локаций...">
+                <input type="text" id="search" placeholder="Search...">
                 <div id="search-results"></div>
             </div>
 
             <div class="all-layers-control">
-                <span id="show-all-layers" class="layer-toggle-btn">Показать все</span>
-                <span id="hide-all-layers" class="layer-toggle-btn">Скрыть все</span>
+                <span id="show-all-layers" class="layer-toggle-btn">SHOW ALL</span>
+                <span id="hide-all-layers" class="layer-toggle-btn">HIDE ALL</span>
             </div>
 
             <div class="layers-section">
-                <h4>ЛОКАЦИИ</h4>
+                <h4>LOCATIONS</h4>
                 <div class="layer-control">
                     <input type="checkbox" id="cities-layer" checked> 
                     <label for="cities-layer"><img src="images/icons/towns.png" class="legend-icon" alt="Cities"> Города</label>
@@ -75,7 +70,6 @@
                     <label for="landmarks-layer"><img src="images/icons/landmarks.png" class="legend-icon" alt="Landmarks"> Другие места</label>
                 </div>
                 
-                <!-- Разделительная линия между типами локаций -->
                 <div class="layer-divider"></div>
                 
                 <div class="layer-control">
@@ -97,15 +91,13 @@
             </div>
 
             <div class="map-controls">
-                <button id="reset-view">Сбросить вид</button>
+                <button id="reset-view">RESET VIEW</button>
             </div>
         </div>
 
-        <!-- Кнопка переключения панели (теперь ВНЕ панели) -->
-        <div id="panel-toggle" class="panel-toggle-btn" title="Скрыть панель"></div>
+        <div id="panel-toggle" class="panel-toggle-btn" title="Hide panel"></div>
     </div>
 
-    <!-- Скрипты -->
     <script src="js/vendor/leaflet.js" defer></script>
     <script type="module" src="js/main.js" defer></script>
 

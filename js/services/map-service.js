@@ -2,8 +2,8 @@ class MapService {
     constructor() {
         this.map = null;
         this.bounds = null;
-        this.mapWidth = 14000;
-        this.mapHeight = 14000;
+        this.mapWidth = 10000;
+        this.mapHeight = 10000;
         this.scaleControl = null;
     }
 
@@ -15,7 +15,7 @@ class MapService {
             attributionControl: false,
             preferCanvas: true,
             crs: L.CRS.Simple,
-            zoomControl: false // Отключаем стандартный zoom control
+            zoomControl: false
         });
 
         const southWest = this.map.unproject([0, this.mapHeight], this.map.getMaxZoom());
@@ -34,30 +34,25 @@ class MapService {
             this.updateScaleControl();
         });
 
-        // Первоначальное обновление
         this.updateScaleControl();
 
         return this.map;
     }
 
     createCustomZoomControl() {
-        // Создаем кастомный контрол зума с позицией выше масштаба
         const zoomControl = L.control.zoom({
             position: 'bottomright'
         });
         
         zoomControl.addTo(this.map);
         
-        // После добавления на карту, перемещаем DOM-элемент выше масштаба
         setTimeout(() => {
             const zoomContainer = document.querySelector('.leaflet-control-zoom');
             const scaleContainer = document.querySelector('.leaflet-control-scale');
             
             if (zoomContainer && scaleContainer) {
-                // Вставляем zoom control перед scale control
                 scaleContainer.parentNode.insertBefore(zoomContainer, scaleContainer);
                 
-                // Добавляем отступ между элементами
                 zoomContainer.style.marginBottom = '5px';
             }
         }, 100);
@@ -90,7 +85,6 @@ class MapService {
         
         const currentZoom = this.map.getZoom();
         
-        // Фиксированные значения для каждого уровня зума
         const scaleConfig = {
             0: { miles: 600, width: 100 }, // 600 miles = 100px
             1: { miles: 300, width: 100 }, // 300 miles = 100px  
@@ -102,7 +96,6 @@ class MapService {
         
         const config = scaleConfig[currentZoom] || scaleConfig[0];
         
-        // Форматируем текст
         const scaleText = `${config.miles} ${config.miles === 1 ? 'mile' : 'miles'}`;
         
         this.scaleContainer.innerHTML = `

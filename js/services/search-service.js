@@ -25,7 +25,6 @@ class SearchService {
             this.handleSearch(e.target.value);
         });
 
-        // Закрытие результатов при клике вне области
         document.addEventListener('click', (e) => {
             if (this.searchInput && this.searchResults && 
                 !this.searchInput.contains(e.target) && !this.searchResults.contains(e.target)) {
@@ -49,13 +48,10 @@ class SearchService {
         this.displayResults(results);
     }
 
-    // ИЗМЕНЕНО: добавлен метод фильтрации результатов по роли
     filterResultsByRole(results) {
         if (AuthService.isDM()) {
-            // DM видит все локации
             return results;
         } else {
-            // Игроки видят только локации с known: true
             return results.filter(location => location.known === true);
         }
     }
@@ -94,11 +90,9 @@ class SearchService {
         return resultElement;
     }
 
-    // ИЗМЕНЕНО: добавлен метод проверки видимости слоя локации
     isLocationLayerVisible(location) {
         const layerControls = LayerService.layerControls;
         
-        // Находим чекбокс, который управляет этим типом локации
         for (const [checkboxId, layerConfig] of Object.entries(layerControls)) {
             const types = Array.isArray(layerConfig) ? layerConfig : [layerConfig];
             
@@ -110,7 +104,7 @@ class SearchService {
             }
         }
         
-        return true; // По умолчанию считаем слой видимым
+        return true;
     }
 
     selectLocation(location) {
@@ -129,9 +123,7 @@ class SearchService {
         }
     }
 
-    // ИЗМЕНЕНО: добавлен метод показа сообщения о скрытой локации
     showLayerHiddenMessage(location) {
-        // Создаем временное сообщение
         const message = document.createElement('div');
         message.className = 'search-hidden-message';
         message.innerHTML = `
@@ -146,14 +138,12 @@ class SearchService {
 
         document.body.appendChild(message);
         
-        // Автоматически удаляем сообщение через 3 секунды
         setTimeout(() => {
             if (message.parentNode) {
                 message.parentNode.removeChild(message);
             }
         }, 3000);
         
-        // Также можно закрыть по клику
         message.addEventListener('click', () => {
             if (message.parentNode) {
                 message.parentNode.removeChild(message);

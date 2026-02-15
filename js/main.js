@@ -1,4 +1,3 @@
-// Главный файл приложения
 import DataService from './services/data-service.js';
 import MapService from './services/map-service.js';
 import LayerService from './services/layer-service.js';
@@ -9,7 +8,6 @@ import AuthService from './services/auth-service.js';
 import LocationVisibilityService from './services/location-visibility-service.js';
 import LoginPage from './utils/login-page.js';
 
-// Функция ожидания загрузки Leaflet
 async function waitForLeaflet() {
     const maxWaitTime = 10000;
     const startTime = Date.now();
@@ -36,10 +34,8 @@ class Application {
         try {
             console.log('🚀 Инициализация приложения...');
             
-            // Инициализируем UI ДО проверки аутентификации
             this.uiService = new UIService();
             
-            // Проверяем аутентификацию
             const isAuthenticated = AuthService.checkAuthStatus();
             
             if (!isAuthenticated) {
@@ -55,31 +51,24 @@ class Application {
     }
 
     async initializeApp() {
-        // Ждем загрузку Leaflet
         await waitForLeaflet();
 
-        // Инициализация карты
         MapService.initialize('map');
         console.log('✅ Карта инициализирована');
 
-        // Загрузка данных
         this.uiService.showLoading();
         this.locations = await DataService.loadAllLocations();
         this.uiService.hideLoading();
         
-        // Фильтрация локаций по роли
         this.filteredLocations = LocationVisibilityService.filterLocationsByRole(this.locations);
         this.uiService.hideLoading();
 
-        // Инициализация сервисов
         LayerService.initializeLayers();
         LayerService.addLayersToMap();
         MarkerService.initializeIcons();
         
-        // Создание маркеров
         this.createMarkers();
         
-        // Настройка взаимодействий
         this.setupInteractions();
         
         this.initialized = true;
@@ -114,10 +103,8 @@ class Application {
         SearchService.initialize();
         this.addLogoutButton();
 
-        // ИЗМЕНЕНО: вызываем метод для скрытия географических слоев после инициализации карты
         LayerService.hideGeographicLayers();
 
-        // ОБНОВЛЯЕМ счетчики после входа пользователя
         setTimeout(() => {
             LayerService.updateLocationCounters();
         }, 100);
@@ -135,7 +122,7 @@ class Application {
         if (mapControls) {
             const logoutBtn = document.createElement('button');
             logoutBtn.id = 'logout-btn';
-            logoutBtn.textContent = `Выйти (${AuthService.getCurrentUser().displayName})`;
+            logoutBtn.textContent = `Logout (${AuthService.getCurrentUser().displayName})`;
             logoutBtn.style.marginTop = '10px';
             logoutBtn.style.background = 'rgba(220, 53, 69, 0.2)';
             logoutBtn.style.borderColor = 'rgba(220, 53, 69, 0.5)';

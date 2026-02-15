@@ -20,37 +20,37 @@ class LoginPage {
         this.container.innerHTML = `
             <div class="login-container">
                 <div class="login-header">
-                    <h1>Fading World</h1>
-                    <p>Интерактивная карта кампании</p>
+                    <h1>World of Orasca</h1>
+                    <p>Fragments of Orasca interactive map</p>
                 </div>
                 
                 <form id="login-form" class="login-form">
                     <div class="form-group">
-                        <label for="username">Имя пользователя</label>
+                        <label for="username">Username</label>
                         <input 
                             type="text" 
                             id="username" 
                             name="username" 
                             required 
                             autocomplete="username"
-                            placeholder="Введите ваше имя пользователя"
+                            placeholder="Enter you username"
                         >
                     </div>
                     
                     <div class="form-group">
-                        <label for="password">Пароль</label>
+                        <label for="password">Password</label>
                         <input 
                             type="password" 
                             id="password" 
                             name="password" 
                             required 
                             autocomplete="current-password"
-                            placeholder="Введите ваш пароль"
+                            placeholder="Enter your password"
                         >
                     </div>
                     
                     <button type="submit" class="login-btn" id="login-submit">
-                        <span class="btn-text">Войти в мир</span>
+                        <span class="btn-text">Enter the world</span>
                     </button>
                 </form>
                 
@@ -58,7 +58,7 @@ class LoginPage {
                 <div id="login-error" class="error-message hidden"></div>
                 
                 <div class="login-footer">
-                    <p>Выберите своего персонажа для входа</p>
+                    <p>Select your character to enter</p>
                 </div>
             </div>
         `;
@@ -83,7 +83,6 @@ class LoginPage {
         const inputs = loginForm.querySelectorAll('input');
         inputs.forEach(input => {
             input.addEventListener('input', () => {
-                // ИЗМЕНЕНО: скрываем ошибку при вводе текста
                 this.hideError();
             });
         });
@@ -98,7 +97,6 @@ class LoginPage {
         const loginBtn = document.getElementById('login-submit');
         const btnText = loginBtn.querySelector('.btn-text');
 
-        // ИЗМЕНЕНО: всегда скрываем ошибку перед проверкой
         this.hideError();
 
         loginBtn.classList.add('loading');
@@ -124,20 +122,17 @@ class LoginPage {
                 }
             }, 600);
         } else {
-            // ИЗМЕНЕНО: показываем ошибку только при неудачном входе
             this.showError(result.error);
             this.shakeForm();
         }
     }
 
-    // ИЗМЕНЕНО: добавляем метод для показа ошибки
     showError(message) {
         const errorElement = document.getElementById('login-error');
         errorElement.textContent = message;
         errorElement.classList.remove('hidden');
     }
 
-    // ИЗМЕНЕНО: добавляем метод для скрытия ошибки
     hideError() {
         const errorElement = document.getElementById('login-error');
         errorElement.textContent = '';

@@ -32,7 +32,6 @@ class UIService {
     }
 
     bindControlButtons() {
-        // Кнопка сброса вида
         const resetViewBtn = document.getElementById('reset-view');
         if (resetViewBtn) {
             resetViewBtn.addEventListener('click', () => {
@@ -42,7 +41,6 @@ class UIService {
             });
         }
 
-        // Кнопки управления всеми слоями
         const showAllBtn = document.getElementById('show-all-layers');
         const hideAllBtn = document.getElementById('hide-all-layers');
         
@@ -112,5 +110,4 @@ class UIService {
     }
 }
 
-// Экспортируем класс, а не экземпляр
 export default UIService;
