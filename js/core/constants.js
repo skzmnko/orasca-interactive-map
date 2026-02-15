@@ -1,4 +1,3 @@
-// Объект для перевода типов на русский
 export const typeTranslations = {
     capitals: "Города",
     feyspires: "Замки эльфов",
@@ -23,7 +22,6 @@ export const typeTranslations = {
     seas: "Моря"
 };
 
-// URL изображений для маркеров
 export const iconUrls = {
     capitals: "images/icons/capitals.png",
     feyspires: "images/icons/elven_castle.png",
