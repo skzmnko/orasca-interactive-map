@@ -50,7 +50,7 @@ class MarkerService {
             
             return marker;
         } catch (error) {
-            console.error(`Ошибка при добавлении маркера ${location.name}:`, error);
+            console.error(`Error when adding a marker ${location.name}:`, error);
             return null;
         }
     }

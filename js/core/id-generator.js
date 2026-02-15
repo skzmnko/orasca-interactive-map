@@ -18,7 +18,7 @@ class LocationIdGenerator {
 
     registerId(id) {
         if (this.usedIds.has(id)) {
-            console.warn(`ID ${id} уже зарегистрирован!`);
+            console.warn(`ID ${id} has already been registered!`);
             return false;
         }
         

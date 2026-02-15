@@ -10,7 +10,7 @@ class UIService {
         this.panelToggle = document.getElementById('panel-toggle');
         this.panelContainer = document.querySelector('.control-panel-container');
         
-        console.log('UIService инициализирован:', {
+        console.log('UIService is initialized:', {
             controlPanel: !!this.controlPanel,
             panelToggle: !!this.panelToggle,
             panelContainer: !!this.panelContainer
@@ -25,7 +25,7 @@ class UIService {
     setupEventListeners() {
         if (this.panelToggle) {
             this.panelToggle.addEventListener('click', () => {
-                console.log('Кнопка переключения панели нажата');
+                console.log('The panel switch button is pressed');
                 this.toggleControlPanel();
             });
         }
@@ -76,10 +76,10 @@ class UIService {
             this.panelContainer.classList.add('hidden');
         }
         if (this.panelToggle) {
-            this.panelToggle.title = 'Показать панель';
+            this.panelToggle.title = 'Show panel';
         }
         
-        console.log('Панель скрыта');
+        console.log('Panel is hidden');
     }
 
     showControlPanel() {
@@ -87,10 +87,10 @@ class UIService {
             this.panelContainer.classList.remove('hidden');
         }
         if (this.panelToggle) {
-            this.panelToggle.title = 'Скрыть панель';
+            this.panelToggle.title = 'Hide panel';
         }
         
-        console.log('Панель показана');
+        console.log('Panel is shown');
     }
 
     toggleControlPanel() {
@@ -102,11 +102,11 @@ class UIService {
     }
 
     showLoading() {
-        console.log('🔄 Загрузка данных...');
+        console.log('🔄 Uploading data...');
     }
 
     hideLoading() {
-        console.log('✅ Данные загружены');
+        console.log('✅ The data is uploaded');
     }
 }
 

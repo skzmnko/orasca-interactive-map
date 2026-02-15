@@ -47,7 +47,7 @@ class LayerService {
             this.hideLayer('mountains');
             this.hideLayer('rivers');
             this.hideLayer('seas');
-            console.log('✅ Географические слои скрыты по умолчанию');
+            console.log('✅ Geographical layers are hidden by default');
         }
     }
 
@@ -156,16 +156,16 @@ class LayerService {
             if (totalCount > visibleCount) {
                 counterElement.textContent = `(${visibleCount}/${totalCount})`;
                 counterElement.style.color = 'var(--mg-text-muted)';
-                counterElement.title = `Игроки видят ${visibleCount} из ${totalCount} локаций`;
+                counterElement.title = `The players see ${visibleCount} from ${totalCount} locations`;
             } else {
                 counterElement.textContent = `(${visibleCount})`;
                 counterElement.style.color = 'var(--mg-text-secondary)';
-                counterElement.title = `Все ${visibleCount} локаций видны игрокам`;
+                counterElement.title = `All ${visibleCount} locations are visible to players`;
             }
         } else {
             counterElement.textContent = `(${visibleCount})`;
             counterElement.style.color = 'var(--mg-text-accent)';
-            counterElement.title = `Локаций доступно вашему персонажу: ${visibleCount}`;
+            counterElement.title = `Locations the player is able to see: ${visibleCount}`;
         }
     }
 

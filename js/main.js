@@ -14,11 +14,11 @@ async function waitForLeaflet() {
     
     while (typeof L === 'undefined') {
         if (Date.now() - startTime > maxWaitTime) {
-            throw new Error('Leaflet не загрузился в течение 10 секунд');
+            throw new Error('Leaflet did not load for 10 seconds');
         }
         await new Promise(resolve => setTimeout(resolve, 50));
     }
-    console.log('✅ Leaflet загружен');
+    console.log('✅ Leaflet downloaded');
 }
 
 class Application {
@@ -32,7 +32,7 @@ class Application {
 
     async initialize() {
         try {
-            console.log('🚀 Инициализация приложения...');
+            console.log('🚀 Application initialization...');
             
             this.uiService = new UIService();
             
@@ -46,7 +46,7 @@ class Application {
             await this.initializeApp();
             
         } catch (error) {
-            console.error('❌ Ошибка инициализации приложения:', error);
+            console.error('❌ Application initialization error:', error);
         }
     }
 
@@ -54,7 +54,7 @@ class Application {
         await waitForLeaflet();
 
         MapService.initialize('map');
-        console.log('✅ Карта инициализирована');
+        console.log('✅ The map has been initialized');
 
         this.uiService.showLoading();
         this.locations = await DataService.loadAllLocations();
@@ -72,10 +72,10 @@ class Application {
         this.setupInteractions();
         
         this.initialized = true;
-        console.log('🎉 Приложение полностью инициализировано');
-        console.log(`👤 Текущий пользователь: ${AuthService.getCurrentUser().displayName}`);
-        console.log(`🎭 Роль: ${AuthService.getCurrentUser().role}`);
-        console.log(`📍 Показано локаций: ${this.filteredLocations.length} из ${this.locations.length}`);
+        console.log('🎉 The application is completely initialized');
+        console.log(`👤 Current user: ${AuthService.getCurrentUser().displayName}`);
+        console.log(`🎭 Role: ${AuthService.getCurrentUser().role}`);
+        console.log(`📍 Locations shown: ${this.filteredLocations.length} из ${this.locations.length}`);
     }
 
     showLoginPage() {

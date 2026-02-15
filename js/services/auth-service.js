@@ -64,11 +64,11 @@ class AuthService {
             sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
             sessionStorage.setItem('isAuthenticated', 'true');
             
-            console.log(`✅ Успешный вход: ${user.displayName} (${user.role})`);
+            console.log(`✅ Successful login: ${user.displayName} (${user.role})`);
             return { success: true, user: this.currentUser };
         } else {
-            console.warn('❌ Неверные учетные данные');
-            return { success: false, error: 'Неверное имя пользователя или пароль' };
+            console.warn('❌ Invalid credentials');
+            return { success: false, error: 'Invalid username or password' };
         }
     }
 
@@ -77,7 +77,7 @@ class AuthService {
         this.isAuthenticated = false;
         sessionStorage.removeItem('currentUser');
         sessionStorage.removeItem('isAuthenticated');
-        console.log('🚪 Пользователь вышел из системы');
+        console.log('🚪 The user logged out');
     }
 
     checkAuthStatus() {
@@ -87,7 +87,7 @@ class AuthService {
         if (storedUser && storedAuth === 'true') {
             this.currentUser = JSON.parse(storedUser);
             this.isAuthenticated = true;
-            console.log(`🔐 Автоматический вход: ${this.currentUser.displayName}`);
+            console.log(`🔐 Automatic login: ${this.currentUser.displayName}`);
             return true;
         }
         return false;

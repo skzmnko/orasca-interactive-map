@@ -130,8 +130,8 @@ class SearchService {
             <div class="search-hidden-content">
                 <div class="search-hidden-icon">🔒</div>
                 <div class="search-hidden-text">
-                    <strong>Локация "${location.name}" скрыта фильтром</strong>
-                    <p>Включите соответствующий фильтр в панели управления</p>
+                    <strong>Location "${location.name}" is hidden by filter</strong>
+                    <p>Enable the appropriate filter in the control panel</p>
                 </div>
             </div>
         `;
@@ -150,13 +150,13 @@ class SearchService {
             }
         });
         
-        console.log(`⚠️ Локация "${location.name}" скрыта фильтром слоя`);
+        console.log(`⚠️ Location "${location.name}" is hidden by layer's filter`);
     }
 
     showNoResults() {
         const noResults = document.createElement('div');
         noResults.className = 'search-result-item';
-        noResults.textContent = 'Ничего не найдено';
+        noResults.textContent = 'Nothing was found';
         noResults.style.color = '#a3a3a3';
         this.searchResults.appendChild(noResults);
     }

@@ -41,19 +41,19 @@ class DataService {
                         this.locationCounts[location.type] = (this.locationCounts[location.type] || 0) + 1;
                     });
                     
-                    console.log(`✅ Загружено ${locations.length} локаций из ${dataFiles[index]}`);
+                    console.log(`✅ ${locations.length} locations uploaded from ${dataFiles[index]}`);
                 } else {
-                    console.warn(`❌ Ошибка загрузки ${dataFiles[index]}:`, result.reason);
+                    console.warn(`❌ Download error ${dataFiles[index]}:`, result.reason);
                 }
             });
 
             this.loaded = true;
-            console.log(`🎯 Всего загружено ${this.allLocations.length} локаций`);
-            console.log('📊 Распределение по типам:', this.locationCounts);
+            console.log(`🎯 A total of ${this.allLocations.length} locations have been uploaded`);
+            console.log('📊 Distribution by types:', this.locationCounts);
             return this.allLocations;
             
         } catch (error) {
-            console.error('❌ Ошибка загрузки данных:', error);
+            console.error('❌ Data uploading error:', error);
             throw error;
         }
     }
