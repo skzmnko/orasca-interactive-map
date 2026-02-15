@@ -7,8 +7,8 @@ class LayerService {
     constructor() {
         this.layers = {};
         this.layerControls = {
-            'cities-layer': ['capitals', 'elven_castles', 'towns'],
-            'settlements-layer': ['settlements', 'elvenwood_settlements'],
+            'cities-layer': ['capitals', 'feyspires', 'towns'],
+            'settlements-layer': 'settlements',
             'ruins-layer': ['ruins', 'elder_ruins', 'town_ruins'],
             'dungeons-layer': ['dungeons', 'tombs', 'caves'],
             'inns-layer': 'inns',
@@ -25,7 +25,7 @@ class LayerService {
 
     initializeLayers() {
         const layerTypes = [
-            'capitals', 'elven_castles', 'towns', 'settlements', 'elvenwood_settlements', 'ruins', 'elder_ruins', 'town_ruins', 
+            'capitals', 'feyspires', 'towns', 'settlements', 'ruins', 'elder_ruins', 'town_ruins', 
             'dungeons', 'tombs', 'caves', 'inns', 'forts', 'fortresses', 'castles', 'temples', 'landmarks', 
             'forests', 'mountains', 'rivers', 'seas'
         ];

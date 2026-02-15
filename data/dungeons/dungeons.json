@@ -1,15 +1,5 @@
 [
   {
-    "name": "Затопленный грот",
-    "alias": "Flooded cave",
-    "type": "caves",
-    "coords": [60.23, 40.09],
-    "known": true,
-    "region": "arnuir",
-    "description": "Полузатопленный грот, некогда служивший тайным убежищем культистов, теперь ставший мрачным логовом для нового хозяина.",
-    "image": "images/locations/flooded-cave.jpg"
-  },
-  {
     "name": "Пещера Короля гоблинов",
     "alias": "The Cave of the Goblin King",
     "type": "caves",
