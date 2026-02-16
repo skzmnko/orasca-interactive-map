@@ -99,7 +99,7 @@ class LoginPage {
         this.hideError();
 
         loginBtn.classList.add('loading');
-        btnText.textContent = 'Вход...';
+        btnText.textContent = 'Log in...';
         loginBtn.disabled = true;
 
         await new Promise(resolve => setTimeout(resolve, 800));
@@ -107,7 +107,7 @@ class LoginPage {
         const result = AuthService.login(username, password);
 
         loginBtn.classList.remove('loading');
-        btnText.textContent = 'Войти в мир';
+        btnText.textContent = 'Enter the World';
         loginBtn.disabled = false;
 
         if (result.success) {

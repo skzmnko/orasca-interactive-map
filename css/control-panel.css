@@ -59,7 +59,7 @@
     background: var(--mg-hover);
     border-color: var(--mg-accent-muted);
     color: var(--mg-text-accent);
-    box-shadow: var(--mg-gold-glow);
+    box-shadow: var(--mg-glow);
 }
 
 .panel-toggle-btn::before {
@@ -97,7 +97,7 @@
     flex: 1;
     font-family: 'Cinzel', serif;
     font-weight: 500;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 10px rgba(26, 127, 127, 0.3);
 }
 
 .show-panel-btn {
@@ -261,7 +261,7 @@
     background: var(--mg-hover);
     border-color: var(--mg-accent-muted);
     color: var(--mg-text-accent);
-    box-shadow: var(--mg-gold-glow);
+    box-shadow: var(--mg-glow);
 }
 
 /* Map Controls */
@@ -287,7 +287,7 @@
     background: var(--mg-hover);
     border-color: var(--mg-accent-muted);
     color: var(--mg-text-accent);
-    box-shadow: var(--mg-gold-glow);
+    box-shadow: var(--mg-glow);
 }
 
 /* Custom Scrollbar */

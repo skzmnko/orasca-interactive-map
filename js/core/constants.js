@@ -30,7 +30,6 @@ export const iconUrls = {
     fortresses: "images/icons/fortresses.png",
     inns: "images/icons/inns.png", 
     settlements: "images/icons/settlements.png",
-    elvenwood_settlements: "images/icons/elvenwood_settlements.png",
     towns: "images/icons/towns.png",
     dungeons: "images/icons/dungeons.png",
     tombs: "images/icons/tombs.png",
