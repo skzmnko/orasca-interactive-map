@@ -1,4 +1,3 @@
-// Объект для перевода типов на русский
 export const typeTranslations = {
     capitals: "Города",
     feyspires: "Замки эльфов",
@@ -23,7 +22,6 @@ export const typeTranslations = {
     seas: "Моря"
 };
 
-// URL изображений для маркеров
 export const iconUrls = {
     capitals: "images/icons/capitals.png",
     feyspires: "images/icons/elven_castle.png",
@@ -32,7 +30,6 @@ export const iconUrls = {
     fortresses: "images/icons/fortresses.png",
     inns: "images/icons/inns.png", 
     settlements: "images/icons/settlements.png",
-    elvenwood_settlements: "images/icons/elvenwood_settlements.png",
     towns: "images/icons/towns.png",
     dungeons: "images/icons/dungeons.png",
     tombs: "images/icons/tombs.png",

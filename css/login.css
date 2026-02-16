@@ -72,7 +72,7 @@
     margin: 0 0 8px 0;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    text-shadow: 0 0 15px rgba(26, 127, 127, 0.4);
 }
 
 .login-header p {
@@ -115,7 +115,7 @@
     outline: none;
     border-color: var(--mg-accent);
     box-shadow: 
-        var(--mg-gold-glow),
+        var(--mg-glow),
         inset 0 0 0 1px var(--mg-accent);
 }
 
@@ -128,7 +128,7 @@
     background: linear-gradient(135deg, var(--mg-accent) 0%, var(--mg-accent-hover) 100%);
     border: none;
     border-radius: 8px;
-    color: #000000;
+    color: #ffffff;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -162,7 +162,7 @@
 .login-btn:hover {
     transform: translateY(-2px);
     box-shadow: 
-        0 8px 20px rgba(212, 175, 55, 0.3),
+        0 8px 20px rgba(26, 127, 127, 0.3),
         var(--mg-gold-glow);
 }
 
@@ -180,7 +180,6 @@
     text-align: center;
     margin-top: 16px;
     animation: shake 0.5s ease-in-out;
-    /* ИЗМЕНЕНО: добавляем плавное появление */
     transition: all 0.3s ease;
     max-height: 0;
     opacity: 0;
@@ -223,8 +222,8 @@
     50% { 
         box-shadow: 
             var(--mg-shadow-lg),
-            0 0 40px rgba(212, 175, 55, 0.3),
-            0 0 80px rgba(212, 175, 55, 0.2);
+            0 0 40px rgba(26, 127, 127, 0.3),
+            0 0 80px rgba(26, 127, 127, 0.2);
     }
     100% { box-shadow: var(--mg-shadow-lg); }
 }
@@ -270,7 +269,7 @@
     height: 20px;
     margin: -10px 0 0 -10px;
     border: 2px solid transparent;
-    border-top: 2px solid #000000;
+    border-top: 2px solid #ffffff;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -290,14 +289,12 @@
     text-align: center;
     margin-top: 16px;
     animation: shake 0.5s ease-in-out;
-    /* ИЗМЕНЕНО: добавляем плавное появление */
     transition: all 0.3s ease;
     max-height: 0;
     opacity: 0;
     overflow: hidden;
 }
 
-/* ИЗМЕНЕНО: показываем ошибку с анимацией */
 .error-message:not(.hidden) {
     max-height: 100px;
     opacity: 1;

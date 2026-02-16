@@ -54,7 +54,6 @@ class LoginPage {
                     </button>
                 </form>
                 
-                <!-- ИЗМЕНЕНО: убираем текст ошибки по умолчанию и добавляем hidden -->
                 <div id="login-error" class="error-message hidden"></div>
                 
                 <div class="login-footer">
@@ -100,7 +99,7 @@ class LoginPage {
         this.hideError();
 
         loginBtn.classList.add('loading');
-        btnText.textContent = 'Вход...';
+        btnText.textContent = 'Log in...';
         loginBtn.disabled = true;
 
         await new Promise(resolve => setTimeout(resolve, 800));
@@ -108,11 +107,11 @@ class LoginPage {
         const result = AuthService.login(username, password);
 
         loginBtn.classList.remove('loading');
-        btnText.textContent = 'Войти в мир';
+        btnText.textContent = 'Enter the World';
         loginBtn.disabled = false;
 
         if (result.success) {
-            console.log(`🎉 Добро пожаловать, ${result.user.displayName}!`);
+            console.log(`🎉 Welcome, ${result.user.displayName}!`);
             this.showSuccessAnimation();
             
             setTimeout(() => {
@@ -156,7 +155,7 @@ class LoginPage {
     }
 
     setupTestCredentials() {
-        console.log('👥 Тестовые пользователи:');
+        console.log('👥 Testing users:');
         console.log('DM: dungeonmaster / dm_access_2024');
         console.log('Игрок: benevir / player_bene_2024');
     }

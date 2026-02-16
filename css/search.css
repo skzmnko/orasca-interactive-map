@@ -20,7 +20,7 @@
 #search:focus {
     outline: none;
     border-color: var(--mg-accent);
-    box-shadow: var(--mg-gold-glow);
+    box-shadow: var(--mg-glow);
 }
 
 #search::placeholder {
@@ -67,7 +67,6 @@
     margin: 0;
 }
 
-/* Стили для скрытых результатов поиска */
 .search-result-hidden {
     opacity: 0.7;
     background: rgba(255, 107, 107, 0.08) !important;
@@ -94,7 +93,6 @@
     font-size: 0.7rem;
 }
 
-/* Стили для сообщения о скрытой локации */
 .search-hidden-message {
     position: fixed;
     top: 50%;
@@ -150,7 +148,6 @@
     line-height: 1.4;
 }
 
-/* Кастомный скролл для результатов поиска */
 #search-results::-webkit-scrollbar {
     width: 6px;
 }
@@ -170,7 +167,7 @@
     background: var(--mg-accent-muted);
 }
 
-/* Для Firefox */
+/* For Firefox */
 #search-results {
     scrollbar-width: thin;
     scrollbar-color: var(--mg-border) transparent;

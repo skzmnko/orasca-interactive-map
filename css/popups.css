@@ -26,7 +26,7 @@
 /* Popup Header */
 .popup-header {
     background: var(--mg-popup-header-bg);
-    border-bottom: none; /* ИЗМЕНЕНО: убираем разделитель */
+    border-bottom: none; 
     padding: 12px 16px;
     margin: 0;
     border-radius: 8px 8px 0 0;
@@ -37,7 +37,7 @@
     margin: 0 0 4px 0;
     font-size: 1.1rem;
     font-weight: 600;
-    text-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+    text-shadow: 0 0 6px rgba(26, 127, 127, 0.2);
     line-height: 1.2;
 }
 
@@ -50,7 +50,6 @@
     margin: 0;
 }
 
-/* Адаптивная высота описания с максимальным ограничением */
 .leaflet-popup-content .location-description {
     color: var(--mg-text-secondary);
     line-height: 1.4;
@@ -62,17 +61,14 @@
     border-bottom: none;
 }
 
-/* Автоматическая высота для коротких описаний */
 .leaflet-popup-content .location-description:not(.has-scroll) {
     overflow-y: hidden;
 }
 
-/* Показываем скролл только когда нужно */
 .leaflet-popup-content .location-description.has-scroll {
     overflow-y: auto;
 }
 
-/* Стили для блока с информацией о роде правителя */
 .leaflet-popup-content .location-family {
     background: var(--mg-popup-header-bg);
     color: var(--mg-text-accent);
@@ -82,10 +78,9 @@
     margin: 0;
     padding: 8px 16px 12px 16px;
     border: none;
-    text-shadow: 0 0 4px rgba(212, 175, 55, 0.2);
+    text-shadow: 0 0 4px rgba(26, 127, 127, 0.2);
 }
 
-/* Кастомный скролл для описания локации */
 .leaflet-popup-content .location-description::-webkit-scrollbar {
     width: 6px;
 }
@@ -105,7 +100,7 @@
     background: var(--mg-accent-muted);
 }
 
-/* Для Firefox */
+/* For Firefox */
 .leaflet-popup-content .location-description {
     scrollbar-width: thin;
     scrollbar-color: var(--mg-border) transparent;
