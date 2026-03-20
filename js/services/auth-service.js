@@ -14,40 +14,10 @@ class AuthService {
                 displayName: 'Dungeon Master'
             },
             { 
-                username: 'benevir', 
-                password: 'player_bene_2024', 
+                username: 'orasca', 
+                password: 'orasca_2026', 
                 role: 'player',
-                displayName: 'Benevir'
-            },
-            { 
-                username: 'niron', 
-                password: 'player_niron_2024', 
-                role: 'player',
-                displayName: 'Элессар'
-            },
-            { 
-                username: 'volha', 
-                password: 'player_volha_2024', 
-                role: 'player',
-                displayName: 'Вольха'
-            },
-            { 
-                username: 'gelbrad', 
-                password: 'player_gelbrad_2024', 
-                role: 'player',
-                displayName: 'Гельбрад'
-            },
-            { 
-                username: 'michael', 
-                password: 'player_michael_2024', 
-                role: 'player',
-                displayName: 'Михаил'
-            },
-            { 
-                username: 'gilifae', 
-                password: 'player_gilifae_2024', 
-                role: 'player',
-                displayName: 'Гилифаэ'
+                displayName: 'Watcher'
             }
         ];
     }

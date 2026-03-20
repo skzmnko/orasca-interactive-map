@@ -156,8 +156,7 @@ class LoginPage {
 
     setupTestCredentials() {
         console.log('👥 Testing users:');
-        console.log('DM: dungeonmaster / dm_access_2024');
-        console.log('Player: benevir / player_bene_2024');
+        console.log('Player: Player');
     }
 
     show() {
