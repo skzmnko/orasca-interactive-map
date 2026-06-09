@@ -19,6 +19,15 @@
     "image": "images/locations/voltundran.jpg"
   },
   {
+    "name": "Мертвая каменоломня",
+    "alias": "The Dead Quarry",
+    "type": "dungeons",
+    "coords": [46.37, 46.28],
+    "region": "morvein",
+    "description": "Старая каменоломня посереди пути от Брикенбека до Лландейло. В последнее время оттуда стали доноситься ужасные известия, а все, кто направлялся туда выяснить в чем дело, не вернулись.",
+    "image": "images/locations/voltundran.jpg"
+  },
+  {
     "name": "Курган Бериада",
     "alias": "Beriad's Barrow",
     "type": "tombs",
