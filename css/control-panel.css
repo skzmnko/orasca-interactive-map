@@ -1,41 +1,73 @@
-/* Control Panel Styles */
+/* Control Panel Styles - Full height panel */
 .control-panel-container {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 25%; /* 1/4 ширины экрана */
+    min-width: 320px;
+    max-width: 450px;
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .control-panel-container.hidden {
     transform: translateX(calc(-100% + 20px));
 }
 
+/* Стили для игроков (стандартный размер) */
+.control-panel-container.player-panel {
+    width: auto;
+    min-width: auto;
+    max-width: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: auto;
+}
+
+.control-panel-container.player-panel #control-panel {
+    max-width: 320px;
+    max-height: 85vh;
+    padding: 16px;
+}
+
 #control-panel {
     background: var(--mg-bg-panel);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border: 1px solid var(--mg-border);
     border-radius: 12px;
     box-shadow: var(--mg-shadow-lg);
     color: var(--mg-text-primary);
-    padding: 16px;
-    max-width: 320px;
-    max-height: 85vh;
+    padding: 24px 28px;
+    width: 100%;
+    height: 100vh;
     overflow-y: auto;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-.control-panel-container.hidden #control-panel {
-    opacity: 0;
-    pointer-events: none;
+/* Стили для игроков - возвращаем к стандартному виду */
+.control-panel-container.player-panel #control-panel {
+    border-radius: 12px;
+    height: auto;
+    max-height: 85vh;
+    padding: 16px;
+    width: auto;
+    position: relative;
 }
 
-/* Panel Toggle Button */
+/* Panel Toggle Button - теперь сбоку от панели */
 .panel-toggle-btn {
-    width: 18px;
-    height: 40px;
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 48px;
     background: var(--mg-bg-panel);
     backdrop-filter: blur(10px);
     border: 1px solid var(--mg-border);
@@ -47,12 +79,21 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    margin-left: -1px;
     box-shadow: var(--mg-shadow);
     flex-shrink: 0;
+    z-index: 1001;
+}
+
+/* Для игроков кнопка остается на своем месте */
+.control-panel-container.player-panel .panel-toggle-btn {
     position: relative;
-    z-index: 1;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 18px;
+    height: 40px;
     margin-top: 16px;
+    border-radius: 0 6px 6px 0;
 }
 
 .panel-toggle-btn:hover {
@@ -64,7 +105,7 @@
 
 .panel-toggle-btn::before {
     content: '◀';
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     transition: all 0.2s ease;
 }
 
@@ -72,51 +113,262 @@
     content: '▶';
 }
 
+.control-panel-container.player-panel .panel-toggle-btn::before {
+    font-size: 0.7rem;
+}
+
 /* Panel Header */
 .panel-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
-    padding-bottom: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 18px;
     border-bottom: 2px solid var(--mg-border);
     position: relative;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .panel-header h3 {
     color: var(--mg-text-accent);
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin: 0;
     padding: 0;
     border: none;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     flex: 1;
     font-family: 'Cinzel', serif;
     font-weight: 500;
     text-shadow: 0 0 10px rgba(26, 127, 127, 0.3);
 }
 
-.show-panel-btn {
-    display: none !important;
+/* Для игроков */
+.control-panel-container.player-panel .panel-header {
+    margin-bottom: 8px;
+    padding-bottom: 12px;
 }
 
-/* Layer Controls */
+.control-panel-container.player-panel .panel-header h3 {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* Search Section */
+.search-section {
+    margin: 0 0 8px 0;
+    position: relative;
+    flex-shrink: 0;
+}
+
+#search {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--mg-bg-secondary);
+    border: 1px solid var(--mg-border);
+    border-radius: 8px;
+    color: var(--mg-text-primary);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    height: 44px;
+    box-sizing: border-box;
+}
+
+.control-panel-container.player-panel #search {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    height: 40px;
+}
+
+#search:focus {
+    outline: none;
+    border-color: var(--mg-accent);
+    box-shadow: var(--mg-glow);
+}
+
+#search::placeholder {
+    color: var(--mg-text-muted);
+}
+
+#search-results {
+    background: var(--mg-bg-secondary);
+    border: 1px solid var(--mg-border);
+    border-radius: 8px;
+    margin-top: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1002;
+    display: none;
+}
+
+#search-results.has-results {
+    display: block;
+}
+
+.control-panel-container.player-panel #search-results {
+    max-height: 200px;
+    position: relative;
+}
+
+.search-result-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--mg-border-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-panel-container.player-panel .search-result-item {
+    padding: 10px 12px;
+}
+
+.search-result-item:hover {
+    background: var(--mg-hover);
+    border-color: var(--mg-accent-muted);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item strong {
+    color: var(--mg-text-primary);
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.control-panel-container.player-panel .search-result-item strong {
+    font-size: 0.9rem;
+}
+
+.search-result-alias {
+    color: var(--mg-text-secondary);
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.control-panel-container.player-panel .search-result-alias {
+    font-size: 0.85rem;
+}
+
+.search-result-hidden {
+    opacity: 0.7;
+    background: rgba(255, 107, 107, 0.08) !important;
+    border-left: 3px solid rgba(255, 107, 107, 0.5);
+}
+
+.search-result-hidden:hover {
+    background: rgba(255, 107, 107, 0.12) !important;
+    border-left-color: rgba(255, 107, 107, 0.7);
+}
+
+.search-result-warning {
+    font-size: 0.75rem;
+    color: rgba(255, 107, 107, 0.9);
+    margin-top: 4px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.search-result-warning::before {
+    content: '🔒';
+    font-size: 0.7rem;
+}
+
+/* Quick Actions */
+.all-layers-control {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0 24px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--mg-border);
+    flex-shrink: 0;
+}
+
+.control-panel-container.player-panel .all-layers-control {
+    gap: 8px;
+    margin: 16px 0 20px 0;
+    padding-bottom: 16px;
+}
+
+.layer-toggle-btn {
+    flex: 1;
+    padding: 12px 16px;
+    background: var(--mg-bg-secondary);
+    border: 1px solid var(--mg-border);
+    border-radius: 6px;
+    color: var(--mg-text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.control-panel-container.player-panel .layer-toggle-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+}
+
+.layer-toggle-btn:hover {
+    background: var(--mg-hover);
+    border-color: var(--mg-accent-muted);
+    color: var(--mg-text-accent);
+    box-shadow: var(--mg-glow);
+}
+
+/* Layers Section - растягивается на всю доступную высоту */
 .layers-section {
+    margin-bottom: 24px;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.control-panel-container.player-panel .layers-section {
     margin-bottom: 20px;
+    flex: none;
+    overflow-y: visible;
+}
+
+.layers-section h4 {
+    color: var(--mg-text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+}
+
+.control-panel-container.player-panel .layers-section h4 {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
 }
 
 .layer-control {
     display: flex;
     align-items: center;
-    padding: 6px 4px;
-    margin: 2px 0;
+    padding: 10px 8px;
+    margin: 6px 0;
     border-radius: 6px;
     transition: all 0.2s ease;
     cursor: pointer;
+}
+
+.control-panel-container.player-panel .layer-control {
+    padding: 6px 4px;
+    margin: 2px 0;
 }
 
 .layer-control:hover {
@@ -124,10 +376,16 @@
 }
 
 .layer-control input[type="checkbox"] {
-    margin-right: 8px;
-    transform: scale(1.1);
+    margin-right: 12px;
+    transform: scale(1.2);
     accent-color: var(--mg-accent);
     transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.control-panel-container.player-panel .layer-control input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
 }
 
 .layer-control input[type="checkbox"]:not(:checked) {
@@ -149,13 +407,18 @@
 .layer-control label {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--mg-text-secondary);
     transition: color 0.2s ease;
     flex: 1;
     justify-content: space-between;
+}
+
+.control-panel-container.player-panel .layer-control label {
+    gap: 8px;
+    font-size: 0.85rem;
 }
 
 .layer-control:hover label {
@@ -186,31 +449,39 @@
     transform: scale(1.1);
 }
 
-.layer-control input[type="checkbox"]:not(:checked):hover + label .legend-icon {
-    opacity: 0.7;
-    filter: grayscale(0.5) brightness(0.8);
-}
-
 /* Legend Icons */
 .legend-icon {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
     transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.control-panel-container.player-panel .legend-icon {
+    width: 18px;
+    height: 18px;
 }
 
 /* Location Counter */
 .location-counter {
     color: var(--mg-text-secondary);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 600;
     margin-left: auto;
-    padding-left: 8px;
-    min-width: 50px;
+    padding-left: 12px;
+    min-width: 60px;
     text-align: right;
     cursor: help;
     transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.control-panel-container.player-panel .location-counter {
+    font-size: 0.75rem;
+    padding-left: 8px;
+    min-width: 25px;
 }
 
 .layer-control:hover .location-counter {
@@ -218,69 +489,47 @@
     transform: scale(1.05);
 }
 
-.layer-control input[type="checkbox"]:checked + label .location-counter {
-    color: var(--mg-text-secondary);
-}
-
-.layer-control input[type="checkbox"]:not(:checked) + label .location-counter {
-    color: var(--mg-text-muted);
-}
-
 /* Layer Divider */
 .layer-divider {
     height: 1px;
     background: var(--mg-border);
-    margin: 12px 0;
+    margin: 20px 0;
     width: 100%;
+    flex-shrink: 0;
 }
 
-/* Quick Actions */
-.all-layers-control {
-    display: flex;
-    gap: 8px;
-    margin: 16px 0 20px 0;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--mg-border);
-}
-
-.layer-toggle-btn {
-    flex: 1;
-    padding: 8px 12px;
-    background: var(--mg-bg-secondary);
-    border: 1px solid var(--mg-border);
-    border-radius: 6px;
-    color: var(--mg-text-secondary);
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: center;
-}
-
-.layer-toggle-btn:hover {
-    background: var(--mg-hover);
-    border-color: var(--mg-accent-muted);
-    color: var(--mg-text-accent);
-    box-shadow: var(--mg-glow);
+.control-panel-container.player-panel .layer-divider {
+    margin: 12px 0;
 }
 
 /* Map Controls */
 .map-controls {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--mg-border);
+    flex-shrink: 0;
+}
+
+.control-panel-container.player-panel .map-controls {
     margin-top: 20px;
     padding-top: 16px;
-    border-top: 1px solid var(--mg-border);
 }
 
 .map-controls button {
     width: 100%;
-    padding: 10px;
+    padding: 14px 16px;
     background: var(--mg-bg-secondary);
     border: 1px solid var(--mg-border);
     border-radius: 6px;
     color: var(--mg-text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.control-panel-container.player-panel .map-controls button {
+    padding: 10px;
+    font-size: 0.85rem;
 }
 
 .map-controls button:hover {
@@ -290,10 +539,23 @@
     box-shadow: var(--mg-glow);
 }
 
+/* Logout button */
+#logout-btn {
+    margin-top: 14px !important;
+    background: rgba(220, 53, 69, 0.15) !important;
+    border-color: rgba(220, 53, 69, 0.3) !important;
+    color: #ff6b6b !important;
+}
+
+#logout-btn:hover {
+    background: rgba(220, 53, 69, 0.25) !important;
+    border-color: rgba(220, 53, 69, 0.5) !important;
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.15) !important;
+}
+
 /* Custom Scrollbar */
 #control-panel::-webkit-scrollbar {
     width: 8px;
-    margin-right: -8px;
 }
 
 #control-panel::-webkit-scrollbar-track {
@@ -318,4 +580,92 @@
 
 #control-panel:hover {
     scrollbar-color: var(--mg-accent-muted) transparent;
+}
+
+/* Responsive для DM панели */
+@media (max-width: 1200px) {
+    .control-panel-container {
+        width: 30%;
+        min-width: 280px;
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .control-panel-container {
+        width: 33.33%;
+        min-width: 260px;
+        max-width: 350px;
+    }
+    
+    #control-panel {
+        padding: 20px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .control-panel-container {
+        width: 85%;
+        min-width: 240px;
+        max-width: 320px;
+    }
+    
+    #control-panel {
+        padding: 16px 18px;
+    }
+    
+    .panel-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .panel-toggle-btn {
+        right: -18px;
+        width: 18px;
+        height: 40px;
+    }
+    
+    .panel-toggle-btn::before {
+        font-size: 0.7rem;
+    }
+    
+    .layer-control label {
+        font-size: 0.85rem;
+    }
+    
+    .legend-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .location-counter {
+        font-size: 0.75rem;
+        min-width: 40px;
+    }
+    
+    .layer-toggle-btn {
+        font-size: 0.8rem;
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .control-panel-container {
+        width: 92%;
+        min-width: 200px;
+        max-width: 280px;
+    }
+    
+    #control-panel {
+        padding: 14px 16px;
+    }
+    
+    .panel-header h3 {
+        font-size: 1rem;
+    }
+    
+    #search {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+        height: 40px;
+    }
 }

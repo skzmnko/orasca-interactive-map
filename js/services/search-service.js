@@ -25,6 +25,12 @@ class SearchService {
             this.handleSearch(e.target.value);
         });
 
+        this.searchInput.addEventListener('focus', () => {
+            if (this.searchResults.children.length > 0) {
+                this.searchResults.classList.add('has-results');
+            }
+        });
+
         document.addEventListener('click', (e) => {
             if (this.searchInput && this.searchResults && 
                 !this.searchInput.contains(e.target) && !this.searchResults.contains(e.target)) {
@@ -37,6 +43,7 @@ class SearchService {
         const trimmedQuery = query.toLowerCase().trim();
         this.clearResults();
         if (trimmedQuery.length < 2) return;
+        
         let results = DataService.searchLocations(trimmedQuery);
         results = this.filterResultsByRole(results);
 
@@ -46,6 +53,7 @@ class SearchService {
         }
 
         this.displayResults(results);
+        this.searchResults.classList.add('has-results');
     }
 
     filterResultsByRole(results) {
@@ -108,7 +116,6 @@ class SearchService {
     }
 
     selectLocation(location) {
-
         const isLayerVisible = this.isLocationLayerVisible(location);
 
         if (!isLayerVisible) {
@@ -120,6 +127,7 @@ class SearchService {
             MapService.flyTo(location.latLng, 5);
             location.marker.openPopup();
             this.clearSearch();
+            this.clearResults();
         }
     }
 
@@ -158,12 +166,15 @@ class SearchService {
         noResults.className = 'search-result-item';
         noResults.textContent = 'Nothing was found';
         noResults.style.color = '#a3a3a3';
+        noResults.style.cursor = 'default';
         this.searchResults.appendChild(noResults);
+        this.searchResults.classList.add('has-results');
     }
 
     clearResults() {
         if (this.searchResults) {
             this.searchResults.innerHTML = '';
+            this.searchResults.classList.remove('has-results');
         }
     }
 

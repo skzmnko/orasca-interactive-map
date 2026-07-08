@@ -1,25 +1,57 @@
+import AuthService from './auth-service.js';
+
 class UIService {
     constructor() {
         this.controlPanel = null;
         this.panelToggle = null;
         this.panelContainer = null;
+        this.isDM = false;
+        this.searchResults = null;
+        this.searchInput = null;
     }
 
     initialize() {
         this.controlPanel = document.getElementById('control-panel');
         this.panelToggle = document.getElementById('panel-toggle');
         this.panelContainer = document.querySelector('.control-panel-container');
+        this.searchInput = document.getElementById('search');
+        this.searchResults = document.getElementById('search-results');
+        
+        // Проверяем роль пользователя
+        this.isDM = AuthService.isDM();
+        
+        // Применяем соответствующий класс в зависимости от роли
+        if (this.panelContainer) {
+            if (this.isDM) {
+                this.panelContainer.classList.add('dm-panel');
+                this.panelContainer.classList.remove('player-panel');
+                console.log('👑 DM panel style applied (full height, 25% width)');
+            } else {
+                this.panelContainer.classList.add('player-panel');
+                this.panelContainer.classList.remove('dm-panel');
+                console.log('🎮 Player panel style applied (standard)');
+            }
+        }
         
         console.log('UIService is initialized:', {
             controlPanel: !!this.controlPanel,
             panelToggle: !!this.panelToggle,
-            panelContainer: !!this.panelContainer
+            panelContainer: !!this.panelContainer,
+            isDM: this.isDM
         });
         
         this.setupEventListeners();
         this.bindControlButtons();
+        this.setupSearchResultsPosition();
         
         return this;
+    }
+
+    setupSearchResultsPosition() {
+        // Для DM - результаты поиска позиционируются абсолютно над панелью
+        if (this.isDM && this.searchResults) {
+            this.searchResults.classList.add('dm-search-results');
+        }
     }
 
     setupEventListeners() {
@@ -29,6 +61,15 @@ class UIService {
                 this.toggleControlPanel();
             });
         }
+        
+        // Закрываем результаты поиска при клике вне их
+        document.addEventListener('click', (e) => {
+            if (this.searchResults && this.searchInput) {
+                if (!this.searchResults.contains(e.target) && !this.searchInput.contains(e.target)) {
+                    this.searchResults.classList.remove('has-results');
+                }
+            }
+        });
     }
 
     bindControlButtons() {
