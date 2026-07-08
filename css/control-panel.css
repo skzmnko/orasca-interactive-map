@@ -10,9 +10,12 @@
     display: flex;
     align-items: stretch;
     z-index: 1000;
+    /* ИЗМЕНЕНО: анимация как у detail-panel */
+    transform: translateX(0);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ИЗМЕНЕНО: панель скрывается сдвигом влево (как detail-panel сдвигается вправо) */
 .control-panel-container.hidden {
     transform: translateX(-100%);
 }
@@ -26,11 +29,11 @@
     top: 10px;
     left: 10px;
     height: auto;
-    transition: all 0.3s ease;
+    transform: none !important;
 }
 
 .control-panel-container.player-panel.hidden {
-    transform: translateX(calc(-100% + 20px));
+    transform: translateX(calc(-100% + 20px)) !important;
 }
 
 .control-panel-container.player-panel #control-panel {
@@ -42,8 +45,10 @@
 #control-panel {
     background: var(--mg-bg-panel);
     backdrop-filter: blur(15px);
+    /* ИЗМЕНЕНО: убираем скругление у левого края, оставляем только справа */
     border: 1px solid var(--mg-border);
-    border-radius: 12px;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
     box-shadow: var(--mg-shadow-lg);
     color: var(--mg-text-primary);
     padding: 24px 28px;
@@ -55,14 +60,16 @@
     flex-direction: column;
 }
 
-/* Стили для игроков - возвращаем к стандартному виду */
+/* Стили для игроков - возвращаем к стандартному виду с скруглениями */
 .control-panel-container.player-panel #control-panel {
+    border: 1px solid var(--mg-border);
     border-radius: 12px;
     height: auto;
     max-height: 85vh;
     padding: 16px;
     width: auto;
     position: relative;
+    border-left: 1px solid var(--mg-border);
 }
 
 /* Panel Header - теперь с крестиком */
@@ -577,7 +584,7 @@
     scrollbar-color: var(--mg-accent-muted) transparent;
 }
 
-/* Responsive для DM панели - full screen on mobile */
+/* ИЗМЕНЕНО: Responsive для DM панели - полный экран на мобильных */
 @media (max-width: 768px) {
     .control-panel-container {
         width: 100%;
@@ -589,6 +596,7 @@
     #control-panel {
         border-radius: 0;
         padding: 16px 18px;
+        border: none;
     }
     
     .panel-header h3 {

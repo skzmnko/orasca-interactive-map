@@ -145,6 +145,7 @@ class UIService {
         });
     }
 
+    // ИЗМЕНЕНО: скрытие панели с анимацией сдвига влево
     hideControlPanel() {
         if (this.panelContainer) {
             this.panelContainer.classList.add('hidden');
@@ -157,6 +158,7 @@ class UIService {
         console.log('Panel is hidden');
     }
 
+    // ИЗМЕНЕНО: показ панели с анимацией сдвига вправо
     showControlPanel() {
         if (this.panelContainer) {
             this.panelContainer.classList.remove('hidden');
