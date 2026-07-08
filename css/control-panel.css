@@ -1,10 +1,9 @@
-/* Control Panel Styles - Full height panel */
 .control-panel-container {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 25%; /* 1/4 ширины экрана */
+    width: 25%;
     min-width: 320px;
     max-width: 450px;
     display: flex;
@@ -18,7 +17,6 @@
     transform: translateX(-100%);
 }
 
-/* Стили для игроков (стандартный размер) */
 .control-panel-container.player-panel {
     width: auto;
     min-width: auto;
@@ -57,7 +55,6 @@
     flex-direction: column;
 }
 
-/* Стили для игроков - возвращаем к стандартному виду с скруглениями */
 .control-panel-container.player-panel #control-panel {
     border: 1px solid var(--mg-border);
     border-radius: 12px;
@@ -69,7 +66,6 @@
     border-left: 1px solid var(--mg-border);
 }
 
-/* Panel Header - теперь с крестиком */
 .panel-header {
     display: flex;
     align-items: center;
@@ -98,7 +94,6 @@
     text-shadow: 0 0 10px rgba(26, 127, 127, 0.3);
 }
 
-/* Для игроков */
 .control-panel-container.player-panel .panel-header {
     margin-bottom: 8px;
     padding-bottom: 12px;
@@ -109,7 +104,6 @@
     letter-spacing: 1px;
 }
 
-/* Кнопка закрытия (крестик) - как в detail-panel */
 .panel-close-btn {
     background: none;
     border: none;
@@ -130,12 +124,10 @@
     transform: scale(1.1);
 }
 
-/* Для игроков крестик скрыт */
 .control-panel-container.player-panel .panel-close-btn {
     display: none;
 }
 
-/* Кнопка открытия панели (фильтр) */
 .panel-open-btn {
     position: fixed;
     top: 10px;
@@ -171,12 +163,6 @@
     height: 24px;
 }
 
-/* Скрываем старую кнопку toggle */
-.control-panel-container .panel-toggle-btn {
-    display: none !important;
-}
-
-/* Search Section */
 .search-section {
     margin: 0 0 8px 0;
     position: relative;
@@ -290,7 +276,6 @@
     border-left-color: rgba(255, 107, 107, 0.7);
 }
 
-/* Quick Actions */
 .all-layers-control {
     display: flex;
     gap: 12px;
@@ -332,7 +317,6 @@
     box-shadow: var(--mg-glow);
 }
 
-/* Layers Section - растягивается на всю доступную высоту */
 .layers-section {
     margin-bottom: 24px;
     flex: 1;
@@ -448,7 +432,6 @@
     transform: scale(1.1);
 }
 
-/* Legend Icons */
 .legend-icon {
     width: 22px;
     height: 22px;
@@ -463,7 +446,6 @@
     height: 18px;
 }
 
-/* Location Counter */
 .location-counter {
     color: var(--mg-text-secondary);
     font-size: 0.85rem;
@@ -488,7 +470,6 @@
     transform: scale(1.05);
 }
 
-/* Layer Divider */
 .layer-divider {
     height: 1px;
     background: var(--mg-border);
@@ -501,7 +482,6 @@
     margin: 12px 0;
 }
 
-/* Map Controls */
 .map-controls {
     margin-top: 26px;
     padding-top: 22px;
@@ -538,7 +518,6 @@
     box-shadow: var(--mg-glow);
 }
 
-/* Logout button */
 #logout-btn {
     margin-top: 14px !important;
     background: rgba(220, 53, 69, 0.15) !important;
@@ -552,7 +531,6 @@
     box-shadow: 0 0 20px rgba(220, 53, 69, 0.15) !important;
 }
 
-/* Custom Scrollbar */
 #control-panel::-webkit-scrollbar {
     width: 8px;
 }
@@ -581,18 +559,24 @@
     scrollbar-color: var(--mg-accent-muted) transparent;
 }
 
-/* ============================================================ */
-/* ИСПРАВЛЕНО: Responsive для DM панели - полный экран на мобильных */
-/* ============================================================ */
+@media (max-width: 1024px) {
+    .control-panel-container {
+        width: 33.33%;
+        min-width: 300px;
+        max-width: 400px;
+    }
+}
 
 @media (max-width: 768px) {
-    /* Переопределяем размеры для мобильных - полный экран */
     .control-panel-container {
         width: 100% !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
+        min-width: auto !important;
+        max-width: none !important;
+        top: 0 !important;
         left: 0 !important;
         right: 0 !important;
+        bottom: 0 !important;
+        height: 100vh !important;
         border-radius: 0 !important;
     }
     
@@ -652,14 +636,8 @@
     .search-result-item {
         padding: 10px 12px;
     }
-    
-    /* Скрываем кнопку открытия на мобильных, если панель уже открыта */
-    .panel-open-btn.visible {
-        display: flex !important;
-    }
 }
 
-/* Дополнительно для очень маленьких экранов */
 @media (max-width: 480px) {
     #control-panel {
         padding: 12px 14px !important;
