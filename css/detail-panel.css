@@ -49,7 +49,9 @@
     text-shadow: 0 0 10px rgba(26, 127, 127, 0.3);
 }
 
-.detail-panel-close {
+/* Общий стиль для кнопок закрытия (крестик) - используется и в control-panel */
+.detail-panel-close,
+.panel-close-btn {
     background: none;
     border: none;
     color: var(--mg-text-secondary);
@@ -61,10 +63,47 @@
     line-height: 1;
 }
 
-.detail-panel-close:hover {
+.detail-panel-close:hover,
+.panel-close-btn:hover {
     color: var(--mg-text-primary);
     background: var(--mg-hover);
     transform: scale(1.1);
+}
+
+/* Общий стиль для кнопок открытия (фильтр) */
+.panel-open-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+    background: var(--mg-bg-panel);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--mg-border);
+    border-radius: 8px;
+    color: var(--mg-text-secondary);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--mg-shadow);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-open-btn:hover {
+    background: var(--mg-hover);
+    border-color: var(--mg-accent-muted);
+    color: var(--mg-text-accent);
+    box-shadow: var(--mg-glow);
+}
+
+.panel-open-btn.visible {
+    display: flex;
+}
+
+.panel-open-btn svg {
+    width: 24px;
+    height: 24px;
 }
 
 /* Panel Content */

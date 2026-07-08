@@ -3,17 +3,20 @@ import AuthService from './auth-service.js';
 class UIService {
     constructor() {
         this.controlPanel = null;
-        this.panelToggle = null;
         this.panelContainer = null;
+        this.panelOpenBtn = null;
+        this.panelCloseBtn = null;
         this.isDM = false;
         this.searchResults = null;
         this.searchInput = null;
+        this.isPanelOpen = true;
     }
 
     initialize() {
         this.controlPanel = document.getElementById('control-panel');
-        this.panelToggle = document.getElementById('panel-toggle');
         this.panelContainer = document.querySelector('.control-panel-container');
+        this.panelOpenBtn = document.getElementById('panel-open-btn');
+        this.panelCloseBtn = document.getElementById('panel-close-btn');
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
         
@@ -25,24 +28,36 @@ class UIService {
             if (this.isDM) {
                 this.panelContainer.classList.add('dm-panel');
                 this.panelContainer.classList.remove('player-panel');
+                // Показываем кнопку открытия для DM
+                if (this.panelOpenBtn) {
+                    this.panelOpenBtn.classList.add('visible');
+                }
                 console.log('👑 DM panel style applied (full height, 25% width)');
             } else {
                 this.panelContainer.classList.add('player-panel');
                 this.panelContainer.classList.remove('dm-panel');
+                // Скрываем кнопки для игроков
+                if (this.panelOpenBtn) {
+                    this.panelOpenBtn.classList.remove('visible');
+                }
                 console.log('🎮 Player panel style applied (standard)');
             }
         }
         
         console.log('UIService is initialized:', {
             controlPanel: !!this.controlPanel,
-            panelToggle: !!this.panelToggle,
             panelContainer: !!this.panelContainer,
+            panelOpenBtn: !!this.panelOpenBtn,
+            panelCloseBtn: !!this.panelCloseBtn,
             isDM: this.isDM
         });
         
         this.setupEventListeners();
         this.bindControlButtons();
         this.setupSearchResultsPosition();
+        
+        // По умолчанию панель открыта
+        this.isPanelOpen = true;
         
         return this;
     }
@@ -55,10 +70,19 @@ class UIService {
     }
 
     setupEventListeners() {
-        if (this.panelToggle) {
-            this.panelToggle.addEventListener('click', () => {
-                console.log('The panel switch button is pressed');
-                this.toggleControlPanel();
+        // Кнопка закрытия (крестик)
+        if (this.panelCloseBtn) {
+            this.panelCloseBtn.addEventListener('click', () => {
+                console.log('Panel close button clicked');
+                this.hideControlPanel();
+            });
+        }
+        
+        // Кнопка открытия (фильтр)
+        if (this.panelOpenBtn) {
+            this.panelOpenBtn.addEventListener('click', () => {
+                console.log('Panel open button clicked');
+                this.showControlPanel();
             });
         }
         
@@ -70,6 +94,15 @@ class UIService {
                 }
             }
         });
+        
+        // Закрытие по Escape (только для DM)
+        if (this.isDM) {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.isPanelOpen) {
+                    this.hideControlPanel();
+                }
+            });
+        }
     }
 
     bindControlButtons() {
@@ -115,9 +148,10 @@ class UIService {
     hideControlPanel() {
         if (this.panelContainer) {
             this.panelContainer.classList.add('hidden');
+            this.isPanelOpen = false;
         }
-        if (this.panelToggle) {
-            this.panelToggle.title = 'Show panel';
+        if (this.panelOpenBtn && this.isDM) {
+            this.panelOpenBtn.classList.add('visible');
         }
         
         console.log('Panel is hidden');
@@ -126,19 +160,27 @@ class UIService {
     showControlPanel() {
         if (this.panelContainer) {
             this.panelContainer.classList.remove('hidden');
+            this.isPanelOpen = true;
         }
-        if (this.panelToggle) {
-            this.panelToggle.title = 'Hide panel';
+        if (this.panelOpenBtn && this.isDM) {
+            this.panelOpenBtn.classList.remove('visible');
+        }
+        
+        // Фокусируемся на поиске при открытии
+        if (this.searchInput) {
+            setTimeout(() => {
+                this.searchInput.focus();
+            }, 300);
         }
         
         console.log('Panel is shown');
     }
 
     toggleControlPanel() {
-        if (this.panelContainer && this.panelContainer.classList.contains('hidden')) {
-            this.showControlPanel();
-        } else {
+        if (this.isPanelOpen) {
             this.hideControlPanel();
+        } else {
+            this.showControlPanel();
         }
     }
 

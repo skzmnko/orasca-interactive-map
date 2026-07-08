@@ -14,7 +14,7 @@
 }
 
 .control-panel-container.hidden {
-    transform: translateX(calc(-100% + 20px));
+    transform: translateX(-100%);
 }
 
 /* Стили для игроков (стандартный размер) */
@@ -26,6 +26,11 @@
     top: 10px;
     left: 10px;
     height: auto;
+    transition: all 0.3s ease;
+}
+
+.control-panel-container.player-panel.hidden {
+    transform: translateX(calc(-100% + 20px));
 }
 
 .control-panel-container.player-panel #control-panel {
@@ -60,68 +65,11 @@
     position: relative;
 }
 
-/* Panel Toggle Button - теперь сбоку от панели */
-.panel-toggle-btn {
-    position: absolute;
-    right: -22px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 22px;
-    height: 48px;
-    background: var(--mg-bg-panel);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--mg-border);
-    border-left: none;
-    border-radius: 0 6px 6px 0;
-    color: var(--mg-text-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: var(--mg-shadow);
-    flex-shrink: 0;
-    z-index: 1001;
-}
-
-/* Для игроков кнопка остается на своем месте */
-.control-panel-container.player-panel .panel-toggle-btn {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    width: 18px;
-    height: 40px;
-    margin-top: 16px;
-    border-radius: 0 6px 6px 0;
-}
-
-.panel-toggle-btn:hover {
-    background: var(--mg-hover);
-    border-color: var(--mg-accent-muted);
-    color: var(--mg-text-accent);
-    box-shadow: var(--mg-glow);
-}
-
-.panel-toggle-btn::before {
-    content: '◀';
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-}
-
-.control-panel-container.hidden .panel-toggle-btn::before {
-    content: '▶';
-}
-
-.control-panel-container.player-panel .panel-toggle-btn::before {
-    font-size: 0.7rem;
-}
-
-/* Panel Header */
+/* Panel Header - теперь с крестиком */
 .panel-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 16px;
     padding-bottom: 18px;
     border-bottom: 2px solid var(--mg-border);
@@ -132,7 +80,7 @@
 
 .panel-header h3 {
     color: var(--mg-text-accent);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin: 0;
     padding: 0;
@@ -155,6 +103,73 @@
 .control-panel-container.player-panel .panel-header h3 {
     font-size: 1.1rem;
     letter-spacing: 1px;
+}
+
+/* Кнопка закрытия (крестик) - как в detail-panel */
+.panel-close-btn {
+    background: none;
+    border: none;
+    color: var(--mg-text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.panel-close-btn:hover {
+    color: var(--mg-text-primary);
+    background: var(--mg-hover);
+    transform: scale(1.1);
+}
+
+/* Для игроков крестик скрыт */
+.control-panel-container.player-panel .panel-close-btn {
+    display: none;
+}
+
+/* Кнопка открытия панели (фильтр) */
+.panel-open-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+    background: var(--mg-bg-panel);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--mg-border);
+    border-radius: 8px;
+    color: var(--mg-text-secondary);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--mg-shadow);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-open-btn:hover {
+    background: var(--mg-hover);
+    border-color: var(--mg-accent-muted);
+    color: var(--mg-text-accent);
+    box-shadow: var(--mg-glow);
+}
+
+.panel-open-btn.visible {
+    display: flex;
+}
+
+.panel-open-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Скрываем старую кнопку toggle */
+.control-panel-container .panel-toggle-btn {
+    display: none !important;
 }
 
 /* Search Section */
@@ -271,21 +286,6 @@
     border-left-color: rgba(255, 107, 107, 0.7);
 }
 
-.search-result-warning {
-    font-size: 0.75rem;
-    color: rgba(255, 107, 107, 0.9);
-    margin-top: 4px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.search-result-warning::before {
-    content: '🔒';
-    font-size: 0.7rem;
-}
-
 /* Quick Actions */
 .all-layers-control {
     display: flex;
@@ -397,11 +397,6 @@
 .layer-control input[type="checkbox"]:checked {
     opacity: 1;
     filter: none;
-}
-
-.layer-control:hover input[type="checkbox"]:not(:checked) {
-    opacity: 0.8;
-    filter: grayscale(0.3) brightness(0.9);
 }
 
 .layer-control label {
@@ -582,50 +577,38 @@
     scrollbar-color: var(--mg-accent-muted) transparent;
 }
 
-/* Responsive для DM панели */
-@media (max-width: 1200px) {
-    .control-panel-container {
-        width: 30%;
-        min-width: 280px;
-        max-width: 380px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .control-panel-container {
-        width: 33.33%;
-        min-width: 260px;
-        max-width: 350px;
-    }
-    
-    #control-panel {
-        padding: 20px 24px;
-    }
-}
-
+/* Responsive для DM панели - full screen on mobile */
 @media (max-width: 768px) {
     .control-panel-container {
-        width: 85%;
-        min-width: 240px;
-        max-width: 320px;
+        width: 100%;
+        min-width: auto;
+        max-width: none;
+        border-radius: 0;
     }
     
     #control-panel {
+        border-radius: 0;
         padding: 16px 18px;
     }
     
     .panel-header h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
-    .panel-toggle-btn {
-        right: -18px;
-        width: 18px;
-        height: 40px;
+    .panel-close-btn {
+        font-size: 1.3rem;
+        padding: 4px 8px;
     }
     
-    .panel-toggle-btn::before {
-        font-size: 0.7rem;
+    .panel-open-btn {
+        top: 10px;
+        left: 10px;
+        padding: 8px 10px;
+    }
+    
+    .panel-open-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
     .layer-control label {
@@ -646,26 +629,50 @@
         font-size: 0.8rem;
         padding: 10px 12px;
     }
-}
-
-@media (max-width: 480px) {
-    .control-panel-container {
-        width: 92%;
-        min-width: 200px;
-        max-width: 280px;
-    }
-    
-    #control-panel {
-        padding: 14px 16px;
-    }
-    
-    .panel-header h3 {
-        font-size: 1rem;
-    }
     
     #search {
         font-size: 0.9rem;
         padding: 10px 12px;
         height: 40px;
+    }
+    
+    .search-result-item {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #control-panel {
+        padding: 14px 16px;
+    }
+    
+    .panel-header h3 {
+        font-size: 0.95rem;
+        letter-spacing: 0.8px;
+    }
+    
+    .panel-close-btn {
+        font-size: 1.2rem;
+        padding: 2px 6px;
+    }
+    
+    .layer-control {
+        padding: 8px 4px;
+    }
+    
+    .layer-control label {
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+    
+    .legend-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .location-counter {
+        font-size: 0.7rem;
+        min-width: 30px;
+        padding-left: 4px;
     }
 }

@@ -19,10 +19,19 @@
     
     <div id="map"></div>
 
+    <!-- Кнопка открытия панели (для DM) -->
+    <button id="panel-open-btn" class="panel-open-btn hidden" title="Open control panel">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+            <line x1="9" y1="6" x2="9" y2="18"/>
+        </svg>
+    </button>
+
     <div class="control-panel-container">
         <div id="control-panel">
             <div class="panel-header">
                 <h3>World of Orasca Interactive Map</h3>
+                <button id="panel-close-btn" class="panel-close-btn" title="Close panel">✕</button>
             </div>
             
             <div class="search-section">
@@ -94,8 +103,6 @@
                 <button id="reset-view">RESET VIEW</button>
             </div>
         </div>
-
-        <div id="panel-toggle" class="panel-toggle-btn" title="Hide panel"></div>
     </div>
 
     <script src="js/vendor/leaflet.js" defer></script>
