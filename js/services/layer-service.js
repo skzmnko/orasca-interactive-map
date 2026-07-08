@@ -85,11 +85,27 @@ class LayerService {
         Object.keys(this.layers).forEach(type => {
             this.showLayer(type);
         });
+        
+        // Обновляем состояние чекбоксов
+        Object.keys(this.layerControls).forEach(checkboxId => {
+            const checkbox = document.getElementById(checkboxId);
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
     }
 
     hideAllLayers() {
         Object.keys(this.layers).forEach(type => {
             this.hideLayer(type);
+        });
+        
+        // Обновляем состояние чекбоксов
+        Object.keys(this.layerControls).forEach(checkboxId => {
+            const checkbox = document.getElementById(checkboxId);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
         });
     }
 
@@ -100,6 +116,7 @@ class LayerService {
                 const types = Array.isArray(layerConfig) ? layerConfig : [layerConfig];
                 const shouldBeVisible = checkbox.checked;
 
+                // Показываем/скрываем слои в соответствии с начальным состоянием чекбоксов
                 this.toggleLayer(layerConfig, shouldBeVisible);
 
                 checkbox.addEventListener('change', (e) => {
@@ -119,18 +136,19 @@ class LayerService {
             let totalCount = this.getAllLocationsCountForTypes(layerConfig);
         
             if (AuthService.isDM()) {
+                // Мастер видит все локации
                 visibleCount = DataService.allLocations.filter(location => 
-                    types.includes(location.type) && 
-                    location.known === true
+                    types.includes(location.type)
                 ).length;
             } else {
+                // Игроки видят только known=true
                 visibleCount = DataService.allLocations.filter(location => 
-                types.includes(location.type) && 
-                LocationVisibilityService.shouldShowLocation(location)
-            ).length;
-        }
+                    types.includes(location.type) && 
+                    LocationVisibilityService.shouldShowLocation(location)
+                ).length;
+            }
         
-        this.updateCounterDisplay(checkboxId, layerConfig, visibleCount, totalCount);
+            this.updateCounterDisplay(checkboxId, layerConfig, visibleCount, totalCount);
         });
     }
 
@@ -153,19 +171,15 @@ class LayerService {
         }
 
         if (AuthService.isDM()) {
-            if (totalCount > visibleCount) {
-                counterElement.textContent = `(${visibleCount}/${totalCount})`;
-                counterElement.style.color = 'var(--mg-text-muted)';
-                counterElement.title = `The players see ${visibleCount} from ${totalCount} locations`;
-            } else {
-                counterElement.textContent = `(${visibleCount})`;
-                counterElement.style.color = 'var(--mg-text-secondary)';
-                counterElement.title = `All ${visibleCount} locations are visible to players`;
-            }
+            // Для мастера показываем общее количество
+            counterElement.textContent = `(${totalCount})`;
+            counterElement.style.color = 'var(--mg-text-secondary)';
+            counterElement.title = `Всего ${totalCount} локаций`;
         } else {
+            // Для игроков показываем доступное количество
             counterElement.textContent = `(${visibleCount})`;
             counterElement.style.color = 'var(--mg-text-accent)';
-            counterElement.title = `Locations the player is able to see: ${visibleCount}`;
+            counterElement.title = `Доступно игроку: ${visibleCount} из ${totalCount}`;
         }
     }
 

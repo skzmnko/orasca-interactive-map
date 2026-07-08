@@ -7,6 +7,8 @@ import UIService from './services/ui-service.js';
 import AuthService from './services/auth-service.js';
 import LocationVisibilityService from './services/location-visibility-service.js';
 import LoginPage from './utils/login-page.js';
+// НОВЫЙ ИМПОРТ
+import DetailPanelService from './services/detail-panel-service.js';
 
 async function waitForLeaflet() {
     const maxWaitTime = 10000;
@@ -112,9 +114,10 @@ class Application {
         window.mapService = MapService;
         window.layerService = LayerService;
         window.dataService = DataService;
-
-        
         window.authService = AuthService;
+        
+        // НОВОЕ: Экспортируем DetailPanelService в глобальную область для отладки
+        window.detailPanelService = DetailPanelService;
     }
 
     addLogoutButton() {

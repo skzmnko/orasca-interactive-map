@@ -11,8 +11,10 @@ class LocationVisibilityService {
         }
 
         if (AuthService.isDM()) {
+            // Мастер видит ВСЕ локации
             return locations;
         } else {
+            // Игроки видят только known=true
             return locations.filter(location => location.known);
         }
     }

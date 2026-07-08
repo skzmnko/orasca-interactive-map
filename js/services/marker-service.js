@@ -1,16 +1,29 @@
 import { iconUrls, typeTranslations } from '../core/constants.js';
 import MapService from './map-service.js';
+import DetailPanelService from './detail-panel-service.js';
+import AuthService from './auth-service.js';
 
 class MarkerService {
     constructor() {
         this.currentIcons = {};
         this.zoomTimeout = null;
+        this.isDM = false;
     }
 
     initializeIcons() {
+        // Проверяем роль при инициализации
+        this.isDM = AuthService.isDM();
+        
         Object.keys(iconUrls).forEach(type => {
             this.currentIcons[type] = this.createCustomIcon(type);
         });
+        
+        // Инициализируем панель деталей для Мастера
+        if (this.isDM) {
+            DetailPanelService.initialize();
+        }
+        
+        console.log(`✅ Маркеры инициализированы для роли: ${this.isDM ? 'DM' : 'Player'}`);
     }
 
     createCustomIcon(type) {
@@ -27,7 +40,8 @@ class MarkerService {
             className: `custom-icon custom-icon-${type}`,
             html: `<img src="${iconUrls[type]}" alt="${type}" 
                    style="width:${baseSize}px; height:${baseSize}px; 
-                          object-fit:contain;">`,
+                          object-fit:contain; 
+                          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">`,
             iconSize: [baseSize, baseSize],
             iconAnchor: [baseSize/2, baseSize/2],
             popupAnchor: [0, -baseSize/2]
@@ -45,9 +59,23 @@ class MarkerService {
             location.marker = marker;
             location.latLng = latLng;
 
-            const popupContent = this.createPopupContent(location);
-            marker.bindPopup(popupContent);
-            
+            // В зависимости от роли создаем разное поведение
+            if (this.isDM) {
+                // Для Мастера - открываем детальную панель
+                marker.on('click', (e) => {
+                    // Отключаем стандартный попап
+                    if (marker.getPopup()) {
+                        marker.closePopup();
+                    }
+                    // Показываем детальную панель
+                    DetailPanelService.showLocation(location);
+                });
+            } else {
+                // Для игроков - стандартный попап
+                const popupContent = this.createPopupContent(location);
+                marker.bindPopup(popupContent);
+            }
+
             return marker;
         } catch (error) {
             console.error(`Error when adding a marker ${location.name}:`, error);
@@ -69,6 +97,9 @@ class MarkerService {
     }
 
     setupDescriptionHeight(location) {
+        // Только для игроков (у них есть попапы)
+        if (this.isDM) return;
+        
         if (location.marker) {
             location.marker.on('popupopen', () => {
                 setTimeout(() => {
