@@ -10,12 +10,10 @@
     display: flex;
     align-items: stretch;
     z-index: 1000;
-    /* ИЗМЕНЕНО: анимация как у detail-panel */
     transform: translateX(0);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ИЗМЕНЕНО: панель скрывается сдвигом влево (как detail-panel сдвигается вправо) */
 .control-panel-container.hidden {
     transform: translateX(-100%);
 }
@@ -45,7 +43,6 @@
 #control-panel {
     background: var(--mg-bg-panel);
     backdrop-filter: blur(15px);
-    /* ИЗМЕНЕНО: убираем скругление у левого края, оставляем только справа */
     border: 1px solid var(--mg-border);
     border-left: none;
     border-radius: 0 12px 12px 0;
@@ -584,19 +581,27 @@
     scrollbar-color: var(--mg-accent-muted) transparent;
 }
 
-/* ИЗМЕНЕНО: Responsive для DM панели - полный экран на мобильных */
+/* ============================================================ */
+/* ИСПРАВЛЕНО: Responsive для DM панели - полный экран на мобильных */
+/* ============================================================ */
+
 @media (max-width: 768px) {
+    /* Переопределяем размеры для мобильных - полный экран */
     .control-panel-container {
-        width: 100%;
-        min-width: auto;
-        max-width: none;
-        border-radius: 0;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        border-radius: 0 !important;
     }
     
     #control-panel {
-        border-radius: 0;
-        padding: 16px 18px;
-        border: none;
+        width: 100% !important;
+        height: 100vh !important;
+        border-radius: 0 !important;
+        border: none !important;
+        padding: 16px 18px !important;
     }
     
     .panel-header h3 {
@@ -647,11 +652,17 @@
     .search-result-item {
         padding: 10px 12px;
     }
+    
+    /* Скрываем кнопку открытия на мобильных, если панель уже открыта */
+    .panel-open-btn.visible {
+        display: flex !important;
+    }
 }
 
+/* Дополнительно для очень маленьких экранов */
 @media (max-width: 480px) {
     #control-panel {
-        padding: 14px 16px;
+        padding: 12px 14px !important;
     }
     
     .panel-header h3 {
@@ -665,7 +676,7 @@
     }
     
     .layer-control {
-        padding: 8px 4px;
+        padding: 6px 4px;
     }
     
     .layer-control label {
