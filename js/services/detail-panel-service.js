@@ -1,6 +1,5 @@
 import AuthService from './auth-service.js';
 
-// Сервис для управления детальной панелью
 class DetailPanelService {
     constructor() {
         this.panel = null;
@@ -11,7 +10,6 @@ class DetailPanelService {
     }
 
     initialize() {
-        // Проверяем роль пользователя
         this.isDM = AuthService.isDM();
         
         this.createPanel();
@@ -20,19 +18,16 @@ class DetailPanelService {
     }
 
     createPanel() {
-        // Создаем контейнер панели
         this.panel = document.createElement('div');
         this.panel.id = 'detail-panel';
         this.panel.className = 'detail-panel hidden';
         
-        // Добавляем класс для роли
         if (this.isDM) {
             this.panel.classList.add('detail-panel-dm');
         } else {
             this.panel.classList.add('detail-panel-player');
         }
         
-        // Создаем содержимое панели
         this.panel.innerHTML = `
             <div class="detail-panel-header">
                 <h3>${this.isDM ? '📜 Location Details' : '📜 Location Info'}</h3>
@@ -46,23 +41,19 @@ class DetailPanelService {
         document.body.appendChild(this.panel);
         this.panelContent = this.panel.querySelector('.detail-panel-content');
         
-        // Кнопка закрытия
         const closeBtn = this.panel.querySelector('.detail-panel-close');
         closeBtn.addEventListener('click', () => this.close());
     }
 
     bindEvents() {
-        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.isOpen) {
                 this.close();
             }
         });
         
-        // Закрытие при клике вне панели
         document.addEventListener('click', (e) => {
             if (this.isOpen && this.panel && !this.panel.contains(e.target)) {
-                // Проверяем, что клик не по маркеру
                 if (!e.target.closest('.leaflet-marker-icon') && !e.target.closest('.leaflet-popup')) {
                     this.close();
                 }
@@ -79,11 +70,9 @@ class DetailPanelService {
         this.currentLocation = location;
         this.isOpen = true;
         
-        // Показываем панель с анимацией
         this.panel.classList.remove('hidden');
         this.panel.classList.add('visible');
         
-        // Обновляем содержимое
         this.renderLocationDetails(location);
         
         console.log(`📖 Showing details for: ${location.name} (${this.isDM ? 'DM' : 'Player'})`);
@@ -96,10 +85,8 @@ class DetailPanelService {
         }
 
         if (this.isDM) {
-            // Полная версия для DM
             this.renderDMDetails(location);
         } else {
-            // Упрощенная версия для игроков
             this.renderPlayerDetails(location);
         }
     }
@@ -231,12 +218,10 @@ class DetailPanelService {
         this.panel.classList.remove('visible');
         this.panel.classList.add('hidden');
         
-        // Закрываем попап маркера, если он открыт
         if (this.currentLocation && this.currentLocation.marker) {
             try {
                 this.currentLocation.marker.closePopup();
             } catch (e) {
-                // Игнорируем ошибки закрытия попапа
             }
         }
         
@@ -248,7 +233,6 @@ class DetailPanelService {
         if (this.isOpen) {
             this.close();
         } else {
-            // Если есть текущая локация, показываем её
             if (this.currentLocation) {
                 this.showLocation(this.currentLocation);
             }
