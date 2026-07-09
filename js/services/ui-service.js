@@ -4,8 +4,11 @@ class UIService {
     constructor() {
         this.controlPanel = null;
         this.panelContainer = null;
+        this.panelHeader = null;
         this.panelOpenBtn = null;
         this.panelCloseBtn = null;
+        this.mobileFilterBtn = null;
+        this.mobileTopPanel = null;
         this.searchResults = null;
         this.searchInput = null;
         this.isPanelOpen = true;
@@ -14,9 +17,12 @@ class UIService {
 
     initialize() {
         this.controlPanel = document.getElementById('control-panel');
-        this.panelContainer = document.querySelector('.control-panel-container');
+        this.panelContainer = document.getElementById('control-panel-container');
+        this.panelHeader = document.getElementById('panel-header');
         this.panelOpenBtn = document.getElementById('panel-open-btn');
         this.panelCloseBtn = document.getElementById('panel-close-btn');
+        this.mobileFilterBtn = document.getElementById('mobile-filter-btn');
+        this.mobileTopPanel = document.getElementById('mobile-top-panel');
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
         
@@ -25,65 +31,79 @@ class UIService {
         
         // Убираем разделение на DM/Player классы - используем единый стиль
         if (this.panelContainer) {
-            // Убираем специфичные классы dm-panel и player-panel
             this.panelContainer.classList.remove('dm-panel', 'player-panel');
-            // Добавляем единый класс для всех
             this.panelContainer.classList.add('unified-panel');
             
-            // Показываем кнопку открытия для ВСЕХ пользователей
-            if (this.panelOpenBtn) {
-                this.panelOpenBtn.classList.add('visible');
+            // На мобильных панель скрыта по умолчанию
+            if (this.isMobile) {
+                this.isPanelOpen = false;
+                this.panelContainer.classList.add('hidden');
+                this.panelContainer.classList.remove('mobile-open');
+                // Скрываем заголовок на мобильных
+                if (this.panelHeader) {
+                    this.panelHeader.style.display = 'none';
+                }
+                console.log('📱 Mobile: Panel is hidden by default');
+            } else {
+                // На десктопе панель открыта
+                this.isPanelOpen = true;
+                this.panelContainer.classList.remove('hidden');
+                if (this.panelOpenBtn) {
+                    this.panelOpenBtn.classList.add('visible');
+                }
+                // Показываем заголовок на десктопе
+                if (this.panelHeader) {
+                    this.panelHeader.style.display = 'flex';
+                }
             }
-            
-            console.log('🔓 Unified control panel initialized for all users');
         }
         
         console.log('UIService is initialized:', {
             controlPanel: !!this.controlPanel,
             panelContainer: !!this.panelContainer,
+            panelHeader: !!this.panelHeader,
             panelOpenBtn: !!this.panelOpenBtn,
             panelCloseBtn: !!this.panelCloseBtn,
-            isMobile: this.isMobile
+            mobileFilterBtn: !!this.mobileFilterBtn,
+            isMobile: this.isMobile,
+            isPanelOpen: this.isPanelOpen
         });
         
         this.setupEventListeners();
         this.bindControlButtons();
         this.setupSearchResultsPosition();
         
-        // Для ВСЕХ пользователей на мобильных устройствах панель скрыта по умолчанию
-        if (this.isMobile) {
-            this.isPanelOpen = false;
-            this.panelContainer.classList.add('hidden');
-            if (this.panelOpenBtn) {
-                this.panelOpenBtn.classList.add('visible');
-            }
-            console.log('📱 Mobile: Panel is hidden by default for all users');
-        } else {
-            // На десктопе панель открыта по умолчанию для всех
-            this.isPanelOpen = true;
-        }
-        
         // Слушатель изменения размера окна для адаптивности
         window.addEventListener('resize', () => {
             const wasMobile = this.isMobile;
             this.isMobile = window.innerWidth <= 768;
             
-            // Если изменилось состояние мобильности
             if (wasMobile !== this.isMobile) {
                 if (this.isMobile) {
                     // При переходе на мобильный - сворачиваем панель
                     this.isPanelOpen = false;
                     this.panelContainer.classList.add('hidden');
-                    if (this.panelOpenBtn) {
-                        this.panelOpenBtn.classList.add('visible');
+                    this.panelContainer.classList.remove('mobile-open');
+                    if (this.panelHeader) {
+                        this.panelHeader.style.display = 'none';
+                    }
+                    if (this.mobileFilterBtn) {
+                        this.mobileFilterBtn.classList.remove('active');
                     }
                     console.log('📱 Switched to mobile: Panel hidden');
                 } else {
                     // При переходе на десктоп - показываем панель
                     this.isPanelOpen = true;
                     this.panelContainer.classList.remove('hidden');
+                    this.panelContainer.classList.remove('mobile-open');
+                    if (this.panelHeader) {
+                        this.panelHeader.style.display = 'flex';
+                    }
                     if (this.panelOpenBtn) {
-                        this.panelOpenBtn.classList.remove('visible');
+                        this.panelOpenBtn.classList.add('visible');
+                    }
+                    if (this.mobileFilterBtn) {
+                        this.mobileFilterBtn.classList.remove('active');
                     }
                     console.log('💻 Switched to desktop: Panel shown');
                 }
@@ -94,14 +114,13 @@ class UIService {
     }
 
     setupSearchResultsPosition() {
-        // Единое позиционирование для всех пользователей
         if (this.searchResults) {
             this.searchResults.classList.add('unified-search-results');
         }
     }
 
     setupEventListeners() {
-        // Кнопка закрытия (крестик)
+        // Кнопка закрытия (крестик) - работает только на десктопе
         if (this.panelCloseBtn) {
             this.panelCloseBtn.addEventListener('click', () => {
                 console.log('Panel close button clicked');
@@ -109,11 +128,19 @@ class UIService {
             });
         }
         
-        // Кнопка открытия (фильтр) - для ВСЕХ пользователей
+        // Кнопка открытия панели - только для десктопа
         if (this.panelOpenBtn) {
             this.panelOpenBtn.addEventListener('click', () => {
                 console.log('Panel open button clicked');
                 this.showControlPanel();
+            });
+        }
+        
+        // Мобильная кнопка фильтра - переключает панель
+        if (this.mobileFilterBtn) {
+            this.mobileFilterBtn.addEventListener('click', () => {
+                console.log('Mobile filter button clicked');
+                this.toggleMobilePanel();
             });
         }
         
@@ -126,12 +153,45 @@ class UIService {
             }
         });
         
-        // Закрытие по Escape для ВСЕХ пользователей
+        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isPanelOpen) {
-                this.hideControlPanel();
+            if (e.key === 'Escape') {
+                if (this.isMobile && this.isPanelOpen) {
+                    this.toggleMobilePanel();
+                } else if (!this.isMobile && this.isPanelOpen) {
+                    this.hideControlPanel();
+                }
             }
         });
+    }
+
+    toggleMobilePanel() {
+        if (this.isPanelOpen) {
+            // Закрываем панель
+            this.panelContainer.classList.add('hidden');
+            this.panelContainer.classList.remove('mobile-open');
+            this.isPanelOpen = false;
+            if (this.mobileFilterBtn) {
+                this.mobileFilterBtn.classList.remove('active');
+            }
+            console.log('📱 Mobile panel closed');
+        } else {
+            // Открываем панель
+            this.panelContainer.classList.remove('hidden');
+            this.panelContainer.classList.add('mobile-open');
+            this.isPanelOpen = true;
+            if (this.mobileFilterBtn) {
+                this.mobileFilterBtn.classList.add('active');
+            }
+            
+            // Фокусируемся на поиске при открытии
+            if (this.searchInput) {
+                setTimeout(() => {
+                    this.searchInput.focus();
+                }, 300);
+            }
+            console.log('📱 Mobile panel opened');
+        }
     }
 
     bindControlButtons() {
@@ -176,22 +236,37 @@ class UIService {
 
     hideControlPanel() {
         if (this.panelContainer) {
-            this.panelContainer.classList.add('hidden');
+            if (this.isMobile) {
+                this.panelContainer.classList.add('hidden');
+                this.panelContainer.classList.remove('mobile-open');
+                if (this.mobileFilterBtn) {
+                    this.mobileFilterBtn.classList.remove('active');
+                }
+            } else {
+                this.panelContainer.classList.add('hidden');
+            }
             this.isPanelOpen = false;
         }
-        if (this.panelOpenBtn) {
+        if (this.panelOpenBtn && !this.isMobile) {
             this.panelOpenBtn.classList.add('visible');
         }
-        
         console.log('Panel is hidden');
     }
 
     showControlPanel() {
         if (this.panelContainer) {
-            this.panelContainer.classList.remove('hidden');
+            if (this.isMobile) {
+                this.panelContainer.classList.remove('hidden');
+                this.panelContainer.classList.add('mobile-open');
+                if (this.mobileFilterBtn) {
+                    this.mobileFilterBtn.classList.add('active');
+                }
+            } else {
+                this.panelContainer.classList.remove('hidden');
+            }
             this.isPanelOpen = true;
         }
-        if (this.panelOpenBtn) {
+        if (this.panelOpenBtn && !this.isMobile) {
             this.panelOpenBtn.classList.remove('visible');
         }
         
@@ -206,10 +281,14 @@ class UIService {
     }
 
     toggleControlPanel() {
-        if (this.isPanelOpen) {
-            this.hideControlPanel();
+        if (this.isMobile) {
+            this.toggleMobilePanel();
         } else {
-            this.showControlPanel();
+            if (this.isPanelOpen) {
+                this.hideControlPanel();
+            } else {
+                this.showControlPanel();
+            }
         }
     }
 

@@ -91,7 +91,6 @@ class Application {
             const targetLayer = LayerService.getLayer(location.type);
             if (targetLayer) {
                 MarkerService.addMarker(location, targetLayer);
-                // Убираем вызов setupDescriptionHeight, так как попапов больше нет
             }
         });
         
