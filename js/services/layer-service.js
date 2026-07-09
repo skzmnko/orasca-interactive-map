@@ -86,7 +86,6 @@ class LayerService {
             this.showLayer(type);
         });
         
-        // Обновляем состояние чекбоксов
         Object.keys(this.layerControls).forEach(checkboxId => {
             const checkbox = document.getElementById(checkboxId);
             if (checkbox) {
@@ -100,7 +99,6 @@ class LayerService {
             this.hideLayer(type);
         });
         
-        // Обновляем состояние чекбоксов
         Object.keys(this.layerControls).forEach(checkboxId => {
             const checkbox = document.getElementById(checkboxId);
             if (checkbox) {
@@ -116,7 +114,6 @@ class LayerService {
                 const types = Array.isArray(layerConfig) ? layerConfig : [layerConfig];
                 const shouldBeVisible = checkbox.checked;
 
-                // Показываем/скрываем слои в соответствии с начальным состоянием чекбоксов
                 this.toggleLayer(layerConfig, shouldBeVisible);
 
                 checkbox.addEventListener('change', (e) => {
@@ -136,12 +133,10 @@ class LayerService {
             let totalCount = this.getAllLocationsCountForTypes(layerConfig);
         
             if (AuthService.isDM()) {
-                // Мастер видит все локации
                 visibleCount = DataService.allLocations.filter(location => 
                     types.includes(location.type)
                 ).length;
             } else {
-                // Игроки видят только known=true
                 visibleCount = DataService.allLocations.filter(location => 
                     types.includes(location.type) && 
                     LocationVisibilityService.shouldShowLocation(location)
@@ -152,7 +147,6 @@ class LayerService {
         });
     }
 
-    // Упрощенный метод - убираем зависимость от роли в отображении счетчика
     updateCounterDisplay(checkboxId, visibleCount, totalCount) {
         const checkbox = document.getElementById(checkboxId);
         if (!checkbox) return;
@@ -171,14 +165,11 @@ class LayerService {
             }
         }
 
-        // Единое отображение для всех пользователей
         if (AuthService.isDM()) {
-            // Для мастера показываем общее количество
             counterElement.textContent = `(${totalCount})`;
             counterElement.style.color = 'var(--mg-text-secondary)';
             counterElement.title = `Всего ${totalCount} локаций`;
         } else {
-            // Для игроков показываем доступное количество
             counterElement.textContent = `(${visibleCount})`;
             counterElement.style.color = 'var(--mg-text-accent)';
             counterElement.title = `Доступно игроку: ${visibleCount} из ${totalCount}`;
