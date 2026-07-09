@@ -22,11 +22,29 @@
     <!-- Новая верхняя панель для мобильных устройств -->
     <div class="mobile-top-panel" id="mobile-top-panel">
         <div class="mobile-panel-title">World of Orasca</div>
-        <button id="mobile-filter-btn" class="mobile-filter-btn" title="Open filter panel">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="22 3 2 3 10 13 10 21 14 18 14 13 22 3"/>
-            </svg>
-        </button>
+        <div class="mobile-panel-actions">
+            <!-- Сначала кнопка фильтрации, потом поиска -->
+            <button id="mobile-filter-btn" class="mobile-filter-btn" title="Open filter panel">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="22 3 2 3 10 13 10 21 14 18 14 13 22 3"/>
+                </svg>
+            </button>
+            <button id="mobile-search-btn" class="mobile-search-btn" title="Search">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Мобильная панель поиска (выдвигается вниз) -->
+    <div class="mobile-search-panel" id="mobile-search-panel">
+        <div class="mobile-search-container">
+            <input type="text" id="mobile-search" placeholder="Search locations...">
+            <!-- Крестик удален -->
+        </div>
+        <div id="mobile-search-results" class="mobile-search-results"></div>
     </div>
 
     <!-- Кнопка открытия панели (скрыта на мобильных) -->
@@ -44,7 +62,8 @@
                 <button id="panel-close-btn" class="panel-close-btn" title="Close panel">✕</button>
             </div>
             
-            <div class="search-section">
+            <!-- Поиск скрыт на мобильных (перенесен в mobile-search-panel) -->
+            <div class="search-section desktop-search" id="desktop-search">
                 <input type="text" id="search" placeholder="Search...">
                 <div id="search-results"></div>
             </div>

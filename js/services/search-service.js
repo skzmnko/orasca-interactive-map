@@ -8,21 +8,35 @@ class SearchService {
     constructor() {
         this.searchInput = null;
         this.searchResults = null;
+        this.mobileSearchInput = null;
+        this.mobileSearchResults = null;
+        this.mobileSearchPanel = null;
+        this.mobileSearchBtn = null;
         this.initialize();
     }
 
     initialize() {
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
+        this.mobileSearchInput = document.getElementById('mobile-search');
+        this.mobileSearchResults = document.getElementById('mobile-search-results');
+        this.mobileSearchPanel = document.getElementById('mobile-search-panel');
+        this.mobileSearchBtn = document.getElementById('mobile-search-btn');
         
+        // Инициализация десктопного поиска
         if (this.searchInput && this.searchResults) {
-            this.setupEventListeners();
+            this.setupDesktopSearch();
+        }
+        
+        // Инициализация мобильного поиска
+        if (this.mobileSearchInput && this.mobileSearchResults) {
+            this.setupMobileSearch();
         }
     }
 
-    setupEventListeners() {
+    setupDesktopSearch() {
         this.searchInput.addEventListener('input', (e) => {
-            this.handleSearch(e.target.value);
+            this.handleSearch(e.target.value, this.searchResults, this.searchInput);
         });
 
         this.searchInput.addEventListener('focus', () => {
@@ -34,26 +48,53 @@ class SearchService {
         document.addEventListener('click', (e) => {
             if (this.searchInput && this.searchResults && 
                 !this.searchInput.contains(e.target) && !this.searchResults.contains(e.target)) {
-                this.clearResults();
+                this.clearResults(this.searchResults);
             }
         });
     }
 
-    handleSearch(query) {
+    setupMobileSearch() {
+        this.mobileSearchInput.addEventListener('input', (e) => {
+            this.handleSearch(e.target.value, this.mobileSearchResults, this.mobileSearchInput);
+        });
+
+        this.mobileSearchInput.addEventListener('focus', () => {
+            if (this.mobileSearchResults.children.length > 0) {
+                this.mobileSearchResults.classList.add('has-results');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (this.mobileSearchInput && this.mobileSearchResults && 
+                !this.mobileSearchInput.contains(e.target) && !this.mobileSearchResults.contains(e.target)) {
+                this.clearResults(this.mobileSearchResults);
+            }
+        });
+        
+        // Закрытие поиска при клике на кнопку (обрабатывается в UIService)
+        // Закрытие по Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeMobileSearch();
+            }
+        });
+    }
+
+    handleSearch(query, resultsContainer, inputElement) {
         const trimmedQuery = query.toLowerCase().trim();
-        this.clearResults();
+        this.clearResults(resultsContainer);
         if (trimmedQuery.length < 2) return;
         
         let results = DataService.searchLocations(trimmedQuery);
         results = this.filterResultsByRole(results);
 
         if (results.length === 0) {
-            this.showNoResults();
+            this.showNoResults(resultsContainer);
             return;
         }
 
-        this.displayResults(results);
-        this.searchResults.classList.add('has-results');
+        this.displayResults(results, resultsContainer);
+        resultsContainer.classList.add('has-results');
     }
 
     filterResultsByRole(results) {
@@ -64,10 +105,10 @@ class SearchService {
         }
     }
 
-    displayResults(results) {
+    displayResults(results, resultsContainer) {
         results.forEach(location => {
             const resultElement = this.createResultElement(location);
-            this.searchResults.appendChild(resultElement);
+            resultsContainer.appendChild(resultElement);
         });
     }
 
@@ -127,7 +168,10 @@ class SearchService {
             MapService.flyTo(location.latLng, 5);
             location.marker.openPopup();
             this.clearSearch();
-            this.clearResults();
+            this.clearResults(this.searchResults);
+            this.clearResults(this.mobileSearchResults);
+            // Закрываем мобильную панель поиска
+            this.closeMobileSearch();
         }
     }
 
@@ -161,20 +205,20 @@ class SearchService {
         console.log(`⚠️ Location "${location.name}" is hidden by layer's filter`);
     }
 
-    showNoResults() {
+    showNoResults(resultsContainer) {
         const noResults = document.createElement('div');
         noResults.className = 'search-result-item';
-        noResults.textContent = 'Nothing was found';
+        noResults.textContent = 'No results found';
         noResults.style.color = '#a3a3a3';
         noResults.style.cursor = 'default';
-        this.searchResults.appendChild(noResults);
-        this.searchResults.classList.add('has-results');
+        resultsContainer.appendChild(noResults);
+        resultsContainer.classList.add('has-results');
     }
 
-    clearResults() {
-        if (this.searchResults) {
-            this.searchResults.innerHTML = '';
-            this.searchResults.classList.remove('has-results');
+    clearResults(resultsContainer) {
+        if (resultsContainer) {
+            resultsContainer.innerHTML = '';
+            resultsContainer.classList.remove('has-results');
         }
     }
 
@@ -182,7 +226,52 @@ class SearchService {
         if (this.searchInput) {
             this.searchInput.value = '';
         }
-        this.clearResults();
+        if (this.mobileSearchInput) {
+            this.mobileSearchInput.value = '';
+        }
+        this.clearResults(this.searchResults);
+        this.clearResults(this.mobileSearchResults);
+    }
+
+    // Методы для управления мобильной панелью поиска
+    openMobileSearch() {
+        if (this.mobileSearchPanel) {
+            this.mobileSearchPanel.classList.add('visible', 'open');
+            // Активный класс для кнопки
+            if (this.mobileSearchBtn) {
+                this.mobileSearchBtn.classList.add('active');
+            }
+            setTimeout(() => {
+                if (this.mobileSearchInput) {
+                    this.mobileSearchInput.focus();
+                }
+            }, 300);
+        }
+    }
+
+    closeMobileSearch() {
+        if (this.mobileSearchPanel) {
+            this.mobileSearchPanel.classList.remove('open');
+            // Убираем активный класс с кнопки
+            if (this.mobileSearchBtn) {
+                this.mobileSearchBtn.classList.remove('active');
+            }
+            setTimeout(() => {
+                this.mobileSearchPanel.classList.remove('visible');
+                this.clearResults(this.mobileSearchResults);
+                if (this.mobileSearchInput) {
+                    this.mobileSearchInput.value = '';
+                }
+            }, 300);
+        }
+    }
+
+    toggleMobileSearch() {
+        if (this.mobileSearchPanel && this.mobileSearchPanel.classList.contains('open')) {
+            this.closeMobileSearch();
+        } else {
+            this.openMobileSearch();
+        }
     }
 }
 
