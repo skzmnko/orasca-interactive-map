@@ -11,14 +11,12 @@ class MarkerService {
     }
 
     initializeIcons() {
-        // Проверяем роль при инициализации
         this.isDM = AuthService.isDM();
         
         Object.keys(iconUrls).forEach(type => {
             this.currentIcons[type] = this.createCustomIcon(type);
         });
         
-        // Инициализируем панель деталей для ВСЕХ пользователей
         DetailPanelService.initialize();
         
         console.log(`✅ Маркеры инициализированы для роли: ${this.isDM ? 'DM' : 'Player'}`);
@@ -57,13 +55,10 @@ class MarkerService {
             location.marker = marker;
             location.latLng = latLng;
 
-            // Единое поведение для всех пользователей - открываем детальную панель
             marker.on('click', (e) => {
-                // Отключаем стандартный попап
                 if (marker.getPopup()) {
                     marker.closePopup();
                 }
-                // Показываем детальную панель
                 DetailPanelService.showLocation(location);
             });
 
@@ -73,10 +68,6 @@ class MarkerService {
             return null;
         }
     }
-
-    // Удаляем метод createPopupContent, так как он больше не нужен
-
-    // Удаляем метод setupDescriptionHeight, так как попапов больше нет
 
     updateMarkersSize(locations) {
         const currentZoom = MapService.getCurrentZoom();
