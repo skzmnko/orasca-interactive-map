@@ -1,6 +1,6 @@
 import AuthService from './auth-service.js';
 
-// Сервис для управления детальной панелью Мастера
+// Сервис для управления детальной панелью
 class DetailPanelService {
     constructor() {
         this.panel = null;
@@ -13,14 +13,10 @@ class DetailPanelService {
     initialize() {
         // Проверяем роль пользователя
         this.isDM = AuthService.isDM();
-        if (!this.isDM) {
-            console.log('🔒 Detail panel is available only for DM');
-            return;
-        }
-
+        
         this.createPanel();
         this.bindEvents();
-        console.log('✅ Detail panel initialized for DM');
+        console.log(`✅ Detail panel initialized for ${this.isDM ? 'DM' : 'Player'}`);
     }
 
     createPanel() {
@@ -29,10 +25,17 @@ class DetailPanelService {
         this.panel.id = 'detail-panel';
         this.panel.className = 'detail-panel hidden';
         
+        // Добавляем класс для роли
+        if (this.isDM) {
+            this.panel.classList.add('detail-panel-dm');
+        } else {
+            this.panel.classList.add('detail-panel-player');
+        }
+        
         // Создаем содержимое панели
         this.panel.innerHTML = `
             <div class="detail-panel-header">
-                <h3>📜 Location Details</h3>
+                <h3>${this.isDM ? '📜 Location Details' : '📜 Location Info'}</h3>
                 <button class="detail-panel-close" title="Close panel">✕</button>
             </div>
             <div class="detail-panel-content">
@@ -68,11 +71,6 @@ class DetailPanelService {
     }
 
     showLocation(location) {
-        if (!this.isDM) {
-            console.warn('⚠️ Detail panel is not available for players');
-            return;
-        }
-        
         if (!location) {
             console.warn('⚠️ No location provided');
             return;
@@ -88,7 +86,7 @@ class DetailPanelService {
         // Обновляем содержимое
         this.renderLocationDetails(location);
         
-        console.log(`📖 Showing details for: ${location.name}`);
+        console.log(`📖 Showing details for: ${location.name} (${this.isDM ? 'DM' : 'Player'})`);
     }
 
     renderLocationDetails(location) {
@@ -97,7 +95,16 @@ class DetailPanelService {
             return;
         }
 
-        // Формируем HTML с детальной информацией
+        if (this.isDM) {
+            // Полная версия для DM
+            this.renderDMDetails(location);
+        } else {
+            // Упрощенная версия для игроков
+            this.renderPlayerDetails(location);
+        }
+    }
+
+    renderDMDetails(location) {
         this.panelContent.innerHTML = `
             <div class="detail-panel-item">
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
@@ -161,6 +168,25 @@ class DetailPanelService {
                     <div class="detail-panel-value detail-panel-id">${new Date(location.createdAt).toLocaleDateString()}</div>
                 </div>
                 ` : ''}
+            </div>
+        `;
+    }
+
+    renderPlayerDetails(location) {
+        this.panelContent.innerHTML = `
+            <div class="detail-panel-item detail-panel-item-player">
+                <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
+                ${location.alias ? `<div class="detail-panel-alias">${this.escapeHtml(location.alias)}</div>` : ''}
+                
+                <div class="detail-panel-section">
+                    <div class="detail-panel-label">Type</div>
+                    <div class="detail-panel-value">${this.getTypeDisplayName(location.type)}</div>
+                </div>
+                
+                <div class="detail-panel-section">
+                    <div class="detail-panel-label">Description</div>
+                    <div class="detail-panel-description detail-panel-description-player">${this.escapeHtml(location.description)}</div>
+                </div>
             </div>
         `;
     }

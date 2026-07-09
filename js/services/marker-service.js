@@ -18,10 +18,8 @@ class MarkerService {
             this.currentIcons[type] = this.createCustomIcon(type);
         });
         
-        // Инициализируем панель деталей для Мастера
-        if (this.isDM) {
-            DetailPanelService.initialize();
-        }
+        // Инициализируем панель деталей для ВСЕХ пользователей
+        DetailPanelService.initialize();
         
         console.log(`✅ Маркеры инициализированы для роли: ${this.isDM ? 'DM' : 'Player'}`);
     }
@@ -59,22 +57,15 @@ class MarkerService {
             location.marker = marker;
             location.latLng = latLng;
 
-            // В зависимости от роли создаем разное поведение
-            if (this.isDM) {
-                // Для Мастера - открываем детальную панель
-                marker.on('click', (e) => {
-                    // Отключаем стандартный попап
-                    if (marker.getPopup()) {
-                        marker.closePopup();
-                    }
-                    // Показываем детальную панель
-                    DetailPanelService.showLocation(location);
-                });
-            } else {
-                // Для игроков - стандартный попап
-                const popupContent = this.createPopupContent(location);
-                marker.bindPopup(popupContent);
-            }
+            // Единое поведение для всех пользователей - открываем детальную панель
+            marker.on('click', (e) => {
+                // Отключаем стандартный попап
+                if (marker.getPopup()) {
+                    marker.closePopup();
+                }
+                // Показываем детальную панель
+                DetailPanelService.showLocation(location);
+            });
 
             return marker;
         } catch (error) {
@@ -83,38 +74,9 @@ class MarkerService {
         }
     }
 
-    createPopupContent(location) {
-        return `
-            <div class="popup-content">
-                <div class="popup-header">
-                    <h3>${location.name}</h3>
-                    ${location.alias ? `<div class="location-alias">${location.alias}</div>` : ''}
-                </div>
-                <div class="location-description" id="desc-${location.id}">${location.description}</div>
-                ${location.family ? `<div class="location-family">${location.family}</div>` : ''}
-            </div>
-        `;
-    }
+    // Удаляем метод createPopupContent, так как он больше не нужен
 
-    setupDescriptionHeight(location) {
-        // Только для игроков (у них есть попапы)
-        if (this.isDM) return;
-        
-        if (location.marker) {
-            location.marker.on('popupopen', () => {
-                setTimeout(() => {
-                    const descElement = document.getElementById(`desc-${location.id}`);
-                    if (descElement) {
-                        if (descElement.scrollHeight > descElement.clientHeight) {
-                            descElement.classList.add('has-scroll');
-                        } else {
-                            descElement.classList.remove('has-scroll');
-                        }
-                    }
-                }, 50);
-            });
-        }
-    }
+    // Удаляем метод setupDescriptionHeight, так как попапов больше нет
 
     updateMarkersSize(locations) {
         const currentZoom = MapService.getCurrentZoom();

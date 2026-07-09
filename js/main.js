@@ -7,7 +7,6 @@ import UIService from './services/ui-service.js';
 import AuthService from './services/auth-service.js';
 import LocationVisibilityService from './services/location-visibility-service.js';
 import LoginPage from './utils/login-page.js';
-// НОВЫЙ ИМПОРТ
 import DetailPanelService from './services/detail-panel-service.js';
 
 async function waitForLeaflet() {
@@ -92,7 +91,7 @@ class Application {
             const targetLayer = LayerService.getLayer(location.type);
             if (targetLayer) {
                 MarkerService.addMarker(location, targetLayer);
-                MarkerService.setupDescriptionHeight(location);
+                // Убираем вызов setupDescriptionHeight, так как попапов больше нет
             }
         });
         
@@ -115,8 +114,6 @@ class Application {
         window.layerService = LayerService;
         window.dataService = DataService;
         window.authService = AuthService;
-        
-        // НОВОЕ: Экспортируем DetailPanelService в глобальную область для отладки
         window.detailPanelService = DetailPanelService;
     }
 
