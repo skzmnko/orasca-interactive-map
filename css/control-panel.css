@@ -1,3 +1,6 @@
+/* Control Panel - Unified styles for all users */
+
+/* Базовые стили для всех пользователей */
 .control-panel-container {
     position: fixed;
     top: 0;
@@ -17,163 +20,16 @@
     transform: translateX(-100%);
 }
 
-@media (max-width: 768px) {
-    .control-panel-container.dm-panel {
-        width: 100vw !important;
-        max-width: 100vw !important;
-        min-width: 0 !important;
-        border-radius: 0 !important;
-    }
-    
-    .control-panel-container.dm-panel #control-panel {
-        width: 100vw !important;
-        height: 100vh !important;
-        border-radius: 0 !important;
-        border: none !important;
-        padding: 16px 18px !important;
-    }
-    
-    /* Кнопка открытия панели всегда видна на мобильных для DM */
-    .panel-open-btn {
-        display: none;
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        z-index: 999;
-        background: var(--mg-bg-panel);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--mg-border);
-        border-radius: 8px;
-        color: var(--mg-text-secondary);
-        padding: 10px 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: var(--mg-shadow);
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .panel-open-btn.visible {
-        display: flex !important;
-    }
-    
-    /* Убеждаемся, что кнопка видна на мобильных для DM */
-    .dm-panel .panel-open-btn.visible {
-        display: flex !important;
-    }
-}
-
-.control-panel-container.player-panel {
-    width: auto;
-    min-width: auto;
-    max-width: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: auto;
-    transform: none !important;
-}
-
-.control-panel-container.player-panel.hidden {
-    transform: translateX(calc(-100% + 20px)) !important;
-}
-
-.control-panel-container.player-panel #control-panel {
-    max-width: 320px;
-    max-height: 85vh;
-    padding: 16px;
-}
-
-#control-panel {
-    background: var(--mg-bg-panel);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--mg-border);
-    border-left: none;
-    border-radius: 0 12px 12px 0;
-    box-shadow: var(--mg-shadow-lg);
-    color: var(--mg-text-primary);
-    padding: 24px 28px;
-    width: 100%;
+/* Единый класс для всех пользователей */
+.control-panel-container.unified-panel {
+    /* Используем те же стили, что были для DM */
+    width: 25%;
+    min-width: 320px;
+    max-width: 450px;
     height: 100vh;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
 }
 
-.control-panel-container.player-panel #control-panel {
-    border: 1px solid var(--mg-border);
-    border-radius: 12px;
-    height: auto;
-    max-height: 85vh;
-    padding: 16px;
-    width: auto;
-    position: relative;
-    border-left: 1px solid var(--mg-border);
-}
-
-.panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    padding-bottom: 18px;
-    border-bottom: 2px solid var(--mg-border);
-    position: relative;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.panel-header h3 {
-    color: var(--mg-text-accent);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0;
-    padding: 0;
-    border: none;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    flex: 1;
-    font-family: 'Cinzel', serif;
-    font-weight: 500;
-    text-shadow: 0 0 10px rgba(26, 127, 127, 0.3);
-}
-
-.control-panel-container.player-panel .panel-header {
-    margin-bottom: 8px;
-    padding-bottom: 12px;
-}
-
-.control-panel-container.player-panel .panel-header h3 {
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-}
-
-.panel-close-btn {
-    background: none;
-    border: none;
-    color: var(--mg-text-secondary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 4px 10px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    line-height: 1;
-    flex-shrink: 0;
-    margin-left: 12px;
-}
-
-.panel-close-btn:hover {
-    color: var(--mg-text-primary);
-    background: var(--mg-hover);
-    transform: scale(1.1);
-}
-
-.control-panel-container.player-panel .panel-close-btn {
-    display: none;
-}
-
+/* Кнопка открытия панели - для ВСЕХ пользователей */
 .panel-open-btn {
     position: fixed;
     top: 10px;
@@ -214,6 +70,76 @@
     stroke-linejoin: round;
 }
 
+/* Кнопка закрытия панели - для ВСЕХ пользователей */
+.panel-close-btn {
+    background: none;
+    border: none;
+    color: var(--mg-text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.panel-close-btn:hover {
+    color: var(--mg-text-primary);
+    background: var(--mg-hover);
+    transform: scale(1.1);
+}
+
+#control-panel {
+    background: var(--mg-bg-panel);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--mg-border);
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+    box-shadow: var(--mg-shadow-lg);
+    color: var(--mg-text-primary);
+    padding: 24px 28px;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Убираем старые стили для dm-panel и player-panel */
+/* .control-panel-container.dm-panel - удалено */
+/* .control-panel-container.player-panel - удалено */
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--mg-border);
+    position: relative;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.panel-header h3 {
+    color: var(--mg-text-accent);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    flex: 1;
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(26, 127, 127, 0.3);
+}
+
 .search-section {
     margin: 0 0 8px 0;
     position: relative;
@@ -231,12 +157,6 @@
     transition: all 0.2s ease;
     height: 44px;
     box-sizing: border-box;
-}
-
-.control-panel-container.player-panel #search {
-    padding: 10px 12px;
-    font-size: 0.9rem;
-    height: 40px;
 }
 
 #search:focus {
@@ -268,9 +188,11 @@
     display: block;
 }
 
-.control-panel-container.player-panel #search-results {
-    max-height: 200px;
-    position: relative;
+/* Унифицированные результаты поиска */
+.unified-search-results {
+    /* Единые стили для всех пользователей */
+    max-height: 250px;
+    position: absolute;
 }
 
 .search-result-item {
@@ -278,10 +200,6 @@
     border-bottom: 1px solid var(--mg-border-light);
     cursor: pointer;
     transition: all 0.2s ease;
-}
-
-.control-panel-container.player-panel .search-result-item {
-    padding: 10px 12px;
 }
 
 .search-result-item:hover {
@@ -300,20 +218,12 @@
     margin-bottom: 2px;
 }
 
-.control-panel-container.player-panel .search-result-item strong {
-    font-size: 0.9rem;
-}
-
 .search-result-alias {
     color: var(--mg-text-secondary);
     font-size: 0.9rem;
     font-style: italic;
     line-height: 1.3;
     margin: 0;
-}
-
-.control-panel-container.player-panel .search-result-alias {
-    font-size: 0.85rem;
 }
 
 .search-result-hidden {
@@ -336,12 +246,6 @@
     flex-shrink: 0;
 }
 
-.control-panel-container.player-panel .all-layers-control {
-    gap: 8px;
-    margin: 16px 0 20px 0;
-    padding-bottom: 16px;
-}
-
 .layer-toggle-btn {
     flex: 1;
     padding: 12px 16px;
@@ -354,11 +258,6 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
-}
-
-.control-panel-container.player-panel .layer-toggle-btn {
-    padding: 8px 12px;
-    font-size: 0.8rem;
 }
 
 .layer-toggle-btn:hover {
@@ -375,12 +274,6 @@
     padding-right: 4px;
 }
 
-.control-panel-container.player-panel .layers-section {
-    margin-bottom: 20px;
-    flex: none;
-    overflow-y: visible;
-}
-
 .layers-section h4 {
     color: var(--mg-text-muted);
     font-size: 0.8rem;
@@ -388,11 +281,6 @@
     letter-spacing: 1px;
     margin: 0 0 12px 0;
     font-weight: 600;
-}
-
-.control-panel-container.player-panel .layers-section h4 {
-    font-size: 0.75rem;
-    margin-bottom: 8px;
 }
 
 .layer-control {
@@ -405,11 +293,6 @@
     cursor: pointer;
 }
 
-.control-panel-container.player-panel .layer-control {
-    padding: 6px 4px;
-    margin: 2px 0;
-}
-
 .layer-control:hover {
     background: var(--mg-hover);
 }
@@ -420,11 +303,6 @@
     accent-color: var(--mg-accent);
     transition: all 0.2s ease;
     flex-shrink: 0;
-}
-
-.control-panel-container.player-panel .layer-control input[type="checkbox"] {
-    margin-right: 8px;
-    transform: scale(1.1);
 }
 
 .layer-control input[type="checkbox"]:not(:checked) {
@@ -448,11 +326,6 @@
     transition: color 0.2s ease;
     flex: 1;
     justify-content: space-between;
-}
-
-.control-panel-container.player-panel .layer-control label {
-    gap: 8px;
-    font-size: 0.85rem;
 }
 
 .layer-control:hover label {
@@ -492,11 +365,6 @@
     flex-shrink: 0;
 }
 
-.control-panel-container.player-panel .legend-icon {
-    width: 18px;
-    height: 18px;
-}
-
 .location-counter {
     color: var(--mg-text-secondary);
     font-size: 0.85rem;
@@ -508,12 +376,6 @@
     cursor: help;
     transition: all 0.2s ease;
     flex-shrink: 0;
-}
-
-.control-panel-container.player-panel .location-counter {
-    font-size: 0.75rem;
-    padding-left: 8px;
-    min-width: 25px;
 }
 
 .layer-control:hover .location-counter {
@@ -529,20 +391,11 @@
     flex-shrink: 0;
 }
 
-.control-panel-container.player-panel .layer-divider {
-    margin: 12px 0;
-}
-
 .map-controls {
     margin-top: 26px;
     padding-top: 22px;
     border-top: 1px solid var(--mg-border);
     flex-shrink: 0;
-}
-
-.control-panel-container.player-panel .map-controls {
-    margin-top: 20px;
-    padding-top: 16px;
 }
 
 .map-controls button {
@@ -555,11 +408,6 @@
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s ease;
-}
-
-.control-panel-container.player-panel .map-controls button {
-    padding: 10px;
-    font-size: 0.85rem;
 }
 
 .map-controls button:hover {
@@ -582,6 +430,7 @@
     box-shadow: 0 0 20px rgba(220, 53, 69, 0.15) !important;
 }
 
+/* Scrollbar styles */
 #control-panel::-webkit-scrollbar {
     width: 8px;
 }
@@ -610,16 +459,7 @@
     scrollbar-color: var(--mg-accent-muted) transparent;
 }
 
-/* Планшеты и маленькие ноутбуки */
-@media (max-width: 1024px) {
-    .control-panel-container {
-        width: 33.33%;
-        min-width: 300px;
-        max-width: 400px;
-    }
-}
-
-/* Мобильные устройства - полный экран */
+/* Мобильные устройства - единое поведение для всех */
 @media (max-width: 768px) {
     .control-panel-container {
         position: fixed !important;
@@ -635,6 +475,7 @@
         margin: 0 !important;
         padding: 0 !important;
         transform: translateX(0) !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     .control-panel-container.hidden {
@@ -701,33 +542,19 @@
     .search-result-item {
         padding: 10px 12px;
     }
-
-    /* Игнорируем player-panel на мобильных для DM */
-    .control-panel-container.player-panel {
-        position: absolute !important;
-        width: auto !important;
-        height: auto !important;
-        top: 10px !important;
-        left: 10px !important;
-        right: auto !important;
-        bottom: auto !important;
-        min-width: auto !important;
-        max-width: 320px !important;
-        border-radius: 12px !important;
-    }
-
-    .control-panel-container.player-panel #control-panel {
-        width: auto !important;
-        height: auto !important;
-        max-width: 320px !important;
-        max-height: 85vh !important;
-        border-radius: 12px !important;
-        border: 1px solid var(--mg-border) !important;
-        padding: 16px !important;
-    }
-
-    .control-panel-container.player-panel.hidden {
-        transform: translateX(calc(-100% + 20px)) !important;
+    
+    /* Убираем специфичные стили для player-panel на мобильных */
+    .control-panel-container.unified-panel {
+        position: fixed !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+        border-radius: 0 !important;
     }
 }
 
@@ -765,25 +592,5 @@
         font-size: 0.7rem;
         min-width: 30px;
         padding-left: 4px;
-    }
-}
-
-@media (max-width: 768px) {
-    .panel-open-btn {
-        padding: 12px 14px;
-        border-radius: 10px;
-        box-shadow: var(--mg-shadow-lg);
-        background: var(--mg-bg-panel);
-        border: 1px solid var(--mg-accent-muted);
-    }
-    
-    .panel-open-btn:hover {
-        background: var(--mg-hover);
-        border-color: var(--mg-accent);
-    }
-    
-    .panel-open-btn svg {
-        width: 28px;
-        height: 28px;
     }
 }

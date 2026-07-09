@@ -148,11 +148,12 @@ class LayerService {
                 ).length;
             }
         
-            this.updateCounterDisplay(checkboxId, layerConfig, visibleCount, totalCount);
+            this.updateCounterDisplay(checkboxId, visibleCount, totalCount);
         });
     }
 
-    updateCounterDisplay(checkboxId, layerConfig, visibleCount, totalCount) {
+    // Упрощенный метод - убираем зависимость от роли в отображении счетчика
+    updateCounterDisplay(checkboxId, visibleCount, totalCount) {
         const checkbox = document.getElementById(checkboxId);
         if (!checkbox) return;
 
@@ -170,6 +171,7 @@ class LayerService {
             }
         }
 
+        // Единое отображение для всех пользователей
         if (AuthService.isDM()) {
             // Для мастера показываем общее количество
             counterElement.textContent = `(${totalCount})`;

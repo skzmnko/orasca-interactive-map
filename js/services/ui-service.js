@@ -6,7 +6,6 @@ class UIService {
         this.panelContainer = null;
         this.panelOpenBtn = null;
         this.panelCloseBtn = null;
-        this.isDM = false;
         this.searchResults = null;
         this.searchInput = null;
         this.isPanelOpen = true;
@@ -24,28 +23,19 @@ class UIService {
         // Определяем мобильное устройство
         this.isMobile = window.innerWidth <= 768;
         
-        // Проверяем роль пользователя
-        this.isDM = AuthService.isDM();
-        
-        // Применяем соответствующий класс в зависимости от роли
+        // Убираем разделение на DM/Player классы - используем единый стиль
         if (this.panelContainer) {
-            if (this.isDM) {
-                this.panelContainer.classList.add('dm-panel');
-                this.panelContainer.classList.remove('player-panel');
-                // Показываем кнопку открытия для DM
-                if (this.panelOpenBtn) {
-                    this.panelOpenBtn.classList.add('visible');
-                }
-                console.log('👑 DM panel style applied (full height, 25% width)');
-            } else {
-                this.panelContainer.classList.add('player-panel');
-                this.panelContainer.classList.remove('dm-panel');
-                // Скрываем кнопки для игроков
-                if (this.panelOpenBtn) {
-                    this.panelOpenBtn.classList.remove('visible');
-                }
-                console.log('🎮 Player panel style applied (standard)');
+            // Убираем специфичные классы dm-panel и player-panel
+            this.panelContainer.classList.remove('dm-panel', 'player-panel');
+            // Добавляем единый класс для всех
+            this.panelContainer.classList.add('unified-panel');
+            
+            // Показываем кнопку открытия для ВСЕХ пользователей
+            if (this.panelOpenBtn) {
+                this.panelOpenBtn.classList.add('visible');
             }
+            
+            console.log('🔓 Unified control panel initialized for all users');
         }
         
         console.log('UIService is initialized:', {
@@ -53,7 +43,6 @@ class UIService {
             panelContainer: !!this.panelContainer,
             panelOpenBtn: !!this.panelOpenBtn,
             panelCloseBtn: !!this.panelCloseBtn,
-            isDM: this.isDM,
             isMobile: this.isMobile
         });
         
@@ -61,26 +50,26 @@ class UIService {
         this.bindControlButtons();
         this.setupSearchResultsPosition();
         
-        // НОВОЕ: Для DM на мобильных устройствах панель скрыта по умолчанию
-        if (this.isDM && this.isMobile) {
+        // Для ВСЕХ пользователей на мобильных устройствах панель скрыта по умолчанию
+        if (this.isMobile) {
             this.isPanelOpen = false;
             this.panelContainer.classList.add('hidden');
             if (this.panelOpenBtn) {
                 this.panelOpenBtn.classList.add('visible');
             }
-            console.log('📱 Mobile DM: Panel is hidden by default');
+            console.log('📱 Mobile: Panel is hidden by default for all users');
         } else {
-            // По умолчанию панель открыта (для десктопа или игроков)
+            // На десктопе панель открыта по умолчанию для всех
             this.isPanelOpen = true;
         }
         
-        // ДОБАВЛЕНО: Слушатель изменения размера окна для адаптивности
+        // Слушатель изменения размера окна для адаптивности
         window.addEventListener('resize', () => {
             const wasMobile = this.isMobile;
             this.isMobile = window.innerWidth <= 768;
             
-            // Если изменилось состояние мобильности и это DM
-            if (this.isDM && wasMobile !== this.isMobile) {
+            // Если изменилось состояние мобильности
+            if (wasMobile !== this.isMobile) {
                 if (this.isMobile) {
                     // При переходе на мобильный - сворачиваем панель
                     this.isPanelOpen = false;
@@ -105,9 +94,9 @@ class UIService {
     }
 
     setupSearchResultsPosition() {
-        // Для DM - результаты поиска позиционируются абсолютно над панелью
-        if (this.isDM && this.searchResults) {
-            this.searchResults.classList.add('dm-search-results');
+        // Единое позиционирование для всех пользователей
+        if (this.searchResults) {
+            this.searchResults.classList.add('unified-search-results');
         }
     }
 
@@ -120,7 +109,7 @@ class UIService {
             });
         }
         
-        // Кнопка открытия (фильтр)
+        // Кнопка открытия (фильтр) - для ВСЕХ пользователей
         if (this.panelOpenBtn) {
             this.panelOpenBtn.addEventListener('click', () => {
                 console.log('Panel open button clicked');
@@ -137,14 +126,12 @@ class UIService {
             }
         });
         
-        // Закрытие по Escape (только для DM)
-        if (this.isDM) {
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.isPanelOpen) {
-                    this.hideControlPanel();
-                }
-            });
-        }
+        // Закрытие по Escape для ВСЕХ пользователей
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isPanelOpen) {
+                this.hideControlPanel();
+            }
+        });
     }
 
     bindControlButtons() {
@@ -192,7 +179,7 @@ class UIService {
             this.panelContainer.classList.add('hidden');
             this.isPanelOpen = false;
         }
-        if (this.panelOpenBtn && this.isDM) {
+        if (this.panelOpenBtn) {
             this.panelOpenBtn.classList.add('visible');
         }
         
@@ -204,7 +191,7 @@ class UIService {
             this.panelContainer.classList.remove('hidden');
             this.isPanelOpen = true;
         }
-        if (this.panelOpenBtn && this.isDM) {
+        if (this.panelOpenBtn) {
             this.panelOpenBtn.classList.remove('visible');
         }
         
