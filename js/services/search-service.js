@@ -23,12 +23,10 @@ class SearchService {
         this.mobileSearchPanel = document.getElementById('mobile-search-panel');
         this.mobileSearchBtn = document.getElementById('mobile-search-btn');
         
-        // Инициализация десктопного поиска
         if (this.searchInput && this.searchResults) {
             this.setupDesktopSearch();
         }
         
-        // Инициализация мобильного поиска
         if (this.mobileSearchInput && this.mobileSearchResults) {
             this.setupMobileSearch();
         }
@@ -71,8 +69,6 @@ class SearchService {
             }
         });
         
-        // Закрытие поиска при клике на кнопку (обрабатывается в UIService)
-        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.closeMobileSearch();
@@ -170,7 +166,6 @@ class SearchService {
             this.clearSearch();
             this.clearResults(this.searchResults);
             this.clearResults(this.mobileSearchResults);
-            // Закрываем мобильную панель поиска
             this.closeMobileSearch();
         }
     }
@@ -233,11 +228,9 @@ class SearchService {
         this.clearResults(this.mobileSearchResults);
     }
 
-    // Методы для управления мобильной панелью поиска
     openMobileSearch() {
         if (this.mobileSearchPanel) {
             this.mobileSearchPanel.classList.add('visible', 'open');
-            // Активный класс для кнопки
             if (this.mobileSearchBtn) {
                 this.mobileSearchBtn.classList.add('active');
             }
@@ -252,7 +245,6 @@ class SearchService {
     closeMobileSearch() {
         if (this.mobileSearchPanel) {
             this.mobileSearchPanel.classList.remove('open');
-            // Убираем активный класс с кнопки
             if (this.mobileSearchBtn) {
                 this.mobileSearchBtn.classList.remove('active');
             }
