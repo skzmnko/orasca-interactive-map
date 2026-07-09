@@ -10,6 +10,7 @@ class UIService {
         this.searchResults = null;
         this.searchInput = null;
         this.isPanelOpen = true;
+        this.isMobile = false;
     }
 
     initialize() {
@@ -19,6 +20,9 @@ class UIService {
         this.panelCloseBtn = document.getElementById('panel-close-btn');
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
+        
+        // Определяем мобильное устройство
+        this.isMobile = window.innerWidth <= 768;
         
         // Проверяем роль пользователя
         this.isDM = AuthService.isDM();
@@ -49,15 +53,53 @@ class UIService {
             panelContainer: !!this.panelContainer,
             panelOpenBtn: !!this.panelOpenBtn,
             panelCloseBtn: !!this.panelCloseBtn,
-            isDM: this.isDM
+            isDM: this.isDM,
+            isMobile: this.isMobile
         });
         
         this.setupEventListeners();
         this.bindControlButtons();
         this.setupSearchResultsPosition();
         
-        // По умолчанию панель открыта
-        this.isPanelOpen = true;
+        // НОВОЕ: Для DM на мобильных устройствах панель скрыта по умолчанию
+        if (this.isDM && this.isMobile) {
+            this.isPanelOpen = false;
+            this.panelContainer.classList.add('hidden');
+            if (this.panelOpenBtn) {
+                this.panelOpenBtn.classList.add('visible');
+            }
+            console.log('📱 Mobile DM: Panel is hidden by default');
+        } else {
+            // По умолчанию панель открыта (для десктопа или игроков)
+            this.isPanelOpen = true;
+        }
+        
+        // ДОБАВЛЕНО: Слушатель изменения размера окна для адаптивности
+        window.addEventListener('resize', () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth <= 768;
+            
+            // Если изменилось состояние мобильности и это DM
+            if (this.isDM && wasMobile !== this.isMobile) {
+                if (this.isMobile) {
+                    // При переходе на мобильный - сворачиваем панель
+                    this.isPanelOpen = false;
+                    this.panelContainer.classList.add('hidden');
+                    if (this.panelOpenBtn) {
+                        this.panelOpenBtn.classList.add('visible');
+                    }
+                    console.log('📱 Switched to mobile: Panel hidden');
+                } else {
+                    // При переходе на десктоп - показываем панель
+                    this.isPanelOpen = true;
+                    this.panelContainer.classList.remove('hidden');
+                    if (this.panelOpenBtn) {
+                        this.panelOpenBtn.classList.remove('visible');
+                    }
+                    console.log('💻 Switched to desktop: Panel shown');
+                }
+            }
+        });
         
         return this;
     }
@@ -145,7 +187,6 @@ class UIService {
         });
     }
 
-    // ИЗМЕНЕНО: скрытие панели с анимацией сдвига влево
     hideControlPanel() {
         if (this.panelContainer) {
             this.panelContainer.classList.add('hidden');
@@ -158,7 +199,6 @@ class UIService {
         console.log('Panel is hidden');
     }
 
-    // ИЗМЕНЕНО: показ панели с анимацией сдвига вправо
     showControlPanel() {
         if (this.panelContainer) {
             this.panelContainer.classList.remove('hidden');
