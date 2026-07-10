@@ -187,8 +187,8 @@ class DetailPanelService {
 
     getTypeDisplayName(type) {
         const typeNames = {
-            capitals: 'Capital City',
-            feyspires: 'Elven Castle',
+            cities: 'City',
+            feyspires: 'Feyspire',
             towns: 'Town',
             settlements: 'Settlement',
             ruins: 'Ruins',
@@ -197,16 +197,16 @@ class DetailPanelService {
             dungeons: 'Dungeon',
             tombs: 'Tomb',
             caves: 'Cave',
-            inns: 'Inn',
+            secrets: 'Secrets',
             forts: 'Fort',
             fortresses: 'Fortress',
             castles: 'Castle',
-            temples: 'Temple',
-            landmarks: 'Point of Interest',
-            forests: 'Forest',
-            mountains: 'Mountains',
-            rivers: 'River',
-            seas: 'Sea'
+            shrines: 'Shrine',
+            point_of_interest: 'Point of Interest',
+            enclaves: 'Enclaves',
+            gold_dragon: 'Gold Dragon',
+            malacoth: 'Malacoth Stations',
+            sapphire: 'Sapphire Stations'
         };
         return typeNames[type] || type;
     }

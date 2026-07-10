@@ -12,18 +12,19 @@ class DataService {
 
         try {
             const dataFiles = [
-                'data/geography/forests.json',
-                'data/geography/mountains.json',
-                'data/geography/rivers.json',
-                'data/geography/seas.json',
-                'data/settlements/fortresses.json',
-                'data/settlements/inns.json',
-                'data/settlements/settlements.json',
-                'data/settlements/cities.json',
-                'data/dungeons/dungeons.json',
-                'data/dungeons/landmarks.json',
-                'data/dungeons/ruins.json',
-                'data/dungeons/temples.json'
+                'data/factions/enclaves.json',
+                'data/factions/gold_dragon.json',
+                'data/factions/malacoth.json',
+                'data/factions/sapphire.json',
+                'data/locations/forts.json',
+                'data/locations/secrets.json',
+                'data/locations/settlements.json',
+                'data/locations/cities.json',
+                'data/locations/feyspires.json',
+                'data/locations/dungeons.json',
+                'data/locations/points_of_interest.json',
+                'data/locations/ruins.json',
+                'data/locations/shrines.json'
             ];
 
             const promises = dataFiles.map(file => this.loadJSON(file));

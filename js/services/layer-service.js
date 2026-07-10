@@ -7,27 +7,28 @@ class LayerService {
     constructor() {
         this.layers = {};
         this.layerControls = {
-            'cities-layer': ['capitals', 'feyspires', 'towns'],
+            'cities-layer': ['cities', 'towns'],
+            'feyspires-layer': 'feyspires',
             'settlements-layer': 'settlements',
             'ruins-layer': ['ruins', 'elder_ruins', 'town_ruins'],
             'dungeons-layer': ['dungeons', 'tombs', 'caves'],
-            'inns-layer': 'inns',
+            'secrets-layer': 'secrets',
             'forts-layer': ['forts', 'fortresses', 'castles'],
-            'temples-layer': 'temples',
-            'landmarks-layer': 'landmarks',
-            'forests-layer': 'forests',
-            'mountains-layer': 'mountains',
-            'rivers-layer': 'rivers',
-            'seas-layer': 'seas',
+            'shrines-layer': 'shrines',
+            'points-of-interest-layer': 'points-of-interest',
+            'enclaves-layer': 'enclaves',
+            'gold-dragon-layer': 'gold_dragon',
+            'malacoth-layer': 'malacoth',
+            'sapphire-layer': 'sapphire',
         };
         this.initializeLayers();
     }
 
     initializeLayers() {
         const layerTypes = [
-            'capitals', 'feyspires', 'towns', 'settlements', 'ruins', 'elder_ruins', 'town_ruins', 
-            'dungeons', 'tombs', 'caves', 'inns', 'forts', 'fortresses', 'castles', 'temples', 'landmarks', 
-            'forests', 'mountains', 'rivers', 'seas'
+            'cities', 'feyspires', 'towns', 'settlements', 'ruins', 'elder_ruins', 'town_ruins', 
+            'dungeons', 'tombs', 'caves', 'secrets', 'forts', 'fortresses', 'castles', 'shrines', 'points-of-interest', 
+            'enclaves', 'gold_dragon', 'malacoth', 'sapphire'
         ];
 
         layerTypes.forEach(type => {
@@ -43,11 +44,11 @@ class LayerService {
 
     hideGeographicLayers() {
         if (MapService.map) {
-            this.hideLayer('forests');
-            this.hideLayer('mountains');
-            this.hideLayer('rivers');
-            this.hideLayer('seas');
-            console.log('✅ Geographical layers are hidden by default');
+            this.hideLayer('enclaves');
+            this.hideLayer('gold_dragon');
+            this.hideLayer('malacoth');
+            this.hideLayer('sapphire');
+            console.log('✅ Great houses layers are hidden by default');
         }
     }
 

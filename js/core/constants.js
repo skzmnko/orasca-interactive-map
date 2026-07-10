@@ -1,5 +1,5 @@
 export const typeTranslations = {
-    capitals: "Города",
+    cities: "Города",
     feyspires: "Замки эльфов",
     forts: "Форты",
     castles: "Замки",
@@ -16,31 +16,31 @@ export const typeTranslations = {
     elder_ruins: "Руины",
     town_ruins: "Руины",
     temples: "Храмы",
-    forests: "Леса",
+    enclaves: "Анклавы",
     mountains: "Горы", 
     rivers: "Рекя",
     seas: "Моря"
 };
 
 export const iconUrls = {
-    capitals: "images/icons/capitals.png",
-    feyspires: "images/icons/elven_castle.png",
+    cities: "images/icons/cities.png",
+    feyspires: "images/icons/feyspires.png",
     forts: "images/icons/forts.png",
     castles: "images/icons/castles.png",
     fortresses: "images/icons/fortresses.png",
-    inns: "images/icons/inns.png", 
+    secrets: "images/icons/secrets.png", 
     settlements: "images/icons/settlements.png",
     towns: "images/icons/towns.png",
     dungeons: "images/icons/dungeons.png",
     tombs: "images/icons/tombs.png",
     caves: "images/icons/caves.png",
-    landmarks: "images/icons/landmarks.png",
-    ruins: "images/icons/tower_ruins.png",
+    landmarks: "images/icons/poi.png",
+    ruins: "images/icons/ruins.png",
     elder_ruins: "images/icons/elder_ruins.png",
     town_ruins: "images/icons/town_ruins.png",
-    temples: "images/icons/temples.png",
-    forests: "images/icons/forests.png",
-    mountains: "images/icons/mountains.png",
-    rivers: "images/icons/rivers.png",
-    seas: "images/icons/seas.png"    
+    shrines: "images/icons/shrines.png",
+    enclaves: "images/icons/enclaves.png",
+    gold_dragon: "images/icons/gold_dragon.png",
+    malacoth: "images/icons/malacoth.png",
+    sapphire: "images/icons/sapphire.png"    
 };
