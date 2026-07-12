@@ -196,7 +196,7 @@ class DetailPanelService {
             secrets: 'Secret',
             forts: 'Fort',
             shrines: 'Shrine',
-            points_of_interest: 'Point of Interest',
+            poi: 'Point of Interest',
             enclaves: 'Enclave',
             gold_dragon: 'Gold Dragon',
             malacoth: 'Malacoth Station',

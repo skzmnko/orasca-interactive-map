@@ -15,7 +15,7 @@ class LayerService {
             'secrets-layer': 'secrets',
             'forts-layer': 'forts',
             'shrines-layer': 'shrines',
-            'points-of-interest-layer': 'points-of-interest',
+            'poi-layer': 'poi',
             'enclaves-layer': 'enclaves',
             'gold-dragon-layer': 'gold_dragon',
             'malacoth-layer': 'malacoth',
@@ -27,7 +27,7 @@ class LayerService {
     initializeLayers() {
         const layerTypes = [
             'cities', 'feyspires', 'settlements', 'ruins', 'dungeons', 'tombs', 'caves', 'secrets', 
-            'forts', 'shrines', 'points-of-interest', 'enclaves', 'gold_dragon', 'malacoth', 'sapphire'
+            'forts', 'shrines', 'poi', 'enclaves', 'gold_dragon', 'malacoth', 'sapphire'
         ];
 
         layerTypes.forEach(type => {

@@ -22,7 +22,7 @@ class DataService {
                 'data/locations/cities.json',
                 'data/locations/feyspires.json',
                 'data/locations/dungeons.json',
-                'data/locations/points_of_interest.json',
+                'data/locations/poi.json',
                 'data/locations/ruins.json',
                 'data/locations/shrines.json'
             ];
