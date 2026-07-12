@@ -71,12 +71,66 @@ class DataService {
         return this.allLocations.filter(location => location.type === type);
     }
 
+    /**
+     * Поиск локаций с приоритетом:
+     * 1. Сначала локации, где строка найдена в названии
+     * 2. Затем локации, где строка найдена только в алиасе
+     * 3. Внутри каждой группы - сортировка по позиции найденного совпадения
+     */
     searchLocations(query) {
-        const lowerQuery = query.toLowerCase();
-        return this.allLocations.filter(loc => {
-            const searchText = `${loc.name} ${loc.alias || ''}`.toLowerCase();
-            return searchText.includes(lowerQuery);
+        const lowerQuery = query.toLowerCase().trim();
+        
+        if (!lowerQuery) {
+            return [];
+        }
+
+        const results = [];
+
+        this.allLocations.forEach(location => {
+            const nameLower = location.name.toLowerCase();
+            const aliasLower = (location.alias || '').toLowerCase();
+            
+            // Проверяем наличие в названии
+            const nameIndex = nameLower.indexOf(lowerQuery);
+            const aliasIndex = aliasLower.indexOf(lowerQuery);
+            
+            // Определяем тип совпадения и позицию
+            let matchType = null;
+            let matchPosition = Infinity;
+            
+            if (nameIndex !== -1) {
+                matchType = 'name';
+                matchPosition = nameIndex;
+            } else if (aliasIndex !== -1) {
+                matchType = 'alias';
+                matchPosition = aliasIndex;
+            }
+            
+            // Если строка найдена, добавляем в результаты
+            if (matchType) {
+                results.push({
+                    location: location,
+                    matchType: matchType,
+                    matchPosition: matchPosition,
+                    // Для сортировки внутри группы по позиции
+                    sortKey: `${matchType === 'name' ? '0' : '1'}_${String(matchPosition).padStart(10, '0')}`
+                });
+            }
         });
+
+        // Сортировка результатов
+        results.sort((a, b) => {
+            // Сначала сортируем по типу совпадения (name > alias)
+            if (a.matchType !== b.matchType) {
+                return a.matchType === 'name' ? -1 : 1;
+            }
+            
+            // Затем по позиции совпадения (чем раньше, тем выше)
+            return a.matchPosition - b.matchPosition;
+        });
+
+        // Возвращаем только объекты локаций
+        return results.map(item => item.location);
     }
 
     getLocationById(id) {
