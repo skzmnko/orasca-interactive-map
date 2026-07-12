@@ -12,7 +12,7 @@
   {
     "name": "Крепость Аргонт",
     "alias": "Argonth Keep",
-    "type": "fortresses",
+    "type": "forts",
     "coords": [53.03, 55.48],
     "known": true,
     "region": "morvein",
@@ -22,7 +22,7 @@
   {
     "name": "Дракенборг",
     "alias": "Drakenborg",
-    "type": "fortresses",
+    "type": "forts",
     "coords": [91.37, 69.52],
     "known": true,
     "region": "ellyria",
@@ -32,7 +32,7 @@
   {
     "name": "Дун Тунна",
     "alias": "Dun Tunna",
-    "type": "fortresses",
+    "type": "forts",
     "coords": [66.27, 56.33],
     "known": true,
     "region": "legions",
@@ -42,7 +42,7 @@
   {
     "name": "Хагтанг",
     "alias": "Hugtang · Клык",
-    "type": "fortresses",
+    "type": "forts",
     "coords": [48.44, 29.87],
     "region": "legions",
     "description": "Древняя крепость непокоренных горных племен, которая приютилась в небольшой долине Небесных гор. Местные жители не признают законов Арнуира и живут тем, что грабят путников, проходящих по окрестным дорогам и нападают на деревни, хотя при виде королевских войск сразу отступают. Еще одна причина не направляться в Сумеречную Долину...",
@@ -51,7 +51,7 @@
   {
     "name": "Крепость Лон",
     "alias": "Lon Keep",
-    "type": "fortresses",
+    "type": "forts",
     "coords": [78.52, 14.36],
     "known": true,
     "region": "talgar",
@@ -61,7 +61,7 @@
   {
     "name": "Крепость Фиска",
     "alias": "Fiska Keep",
-    "type": "fortresses",
+    "type": "forts",
     "coords": [83.09, 11.42],
     "known": true,
     "region": "talgar",
@@ -71,7 +71,7 @@
   {
     "name": "Castle Sample",
     "alias": "Fiska Keep",
-    "type": "castles",
+    "type": "forts",
     "coords": [48.44, 29.87],
     "region": "arnuir",
     "description": "Древняя крепость непокоренных горных племен, которая приютилась в небольшой долине Небесных гор. Местные жители не признают законов Арнуира и живут тем, что грабят путников, проходящих по окрестным дорогам и нападают на деревни, хотя при виде королевских войск сразу отступают. Еще одна причина не направляться в Сумеречную Долину...",
