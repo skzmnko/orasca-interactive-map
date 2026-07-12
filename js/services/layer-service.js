@@ -7,13 +7,13 @@ class LayerService {
     constructor() {
         this.layers = {};
         this.layerControls = {
-            'cities-layer': ['cities', 'towns'],
+            'cities-layer': 'cities',
             'feyspires-layer': 'feyspires',
             'settlements-layer': 'settlements',
-            'ruins-layer': ['ruins', 'elder_ruins', 'town_ruins'],
-            'dungeons-layer': ['dungeons', 'tombs', 'caves'],
+            'ruins-layer': 'ruins',
+            'dungeons-layer': ['dungeons', 'caves'],
             'secrets-layer': 'secrets',
-            'forts-layer': ['forts', 'fortresses', 'castles'],
+            'forts-layer': 'forts',
             'shrines-layer': 'shrines',
             'points-of-interest-layer': 'points-of-interest',
             'enclaves-layer': 'enclaves',
@@ -26,9 +26,8 @@ class LayerService {
 
     initializeLayers() {
         const layerTypes = [
-            'cities', 'feyspires', 'towns', 'settlements', 'ruins', 'elder_ruins', 'town_ruins', 
-            'dungeons', 'tombs', 'caves', 'secrets', 'forts', 'fortresses', 'castles', 'shrines', 'points-of-interest', 
-            'enclaves', 'gold_dragon', 'malacoth', 'sapphire'
+            'cities', 'feyspires', 'settlements', 'ruins', 'dungeons', 'tombs', 'caves', 'secrets', 
+            'forts', 'shrines', 'points-of-interest', 'enclaves', 'gold_dragon', 'malacoth', 'sapphire'
         ];
 
         layerTypes.forEach(type => {

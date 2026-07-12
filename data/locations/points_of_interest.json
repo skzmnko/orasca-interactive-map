@@ -2,7 +2,7 @@
   {
     "name": "Черная Яма",
     "alias": "Black Pit",
-    "type": "landmarks",
+    "type": "points_of_interest",
     "coords": [67.95, 44.96],
     "known": true,
     "region": "morvein",
@@ -12,7 +12,7 @@
   {
     "name": "Сияющая Долина",
     "alias": "Shining Valley",
-    "type": "landmarks",
+    "type": "points_of_interest",
     "coords": [61.47, 38.56],
     "known": true,
     "region": "morvein",
@@ -22,7 +22,7 @@
   {
     "name": "Мгла",
     "alias": "The Gloaming",
-    "type": "landmarks",
+    "type": "points_of_interest",
     "coords": [85.48, 53.23],
     "known": true,
     "region": "eldinholds",
@@ -32,7 +32,7 @@
   {
     "name": "Сумеречные Владения",
     "alias": "Twilight Demesne",
-    "type": "landmarks",
+    "type": "points_of_interest",
     "coords": [82.06, 51.80],
     "known": true,
     "region": "eldinholds",
@@ -42,7 +42,7 @@
   {
     "name": "Равнина Надгробий",
     "alias": "Gravesite Plain",
-    "type": "landmarks",
+    "type": "points_of_interest",
     "coords": [66.57, 62.38],
     "known": true,
     "region": "morvein",
@@ -52,7 +52,7 @@
   {
     "name": "Лазурное побережье",
     "alias": "Cerulean Coast",
-    "type": "landmarks",
+    "type": "points_of_interest",
     "coords": [49.45, 41.01],
     "known": true,
     "region": "morvein",

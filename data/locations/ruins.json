@@ -2,7 +2,7 @@
   {
     "name": "Киккебюрг",
     "alias": "Kikkeburgh · Жемчужина Звука",
-    "type": "town_ruins",
+    "type": "ruins",
     "coords": [61.67, 67.58],
     "known": true,
     "region": "olessia",
@@ -12,7 +12,7 @@
   {
     "name": "Лонгаррон",
     "alias": "Longarron · Растущий Город",
-    "type": "town_ruins",
+    "type": "ruins",
     "coords": [75.14, 57.68],
     "known": true,
     "region": "ellyria",
@@ -22,7 +22,7 @@
   {
     "name": "Нор",
     "alias": "Nore · Город Чудес",
-    "type": "town_ruins",
+    "type": "ruins",
     "coords": [76.77, 54.85],
     "known": true,
     "region": "ellyria",
@@ -32,7 +32,7 @@
   {
     "name": "Тун Браа",
     "alias": "Tun Braha",
-    "type": "town_ruins",
+    "type": "ruins",
     "coords": [89.03, 69.90],
     "known": true,
     "region": "ellyria",
@@ -42,7 +42,7 @@
   {
     "name": "Кер Будил",
     "alias": "Cer Budil",
-    "type": "town_ruins",
+    "type": "ruins",
     "coords": [69.38, 56.69],
     "known": true,
     "region": "morvein",
@@ -61,7 +61,7 @@
   {
     "name": "Эрнлиемна",
     "alias": "Ernliemna · Обсидиановая Крепость",
-    "type": "elder_ruins",
+    "type": "ruins",
     "coords": [77.94, 43.56],
     "known": true,
     "region": "elreddh",
@@ -71,7 +71,7 @@
   {
     "name": "Фроарос",
     "alias": "Froaros",
-    "type": "elder_ruins",
+    "type": "ruins",
     "coords": [66.15, 11.58],
     "known": true,
     "region": "ironkingdom",
@@ -81,7 +81,7 @@
   {
     "name": "Руины древней обители Рауха",
     "alias": "Ancient Ruins of Rauh",
-    "type": "elder_ruins",
+    "type": "ruins",
     "coords": [83.30, 56.06],
     "region": "ellyria",
     "description": "Эти циклопические развалины, заросшие кустарником и бурьяном, затоплены водой и разделены на две части широкой и глубокой расселиной. На юго-западе расположен древний храм, хранящий множество тайн.",
