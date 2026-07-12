@@ -107,20 +107,20 @@ class DetailPanelService {
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
                 ${location.alias ? `<div class="detail-panel-alias">${this.escapeHtml(location.alias)}</div>` : ''}
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Type</div>
-                    <div class="detail-panel-value">${this.getTypeDisplayName(location.type)}</div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">TYPE</span>
+                    <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
                 
                 ${location.region ? `
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Region</div>
-                    <div class="detail-panel-value">${this.escapeHtml(location.region)}</div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">REGION</span>
+                    <span class="detail-panel-value-inline">${this.escapeHtml(location.region)}</span>
                 </div>
                 ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-description">
-                    <div class="detail-panel-label">DESCRIPTION</div>
+                    <span class="detail-panel-label">DESCRIPTION</span>
                     <div class="detail-panel-description-wrapper">
                         <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
                         <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
@@ -128,44 +128,44 @@ class DetailPanelService {
                 </div>
                 
                 ${location.family ? `
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Family / Ruling House</div>
-                    <div class="detail-panel-value">${this.escapeHtml(location.family)}</div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">FAMILY</span>
+                    <span class="detail-panel-value-inline">${this.escapeHtml(location.family)}</span>
                 </div>
                 ` : ''}
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">VISIBILITY</div>
-                    <div class="detail-panel-value ${location.known ? 'status-known' : 'status-hidden'}">
-                        ${location.known ? '👁️ Visible to players' : '🔒 Hidden from players'}
-                    </div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">VISIBILITY</span>
+                    <span class="detail-panel-value-inline ${location.known ? 'status-known' : 'status-hidden'}">
+                        ${location.known ? '👁️ Visible' : '🔒 Hidden'}
+                    </span>
                 </div>
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">COORDINATES</div>
-                    <div class="detail-panel-value detail-panel-coords">
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">COORDINATES</span>
+                    <span class="detail-panel-value-inline detail-panel-coords">
                         ${location.coords ? `${location.coords[0].toFixed(2)}%, ${location.coords[1].toFixed(2)}%` : 'N/A'}
-                    </div>
+                    </span>
                 </div>
                 
                 ${location.image ? `
                 <div class="detail-panel-section">
-                    <div class="detail-panel-label">Image</div>
+                    <span class="detail-panel-label">IMAGE</span>
                     <div class="detail-panel-image">
                         <img src="${location.image}" alt="${location.name}" loading="lazy" onerror="this.style.display='none'">
                     </div>
                 </div>
                 ` : ''}
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">ID</div>
-                    <div class="detail-panel-value detail-panel-id">#${location.id}</div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">ID</span>
+                    <span class="detail-panel-value-inline detail-panel-id">#${location.id}</span>
                 </div>
                 
                 ${location.createdAt ? `
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Created</div>
-                    <div class="detail-panel-value detail-panel-id">${new Date(location.createdAt).toLocaleDateString()}</div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">CREATED</span>
+                    <span class="detail-panel-value-inline detail-panel-id">${new Date(location.createdAt).toLocaleDateString()}</span>
                 </div>
                 ` : ''}
             </div>
@@ -188,13 +188,13 @@ class DetailPanelService {
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
                 ${location.alias ? `<div class="detail-panel-alias">${this.escapeHtml(location.alias)}</div>` : ''}
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Type</div>
-                    <div class="detail-panel-value">${this.getTypeDisplayName(location.type)}</div>
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">TYPE</span>
+                    <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
                 
                 <div class="detail-panel-section detail-panel-section-description">
-                    <div class="detail-panel-label">DESCRIPTION</div>
+                    <span class="detail-panel-label">DESCRIPTION</span>
                     <div class="detail-panel-description-wrapper">
                         <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
                         <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
@@ -228,7 +228,7 @@ class DetailPanelService {
 
     checkDescriptionHeight(descriptionText, toggleBtn) {
         // Если текст короткий - скрываем кнопку
-        const lineHeight = parseInt(getComputedStyle(descriptionText).lineHeight) || 20;
+        const lineHeight = parseInt(getComputedStyle(descriptionText).lineHeight) || 18;
         const maxHeight = lineHeight * 4;
         
         // Временно убираем clamp для измерения реальной высоты
