@@ -170,7 +170,7 @@ body {
     backdrop-filter: blur(15px);
     border: 1px solid var(--mg-border);
     border-left: none;
-    border-radius: 0 12px 12px 0;
+    border-radius: 0; /* Убрал скругление углов - теперь прямые углы, как у detail-panel */
     box-shadow: var(--mg-shadow-lg);
     color: var(--mg-text-primary);
     padding: 24px 28px;
