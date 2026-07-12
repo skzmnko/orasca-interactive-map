@@ -12,8 +12,7 @@ export const typeTranslations = {
     caves: "Пещеры",
     poi: "Место",
     ruins: "Руины",
-    shrines: "Храмы",
-    enclaves: "Анклавы",
+    shrines: "Храмы"
 };
 
 export const iconUrls = {
@@ -28,6 +27,5 @@ export const iconUrls = {
     caves: "images/icons/caves.png",
     poi: "images/icons/poi.png",
     ruins: "images/icons/ruins.png",
-    shrines: "images/icons/shrines.png",
-    enclaves: "images/icons/enclaves.png"  
+    shrines: "images/icons/shrines.png"
 };

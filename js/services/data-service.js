@@ -12,7 +12,6 @@ class DataService {
 
         try {
             const dataFiles = [
-                'data/enclaves.json',
                 'data/forts.json',
                 'data/secrets.json',
                 'data/settlements.json',

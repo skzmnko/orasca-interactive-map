@@ -7,6 +7,7 @@ class DetailPanelService {
         this.isOpen = false;
         this.currentLocation = null;
         this.isDM = false;
+        this.descriptionExpanded = false;
     }
 
     initialize() {
@@ -69,6 +70,7 @@ class DetailPanelService {
         
         this.currentLocation = location;
         this.isOpen = true;
+        this.descriptionExpanded = false;
         
         this.panel.classList.remove('hidden');
         this.panel.classList.add('visible');
@@ -92,6 +94,14 @@ class DetailPanelService {
     }
 
     renderDMDetails(location) {
+        // Очищаем описание от лишних пробелов в начале и конце каждой строки
+        const descriptionHtml = location.description
+            ? location.description
+                .split('\n')
+                .map(line => line.trim())
+                .join('\n')
+            : '';
+        
         this.panelContent.innerHTML = `
             <div class="detail-panel-item">
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
@@ -109,9 +119,12 @@ class DetailPanelService {
                 </div>
                 ` : ''}
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Description</div>
-                    <div class="detail-panel-description">${this.escapeHtml(location.description)}</div>
+                <div class="detail-panel-section detail-panel-section-description">
+                    <div class="detail-panel-label">DESCRIPTION</div>
+                    <div class="detail-panel-description-wrapper">
+                        <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
+                        <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
+                    </div>
                 </div>
                 
                 ${location.family ? `
@@ -122,14 +135,14 @@ class DetailPanelService {
                 ` : ''}
                 
                 <div class="detail-panel-section">
-                    <div class="detail-panel-label">Visibility</div>
+                    <div class="detail-panel-label">VISIBILITY</div>
                     <div class="detail-panel-value ${location.known ? 'status-known' : 'status-hidden'}">
                         ${location.known ? '👁️ Visible to players' : '🔒 Hidden from players'}
                     </div>
                 </div>
                 
                 <div class="detail-panel-section">
-                    <div class="detail-panel-label">Coordinates</div>
+                    <div class="detail-panel-label">COORDINATES</div>
                     <div class="detail-panel-value detail-panel-coords">
                         ${location.coords ? `${location.coords[0].toFixed(2)}%, ${location.coords[1].toFixed(2)}%` : 'N/A'}
                     </div>
@@ -157,9 +170,19 @@ class DetailPanelService {
                 ` : ''}
             </div>
         `;
+
+        this.bindDescriptionToggle();
     }
 
     renderPlayerDetails(location) {
+        // Очищаем описание от лишних пробелов в начале и конце каждой строки
+        const descriptionHtml = location.description
+            ? location.description
+                .split('\n')
+                .map(line => line.trim())
+                .join('\n')
+            : '';
+        
         this.panelContent.innerHTML = `
             <div class="detail-panel-item detail-panel-item-player">
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
@@ -170,12 +193,74 @@ class DetailPanelService {
                     <div class="detail-panel-value">${this.getTypeDisplayName(location.type)}</div>
                 </div>
                 
-                <div class="detail-panel-section">
-                    <div class="detail-panel-label">Description</div>
-                    <div class="detail-panel-description detail-panel-description-player">${this.escapeHtml(location.description)}</div>
+                <div class="detail-panel-section detail-panel-section-description">
+                    <div class="detail-panel-label">DESCRIPTION</div>
+                    <div class="detail-panel-description-wrapper">
+                        <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
+                        <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
+                    </div>
                 </div>
             </div>
         `;
+
+        this.bindDescriptionToggle();
+    }
+
+    bindDescriptionToggle() {
+        const toggleBtn = document.getElementById('description-toggle');
+        const descriptionText = document.getElementById('description-text');
+        const wrapper = descriptionText?.closest('.detail-panel-description-wrapper');
+        const section = wrapper?.closest('.detail-panel-section-description');
+        
+        if (!toggleBtn || !descriptionText || !wrapper || !section) return;
+        
+        // Удаляем старый обработчик, если был
+        const newToggleBtn = toggleBtn.cloneNode(true);
+        toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+        
+        newToggleBtn.addEventListener('click', () => {
+            this.toggleDescription(descriptionText, newToggleBtn, wrapper, section);
+        });
+        
+        // Проверяем, нужно ли показывать кнопку "Read more"
+        this.checkDescriptionHeight(descriptionText, newToggleBtn);
+    }
+
+    checkDescriptionHeight(descriptionText, toggleBtn) {
+        // Если текст короткий - скрываем кнопку
+        const lineHeight = parseInt(getComputedStyle(descriptionText).lineHeight) || 20;
+        const maxHeight = lineHeight * 4;
+        
+        // Временно убираем clamp для измерения реальной высоты
+        descriptionText.style.webkitLineClamp = 'unset';
+        descriptionText.style.maxHeight = 'none';
+        const fullHeight = descriptionText.scrollHeight;
+        
+        // Возвращаем clamp
+        descriptionText.style.webkitLineClamp = '4';
+        descriptionText.style.maxHeight = `${maxHeight}px`;
+        
+        if (fullHeight <= maxHeight + 2) {
+            toggleBtn.style.display = 'none';
+        } else {
+            toggleBtn.style.display = 'inline-block';
+        }
+    }
+
+    toggleDescription(descriptionText, toggleBtn, wrapper, section) {
+        this.descriptionExpanded = !this.descriptionExpanded;
+        
+        if (this.descriptionExpanded) {
+            descriptionText.classList.add('expanded');
+            toggleBtn.textContent = 'Show less';
+            wrapper.classList.add('expanded');
+            section.classList.add('expanded');
+        } else {
+            descriptionText.classList.remove('expanded');
+            toggleBtn.textContent = 'Read more';
+            wrapper.classList.remove('expanded');
+            section.classList.remove('expanded');
+        }
     }
 
     escapeHtml(text) {
@@ -206,6 +291,7 @@ class DetailPanelService {
         if (!this.isOpen) return;
         
         this.isOpen = false;
+        this.descriptionExpanded = false;
         this.panel.classList.remove('visible');
         this.panel.classList.add('hidden');
         
