@@ -94,7 +94,6 @@ class DetailPanelService {
     }
 
     renderDMDetails(location) {
-        // Очищаем описание от лишних пробелов в начале и конце каждой строки
         const descriptionHtml = location.description
             ? location.description
                 .split('\n')
@@ -175,7 +174,6 @@ class DetailPanelService {
     }
 
     renderPlayerDetails(location) {
-        // Очищаем описание от лишних пробелов в начале и конце каждой строки
         const descriptionHtml = location.description
             ? location.description
                 .split('\n')
@@ -214,7 +212,6 @@ class DetailPanelService {
         
         if (!toggleBtn || !descriptionText || !wrapper || !section) return;
         
-        // Удаляем старый обработчик, если был
         const newToggleBtn = toggleBtn.cloneNode(true);
         toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
         
@@ -222,21 +219,17 @@ class DetailPanelService {
             this.toggleDescription(descriptionText, newToggleBtn, wrapper, section);
         });
         
-        // Проверяем, нужно ли показывать кнопку "Read more"
         this.checkDescriptionHeight(descriptionText, newToggleBtn);
     }
 
     checkDescriptionHeight(descriptionText, toggleBtn) {
-        // Если текст короткий - скрываем кнопку
         const lineHeight = parseInt(getComputedStyle(descriptionText).lineHeight) || 18;
         const maxHeight = lineHeight * 4;
         
-        // Временно убираем clamp для измерения реальной высоты
         descriptionText.style.webkitLineClamp = 'unset';
         descriptionText.style.maxHeight = 'none';
         const fullHeight = descriptionText.scrollHeight;
         
-        // Возвращаем clamp
         descriptionText.style.webkitLineClamp = '4';
         descriptionText.style.maxHeight = `${maxHeight}px`;
         
