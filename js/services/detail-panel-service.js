@@ -193,14 +193,14 @@ class DetailPanelService {
             ruins: 'Ruins',
             dungeons: 'Dungeon',
             caves: 'Cave',
-            secrets: 'Secrets',
+            secrets: 'Secret',
             forts: 'Fort',
             shrines: 'Shrine',
-            point_of_interest: 'Point of Interest',
-            enclaves: 'Enclaves',
+            points_of_interest: 'Point of Interest',
+            enclaves: 'Enclave',
             gold_dragon: 'Gold Dragon',
-            malacoth: 'Malacoth Stations',
-            sapphire: 'Sapphire Stations'
+            malacoth: 'Malacoth Station',
+            sapphire: 'Sapphire Station'
         };
         return typeNames[type] || type;
     }

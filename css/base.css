@@ -1,32 +1,4 @@
-/* Base Styles and Variables */
-:root {
-    --mg-bg-primary: #0a0a0a;
-    --mg-bg-secondary: #1a1a1a;
-    --mg-bg-panel: rgba(30, 30, 30, 0.95);
-    
-    --mg-accent: #1a7f7f;
-    --mg-accent-hover: #2a9f9f;
-    --mg-accent-light: rgba(26, 127, 127, 0.15);
-    --mg-accent-muted: rgba(26, 127, 127, 0.4);
-    
-    --mg-text-primary: #ffffff;
-    --mg-text-secondary: #a3a3a3;
-    --mg-text-muted: #6b7280;
-    --mg-text-accent: #7fbfbf;
-    
-    --mg-border: #374151;
-    --mg-border-light: #4b5563;
-    
-    --mg-hover: rgba(26, 127, 127, 0.08);
-    --mg-active: rgba(26, 127, 127, 0.2);
-    
-    --mg-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-    --mg-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
-    --mg-glow: 0 0 8px rgba(26, 127, 127, 0.3);
-    
-    --mg-popup-header-bg: #1a1a1a;
-    --mg-popup-header-border: #374151;
-}
+/* Base Styles */
 
 * {
     margin: 0;

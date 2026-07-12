@@ -1,4 +1,5 @@
 /* Login Page Styles */
+
 .login-page {
     position: fixed;
     top: 0;
@@ -58,6 +59,39 @@
     50% { opacity: 1; }
 }
 
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes successGlow {
+    0% { box-shadow: var(--mg-shadow-lg); }
+    50% { 
+        box-shadow: 
+            var(--mg-shadow-lg),
+            0 0 40px rgba(26, 127, 127, 0.3),
+            0 0 80px rgba(26, 127, 127, 0.2);
+    }
+    100% { box-shadow: var(--mg-shadow-lg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .login-header {
     text-align: center;
     margin-bottom: 32px;
@@ -104,7 +138,7 @@
     padding: 12px 16px;
     background: var(--mg-bg-secondary);
     border: 1px solid var(--mg-border);
-    border-radius: 8px;
+    border-radius: var(--mg-radius-lg);
     color: var(--mg-text-primary);
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -127,7 +161,7 @@
     padding: 14px 24px;
     background: linear-gradient(135deg, var(--mg-accent) 0%, var(--mg-accent-hover) 100%);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--mg-radius-lg);
     color: #ffffff;
     font-size: 1rem;
     font-weight: 600;
@@ -162,97 +196,11 @@
 .login-btn:hover {
     transform: translateY(-2px);
     box-shadow: 
-        0 8px 20px rgba(26, 127, 127, 0.3),
-        var(--mg-gold-glow);
+        0 8px 20px rgba(26, 127, 127, 0.3);
 }
 
 .login-btn:active {
     transform: translateY(0);
-}
-
-.error-message {
-    background: rgba(220, 53, 69, 0.1);
-    border: 1px solid rgba(220, 53, 69, 0.3);
-    border-radius: 8px;
-    padding: 12px 16px;
-    color: #f8d7da;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-top: 16px;
-    animation: shake 0.5s ease-in-out;
-    transition: all 0.3s ease;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-.login-footer {
-    text-align: center;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid var(--mg-border);
-}
-
-.login-footer p {
-    color: var(--mg-text-muted);
-    font-size: 0.85rem;
-    margin: 0;
-    font-style: italic;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes successGlow {
-    0% { box-shadow: var(--mg-shadow-lg); }
-    50% { 
-        box-shadow: 
-            var(--mg-shadow-lg),
-            0 0 40px rgba(26, 127, 127, 0.3),
-            0 0 80px rgba(26, 127, 127, 0.2);
-    }
-    100% { box-shadow: var(--mg-shadow-lg); }
-}
-
-/* Responsive Design for Login */
-@media (max-width: 768px) {
-    .login-container {
-        padding: 30px 24px;
-        margin: 20px;
-        max-width: none;
-    }
-    
-    .login-header h1 {
-        font-size: 2rem;
-        letter-spacing: 1px;
-    }
-    
-    .login-header p {
-        font-size: 0.9rem;
-    }
-    
-    .login-btn {
-        padding: 12px 20px;
-        font-size: 0.9rem;
-    }
-    
-    .form-group input {
-        padding: 10px 14px;
-    }
 }
 
 .login-btn.loading {
@@ -274,15 +222,10 @@
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 .error-message {
     background: rgba(220, 53, 69, 0.1);
     border: 1px solid rgba(220, 53, 69, 0.3);
-    border-radius: 8px;
+    border-radius: var(--mg-radius-lg);
     padding: 12px 16px;
     color: #f8d7da;
     font-size: 0.9rem;
@@ -300,4 +243,18 @@
     opacity: 1;
     padding: 12px 16px;
     margin-top: 16px;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--mg-border);
+}
+
+.login-footer p {
+    color: var(--mg-text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+    font-style: italic;
 }
