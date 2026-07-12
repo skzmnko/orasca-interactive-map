@@ -12,19 +12,16 @@ class DataService {
 
         try {
             const dataFiles = [
-                'data/factions/enclaves.json',
-                'data/factions/gold_dragon.json',
-                'data/factions/malacoth.json',
-                'data/factions/sapphire.json',
-                'data/locations/forts.json',
-                'data/locations/secrets.json',
-                'data/locations/settlements.json',
-                'data/locations/cities.json',
-                'data/locations/feyspires.json',
-                'data/locations/dungeons.json',
-                'data/locations/poi.json',
-                'data/locations/ruins.json',
-                'data/locations/shrines.json'
+                'data/enclaves.json',
+                'data/forts.json',
+                'data/secrets.json',
+                'data/settlements.json',
+                'data/cities.json',
+                'data/feyspires.json',
+                'data/dungeons.json',
+                'data/poi.json',
+                'data/ruins.json',
+                'data/shrines.json'
             ];
 
             const promises = dataFiles.map(file => this.loadJSON(file));

@@ -198,9 +198,6 @@ class DetailPanelService {
             shrines: 'Shrine',
             poi: 'Point of Interest',
             enclaves: 'Enclave',
-            gold_dragon: 'Gold Dragon',
-            malacoth: 'Malacoth Station',
-            sapphire: 'Sapphire Station'
         };
         return typeNames[type] || type;
     }
