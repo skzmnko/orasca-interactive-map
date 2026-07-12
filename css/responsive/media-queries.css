@@ -49,6 +49,7 @@
     .mobile-search-panel {
         top: var(--mg-mobile-top-panel-height);
         padding: 10px 12px 6px 12px;
+        max-height: 55vh; /* Увеличено для лучшей видимости результатов */
     }
     
     #mobile-search {
@@ -58,19 +59,19 @@
     }
     
     #mobile-search-results {
-        max-height: 150px;
+        max-height: 250px; /* Увеличено с 150px для отображения 5+ результатов */
     }
     
     #mobile-search-results .search-result-item {
-        padding: 8px 12px;
+        padding: 10px 14px; /* Увеличен padding для лучшего отображения */
     }
     
     #mobile-search-results .search-result-item strong {
-        font-size: 0.85rem;
+        font-size: 0.9rem; /* Увеличен размер шрифта */
     }
     
     #mobile-search-results .search-result-alias {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     
     /* Hide desktop search on mobile */
@@ -259,19 +260,19 @@
     }
     
     #search-results {
-        max-height: 180px;
+        max-height: 300px; /* Увеличено для планшетов */
     }
     
     .search-result-item {
-        padding: 8px 10px;
+        padding: 10px 14px;
     }
     
     .search-result-item strong {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
     
     .search-result-alias {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     
     /* Map controls mobile */
@@ -324,6 +325,7 @@
     .mobile-search-panel {
         top: var(--mg-mobile-top-panel-height);
         padding: 8px 10px 4px 10px;
+        max-height: 50vh;
     }
     
     #mobile-search {
@@ -333,7 +335,7 @@
     }
     
     #mobile-search-results {
-        max-height: 120px;
+        max-height: 200px; /* Увеличено для очень маленьких экранов */
     }
     
     .control-panel-container {
@@ -408,6 +410,22 @@
         font-size: 0.7rem;
         min-width: 30px;
         padding-left: 4px;
+    }
+    
+    #search-results {
+        max-height: 250px;
+    }
+    
+    .search-result-item {
+        padding: 8px 12px;
+    }
+    
+    .search-result-item strong {
+        font-size: 0.85rem;
+    }
+    
+    .search-result-alias {
+        font-size: 0.8rem;
     }
 }
 

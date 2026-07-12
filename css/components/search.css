@@ -34,7 +34,7 @@
     border: 1px solid var(--mg-border);
     border-radius: var(--mg-radius-lg);
     margin-top: 8px;
-    max-height: 250px;
+    max-height: 320px; /* Увеличено с 250px для отображения 5+ результатов */
     overflow-y: auto;
     position: absolute;
     top: 100%;
@@ -49,7 +49,7 @@
 }
 
 .unified-search-results {
-    max-height: 250px;
+    max-height: 320px; /* Увеличено с 250px */
     position: absolute;
 }
 

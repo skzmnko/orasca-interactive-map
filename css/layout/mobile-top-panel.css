@@ -59,6 +59,7 @@
     padding: 12px 16px 8px 16px;
     flex-direction: column;
     gap: 8px;
+    max-height: 60vh; /* Ограничиваем общую высоту панели */
 }
 
 .mobile-search-panel.open {
@@ -103,7 +104,7 @@
     background: var(--mg-bg-secondary);
     border: 1px solid var(--mg-border);
     border-radius: var(--mg-radius-lg);
-    max-height: 200px;
+    max-height: 200px; /* Увеличено с текущего значения для отображения 5+ результатов */
     overflow-y: auto;
     display: none;
     margin-top: 4px;
