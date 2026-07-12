@@ -29,8 +29,5 @@ export const iconUrls = {
     poi: "images/icons/poi.png",
     ruins: "images/icons/ruins.png",
     shrines: "images/icons/shrines.png",
-    enclaves: "images/icons/enclaves.png",
-    gold_dragon: "images/icons/gold_dragon.png",
-    malacoth: "images/icons/malacoth.png",
-    sapphire: "images/icons/sapphire.png"    
+    enclaves: "images/icons/enclaves.png"  
 };

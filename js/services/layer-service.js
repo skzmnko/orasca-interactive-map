@@ -16,10 +16,7 @@ class LayerService {
             'forts-layer': 'forts',
             'shrines-layer': 'shrines',
             'poi-layer': 'poi',
-            'enclaves-layer': 'enclaves',
-            'gold-dragon-layer': 'gold_dragon',
-            'malacoth-layer': 'malacoth',
-            'sapphire-layer': 'sapphire',
+            'enclaves-layer': 'enclaves'
         };
         this.initializeLayers();
     }
@@ -27,7 +24,7 @@ class LayerService {
     initializeLayers() {
         const layerTypes = [
             'cities', 'feyspires', 'settlements', 'ruins', 'dungeons', 'tombs', 'caves', 'secrets', 
-            'forts', 'shrines', 'poi', 'enclaves', 'gold_dragon', 'malacoth', 'sapphire'
+            'forts', 'shrines', 'poi', 'enclaves'
         ];
 
         layerTypes.forEach(type => {
@@ -42,13 +39,9 @@ class LayerService {
     }
 
     hideGeographicLayers() {
-        if (MapService.map) {
-            this.hideLayer('enclaves');
-            this.hideLayer('gold_dragon');
-            this.hideLayer('malacoth');
-            this.hideLayer('sapphire');
-            console.log('✅ Great houses layers are hidden by default');
-        }
+        // No layers are hidden by default now
+        // All layers including enclaves are shown by default
+        console.log('✅ All layers visible by default');
     }
 
     getLayer(type) {
