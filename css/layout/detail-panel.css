@@ -153,7 +153,6 @@
     word-break: break-word;
 }
 
-/* Description wrapper - контейнер для текста и кнопки */
 .detail-panel-description-wrapper {
     display: flex;
     flex-direction: column;
@@ -162,7 +161,6 @@
     overflow: hidden;
 }
 
-/* Description text - убираем все отступы */
 .detail-panel-description-text {
     color: var(--mg-text-secondary);
     font-size: 0.95rem;
