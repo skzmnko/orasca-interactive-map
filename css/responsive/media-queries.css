@@ -21,35 +21,17 @@
         --mg-mobile-top-panel-height: 50px;
     }
     
-    /* Show mobile top panel */
-    .mobile-top-panel {
-        display: flex !important;
-        height: var(--mg-mobile-top-panel-height);
-        padding: 0 12px;
-    }
+    /* Mobile top panel is shown via mobile-top-panel.css */
+    /* No need to duplicate display: flex here */
     
     .mobile-panel-title {
         font-size: 0.9rem;
     }
     
-    .mobile-search-btn,
-    .mobile-filter-btn {
-        height: 36px;
-        width: 36px;
-        padding: 6px;
-        border-radius: var(--mg-radius-md);
-    }
-    
-    .mobile-search-btn svg,
-    .mobile-filter-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-    
     .mobile-search-panel {
         top: var(--mg-mobile-top-panel-height);
         padding: 10px 12px 6px 12px;
-        max-height: 55vh; /* Увеличено для лучшей видимости результатов */
+        max-height: 55vh;
     }
     
     #mobile-search {
@@ -59,15 +41,15 @@
     }
     
     #mobile-search-results {
-        max-height: 250px; /* Увеличено с 150px для отображения 5+ результатов */
+        max-height: 250px;
     }
     
     #mobile-search-results .search-result-item {
-        padding: 10px 14px; /* Увеличен padding для лучшего отображения */
+        padding: 10px 14px;
     }
     
     #mobile-search-results .search-result-item strong {
-        font-size: 0.9rem; /* Увеличен размер шрифта */
+        font-size: 0.9rem;
     }
     
     #mobile-search-results .search-result-alias {
@@ -260,7 +242,7 @@
     }
     
     #search-results {
-        max-height: 300px; /* Увеличено для планшетов */
+        max-height: 300px;
     }
     
     .search-result-item {
@@ -299,27 +281,8 @@
         padding-top: 10px !important;
     }
     
-    .mobile-top-panel {
-        height: var(--mg-mobile-top-panel-height);
-        padding: 0 10px;
-    }
-    
     .mobile-panel-title {
         font-size: 0.8rem;
-    }
-    
-    .mobile-search-btn,
-    .mobile-filter-btn {
-        height: 32px;
-        width: 32px;
-        padding: 4px;
-        border-radius: 5px;
-    }
-    
-    .mobile-search-btn svg,
-    .mobile-filter-btn svg {
-        width: 16px;
-        height: 16px;
     }
     
     .mobile-search-panel {
@@ -335,7 +298,7 @@
     }
     
     #mobile-search-results {
-        max-height: 200px; /* Увеличено для очень маленьких экранов */
+        max-height: 200px;
     }
     
     .control-panel-container {

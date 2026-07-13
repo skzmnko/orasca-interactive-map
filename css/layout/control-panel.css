@@ -87,14 +87,6 @@
     font-weight: 600;
 }
 
-.layer-divider {
-    height: 1px;
-    background: var(--mg-border);
-    margin: 20px 0;
-    width: 100%;
-    flex-shrink: 0;
-}
-
 .map-controls {
     margin-top: 26px;
     padding-top: 22px;

@@ -18,8 +18,11 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mobile-top-panel.visible {
-    display: flex;
+/* Mobile top panel visible on mobile devices only */
+@media (max-width: 768px) {
+    .mobile-top-panel {
+        display: flex !important;
+    }
 }
 
 .mobile-panel-title {
@@ -54,11 +57,16 @@
     border-radius: 5px;
     color: var(--mg-text-secondary);
     padding: 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
     flex-shrink: 0;
     height: 32px;
     width: 32px;
+}
+
+/* Interactive buttons (search and filter) */
+.mobile-search-btn,
+.mobile-filter-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .mobile-search-btn:hover,
@@ -82,7 +90,7 @@
     box-shadow: var(--mg-glow);
 }
 
-/* DM Tools button - disabled state (inherits base sizes from above) */
+/* DM Tools button - disabled state */
 .mobile-dm-tools-btn {
     opacity: 0.4;
     cursor: not-allowed;
@@ -111,7 +119,7 @@
     flex-shrink: 0;
 }
 
-/* Hide mobile buttons on desktop (they are shown only on mobile via media query) */
+/* Hide mobile buttons on desktop */
 @media (min-width: 769px) {
     .mobile-search-btn,
     .mobile-filter-btn,
@@ -195,7 +203,6 @@
 /* Responsive for very small screens */
 @media (max-width: 480px) {
     .mobile-top-panel {
-        height: var(--mg-mobile-top-panel-height);
         padding: 0 10px;
         gap: 8px;
     }
