@@ -8,6 +8,7 @@ import AuthService from './services/auth-service.js';
 import LocationVisibilityService from './services/location-visibility-service.js';
 import LoginPage from './utils/login-page.js';
 import DetailPanelService from './services/detail-panel-service.js';
+import DMToolsPanel from './services/dm/dm-tools-panel.js';
 
 async function waitForLeaflet() {
     const maxWaitTime = 10000;
@@ -29,6 +30,7 @@ class Application {
         this.initialized = false;
         this.uiService = null;
         this.loginPage = null;
+        this.dmToolsPanel = null;
     }
 
     async initialize() {
@@ -103,6 +105,13 @@ class Application {
         SearchService.initialize();
         this.addLogoutButton();
 
+        // Initialize DM Tools only for DM users
+        if (AuthService.isDM()) {
+            this.dmToolsPanel = DMToolsPanel;
+            this.dmToolsPanel.initialize();
+            console.log('🛠️ DM Tools initialized');
+        }
+
         LayerService.hideGeographicLayers();
 
         setTimeout(() => {
@@ -114,6 +123,7 @@ class Application {
         window.dataService = DataService;
         window.authService = AuthService;
         window.detailPanelService = DetailPanelService;
+        window.dmToolsPanel = DMToolsPanel;
     }
 
     addLogoutButton() {
