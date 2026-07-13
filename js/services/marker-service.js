@@ -32,7 +32,6 @@ class MarkerService {
         else if (currentZoom === 3) baseSize = 28;
         else baseSize = 32;
 
-        // Переведен alt-текст для изображения
         const typeDisplayName = this.getTypeDisplayName(type);
         
         return L.divIcon({
@@ -47,7 +46,6 @@ class MarkerService {
         });
     }
 
-    // Добавлен вспомогательный метод для перевода названий типов
     getTypeDisplayName(type) {
         const typeNames = {
             cities: 'Город',
