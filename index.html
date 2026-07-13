@@ -19,6 +19,33 @@
     
     <div id="map"></div>
 
+    <!-- Desktop Profile Button -->
+    <button id="desktop-profile-btn" class="desktop-profile-btn" title="Profile">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+        </svg>
+    </button>
+
+    <!-- Profile Panel -->
+    <div class="profile-panel" id="profile-panel">
+        <div class="profile-panel-content">
+            <div class="profile-user-info">
+                <div class="profile-avatar">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                <div class="profile-user-details">
+                    <div class="profile-username" id="profile-username">User</div>
+                    <div class="profile-role" id="profile-role">Role</div>
+                </div>
+            </div>
+            <button id="profile-logout-btn" class="profile-logout-btn">Logout</button>
+        </div>
+    </div>
+
     <div class="mobile-top-panel" id="mobile-top-panel">
         <div class="mobile-panel-title">World of Orasca</div>
         <div class="mobile-panel-actions">
@@ -38,6 +65,13 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"/>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </button>
+            <!-- Mobile Profile Button -->
+            <button id="mobile-profile-btn" class="mobile-profile-btn" title="Profile">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
                 </svg>
             </button>
         </div>

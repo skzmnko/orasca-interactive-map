@@ -15,6 +15,15 @@ class UIService {
         this.searchInput = null;
         this.isPanelOpen = true;
         this.isMobile = false;
+        
+        // Profile elements
+        this.desktopProfileBtn = null;
+        this.mobileProfileBtn = null;
+        this.profilePanel = null;
+        this.profileUsername = null;
+        this.profileRole = null;
+        this.profileLogoutBtn = null;
+        this.isProfileOpen = false;
     }
 
     initialize() {
@@ -28,6 +37,14 @@ class UIService {
         this.mobileTopPanel = document.getElementById('mobile-top-panel');
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
+        
+        // Profile elements
+        this.desktopProfileBtn = document.getElementById('desktop-profile-btn');
+        this.mobileProfileBtn = document.getElementById('mobile-profile-btn');
+        this.profilePanel = document.getElementById('profile-panel');
+        this.profileUsername = document.getElementById('profile-username');
+        this.profileRole = document.getElementById('profile-role');
+        this.profileLogoutBtn = document.getElementById('profile-logout-btn');
         
         this.isMobile = window.innerWidth <= 768;
         
@@ -70,6 +87,7 @@ class UIService {
         this.setupEventListeners();
         this.bindControlButtons();
         this.setupSearchResultsPosition();
+        this.setupProfilePanel();
         
         window.addEventListener('resize', () => {
             const wasMobile = this.isMobile;
@@ -112,6 +130,89 @@ class UIService {
         });
         
         return this;
+    }
+
+    setupProfilePanel() {
+        const user = AuthService.getCurrentUser();
+        if (this.profileUsername && user) {
+            this.profileUsername.textContent = user.displayName || user.username;
+        }
+        if (this.profileRole && user) {
+            this.profileRole.textContent = user.role === 'DM' ? 'Dungeon Master' : 'Player';
+        }
+
+        if (this.profileLogoutBtn) {
+            this.profileLogoutBtn.addEventListener('click', () => {
+                AuthService.logout();
+                location.reload();
+            });
+        }
+
+        if (this.desktopProfileBtn) {
+            this.desktopProfileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleProfilePanel();
+            });
+        }
+
+        if (this.mobileProfileBtn) {
+            this.mobileProfileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleProfilePanel();
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (this.isProfileOpen && this.profilePanel) {
+                const isClickOnPanel = this.profilePanel.contains(e.target);
+                const isClickOnBtn = this.desktopProfileBtn?.contains(e.target) || this.mobileProfileBtn?.contains(e.target);
+                if (!isClickOnPanel && !isClickOnBtn) {
+                    this.closeProfilePanel();
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isProfileOpen) {
+                this.closeProfilePanel();
+            }
+        });
+    }
+
+    toggleProfilePanel() {
+        if (this.isProfileOpen) {
+            this.closeProfilePanel();
+        } else {
+            this.openProfilePanel();
+        }
+    }
+
+    openProfilePanel() {
+        if (this.profilePanel) {
+            this.profilePanel.classList.add('open');
+            this.isProfileOpen = true;
+            if (this.desktopProfileBtn) {
+                this.desktopProfileBtn.classList.add('active');
+            }
+            if (this.mobileProfileBtn) {
+                this.mobileProfileBtn.classList.add('active');
+            }
+            console.log('👤 Profile panel opened');
+        }
+    }
+
+    closeProfilePanel() {
+        if (this.profilePanel) {
+            this.profilePanel.classList.remove('open');
+            this.isProfileOpen = false;
+            if (this.desktopProfileBtn) {
+                this.desktopProfileBtn.classList.remove('active');
+            }
+            if (this.mobileProfileBtn) {
+                this.mobileProfileBtn.classList.remove('active');
+            }
+            console.log('👤 Profile panel closed');
+        }
     }
 
     setupSearchResultsPosition() {

@@ -105,7 +105,6 @@ class Application {
         this.uiService.initialize();
         LayerService.bindLayerControls();
         SearchService.initialize();
-        this.addLogoutButton();
 
         // Manage mobile DM Tools button visibility
         this.updateMobileDMButtonVisibility();
@@ -146,25 +145,6 @@ class Application {
             console.log('📱 Mobile DM Tools button shown (DM user on mobile)');
         } else {
             mobileDmBtn.style.display = 'none';
-        }
-    }
-
-    addLogoutButton() {
-        const mapControls = document.querySelector('.map-controls');
-        if (mapControls) {
-            const logoutBtn = document.createElement('button');
-            logoutBtn.id = 'logout-btn';
-            logoutBtn.textContent = `Logout (${AuthService.getCurrentUser().displayName})`;
-            logoutBtn.style.marginTop = '10px';
-            logoutBtn.style.background = 'rgba(220, 53, 69, 0.2)';
-            logoutBtn.style.borderColor = 'rgba(220, 53, 69, 0.5)';
-            
-            logoutBtn.addEventListener('click', () => {
-                AuthService.logout();
-                location.reload();
-            });
-            
-            mapControls.appendChild(logoutBtn);
         }
     }
 }
