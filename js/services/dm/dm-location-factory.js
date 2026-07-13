@@ -71,11 +71,7 @@ class DMLocationFactory {
         }
 
         const locationId = idGenerator.generateId();
-
-        // Round coordinates to two decimal places
         const roundedCoords = coords.map(c => Number(c.toFixed(2)));
-
-        // If image is not specified, use default
         const imagePath = image.trim() || 'images/locations/example.jpg';
 
         return {
