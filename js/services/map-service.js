@@ -95,8 +95,6 @@ class MapService {
         };
         
         const config = scaleConfig[currentZoom] || scaleConfig[0];
-        
-        // Переведено на русский
         const scaleText = `${config.miles} ${config.miles === 1 ? 'миля' : 'миль'}`;
         
         this.scaleContainer.innerHTML = `
