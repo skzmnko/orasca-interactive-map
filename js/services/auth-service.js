@@ -17,7 +17,7 @@ class AuthService {
                 username: 'orasca', 
                 password: 'orasca_2026', 
                 role: 'player',
-                displayName: 'Watcher'
+                displayName: 'Наблюдатель'
             }
         ];
     }
@@ -38,7 +38,7 @@ class AuthService {
             return { success: true, user: this.currentUser };
         } else {
             console.warn('❌ Invalid credentials');
-            return { success: false, error: 'Invalid username or password' };
+            return { success: false, error: 'Неверное имя пользователя или пароль' };
         }
     }
 

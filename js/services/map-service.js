@@ -86,17 +86,18 @@ class MapService {
         const currentZoom = this.map.getZoom();
         
         const scaleConfig = {
-            0: { miles: 1600, width: 100 }, // 600 miles = 100px
-            1: { miles: 800, width: 100 }, // 300 miles = 100px  
-            2: { miles: 400, width: 100 }, // 150 miles = 100px
-            3: { miles: 200, width: 100 },  // 75 miles = 100px
-            4: { miles: 100, width: 100 },  // 30 miles = 100px
-            5: { miles: 50, width: 100 }   // 25 miles = 100px
+            0: { miles: 1600, width: 100 },
+            1: { miles: 800, width: 100 },
+            2: { miles: 400, width: 100 },
+            3: { miles: 200, width: 100 },
+            4: { miles: 100, width: 100 },
+            5: { miles: 50, width: 100 }
         };
         
         const config = scaleConfig[currentZoom] || scaleConfig[0];
         
-        const scaleText = `${config.miles} ${config.miles === 1 ? 'mile' : 'miles'}`;
+        // Переведено на русский
+        const scaleText = `${config.miles} ${config.miles === 1 ? 'миля' : 'миль'}`;
         
         this.scaleContainer.innerHTML = `
             <div style="display: flex; align-items: center; gap: 8px;">

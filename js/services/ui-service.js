@@ -141,7 +141,8 @@ class UIService {
             this.profileUsername.textContent = user.displayName || user.username;
         }
         if (this.profileRole && user) {
-            this.profileRole.textContent = user.role === 'DM' ? 'Dungeon Master' : 'Player';
+            // Переведено на русский
+            this.profileRole.textContent = user.role === 'DM' ? 'Мастер' : 'Игрок';
         }
 
         if (this.profileLogoutBtn) {

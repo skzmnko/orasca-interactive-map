@@ -132,7 +132,7 @@
 
 .detail-panel-label {
     color: var(--mg-text-secondary);
-    font-size: 1rem; /* Changed to match value size */
+    font-size: 1rem;
     font-weight: 600;
     text-transform: none;
     letter-spacing: 0.5px;
@@ -178,6 +178,8 @@
     padding: 0 !important;
     margin: 0 !important;
     text-indent: 0 !important;
+    /* Standard property for compatibility */
+    line-clamp: 4;
 }
 
 /* Expanded state for text */
@@ -186,6 +188,8 @@
     -webkit-box-orient: vertical;
     overflow: visible !important;
     max-height: none !important;
+    /* Standard property for compatibility */
+    line-clamp: unset !important;
 }
 
 /* Expanded state for wrapper */
@@ -194,6 +198,8 @@
     -webkit-box-orient: vertical;
     overflow: visible !important;
     max-height: none !important;
+    /* Standard property for compatibility */
+    line-clamp: unset !important;
 }
 
 /* Toggle button */
@@ -325,6 +331,7 @@
         font-size: 0.9rem;
         line-height: 1.5;
         max-height: 60px;
+        line-clamp: 4;
     }
     
     .detail-panel-value-inline {
@@ -332,7 +339,7 @@
     }
     
     .detail-panel-label {
-        font-size: 0.95rem; /* Changed to match value size */
+        font-size: 0.95rem;
     }
     
     .detail-panel-section-inline {
@@ -380,6 +387,7 @@
         font-size: 0.85rem;
         line-height: 1.4;
         max-height: 48px;
+        line-clamp: 4;
     }
     
     .detail-panel-value-inline {
@@ -387,7 +395,7 @@
     }
     
     .detail-panel-label {
-        font-size: 0.9rem; /* Changed to match value size */
+        font-size: 0.9rem;
     }
     
     .detail-panel-section-inline {

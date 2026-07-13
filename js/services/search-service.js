@@ -173,12 +173,13 @@ class SearchService {
     showLayerHiddenMessage(location) {
         const message = document.createElement('div');
         message.className = 'search-hidden-message';
+        // Переведено на русский
         message.innerHTML = `
             <div class="search-hidden-content">
                 <div class="search-hidden-icon">🔒</div>
                 <div class="search-hidden-text">
-                    <strong>Location "${location.name}" is hidden by filter</strong>
-                    <p>Enable the appropriate filter in the control panel</p>
+                    <strong>Локация "${location.name}" скрыта фильтром</strong>
+                    <p>Включите соответствующий фильтр в панели управления</p>
                 </div>
             </div>
         `;
@@ -197,13 +198,15 @@ class SearchService {
             }
         });
         
+        // Консольный лог оставлен на английском согласно ТЗ
         console.log(`⚠️ Location "${location.name}" is hidden by layer's filter`);
     }
 
     showNoResults(resultsContainer) {
         const noResults = document.createElement('div');
         noResults.className = 'search-result-item';
-        noResults.textContent = 'No results found';
+        // Переведено на русский
+        noResults.textContent = 'Ничего не найдено';
         noResults.style.color = '#a3a3a3';
         noResults.style.cursor = 'default';
         resultsContainer.appendChild(noResults);

@@ -21,43 +21,43 @@ class LoginPage {
             <div class="login-container">
                 <div class="login-header">
                     <h1>World of Orasca</h1>
-                    <p>Fragments of Orasca interactive map</p>
+                    <p>Интерактивная карта Осколков Ораски</p>
                 </div>
                 
                 <form id="login-form" class="login-form">
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Логин</label>
                         <input 
                             type="text" 
                             id="username" 
                             name="username" 
                             required 
                             autocomplete="username"
-                            placeholder="Enter you username"
+                            placeholder="Логин"
                         >
                     </div>
                     
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Пароль</label>
                         <input 
                             type="password" 
                             id="password" 
                             name="password" 
                             required 
                             autocomplete="current-password"
-                            placeholder="Enter your password"
+                            placeholder="Пароль"
                         >
                     </div>
                     
                     <button type="submit" class="login-btn" id="login-submit">
-                        <span class="btn-text">Enter the world</span>
+                        <span class="btn-text">Войдите в мир</span>
                     </button>
                 </form>
                 
                 <div id="login-error" class="error-message hidden"></div>
                 
                 <div class="login-footer">
-                    <p>Select your character to enter</p>
+                    <p>Выберите свой путь</p>
                 </div>
             </div>
         `;

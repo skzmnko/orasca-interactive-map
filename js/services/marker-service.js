@@ -32,9 +32,12 @@ class MarkerService {
         else if (currentZoom === 3) baseSize = 28;
         else baseSize = 32;
 
+        // Переведен alt-текст для изображения
+        const typeDisplayName = this.getTypeDisplayName(type);
+        
         return L.divIcon({
             className: `custom-icon custom-icon-${type}`,
-            html: `<img src="${iconUrls[type]}" alt="${type}" 
+            html: `<img src="${iconUrls[type]}" alt="${typeDisplayName}" 
                    style="width:${baseSize}px; height:${baseSize}px; 
                           object-fit:contain; 
                           filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">`,
@@ -42,6 +45,25 @@ class MarkerService {
             iconAnchor: [baseSize/2, baseSize/2],
             popupAnchor: [0, -baseSize/2]
         });
+    }
+
+    // Добавлен вспомогательный метод для перевода названий типов
+    getTypeDisplayName(type) {
+        const typeNames = {
+            cities: 'Город',
+            feyspires: 'Фейский Шпиль',
+            settlements: 'Поселение',
+            farms: 'Ферма',
+            ruins: 'Руины',
+            dungeons: 'Подземелье',
+            caves: 'Пещера',
+            secrets: 'Секрет',
+            forts: 'Форт',
+            shrines: 'Храм',
+            poi: 'Точка интереса',
+            enclaves: 'Анклав'
+        };
+        return typeNames[type] || type;
     }
 
     addMarker(location, targetLayer) {

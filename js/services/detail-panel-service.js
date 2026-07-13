@@ -31,11 +31,11 @@ class DetailPanelService {
         
         this.panel.innerHTML = `
             <div class="detail-panel-header">
-                <h3>${this.isDM ? '📜 Location Details' : '📜 Location Info'}</h3>
-                <button class="detail-panel-close" title="Close panel">✕</button>
+                <h3>${this.isDM ? '📜 Детали локации' : '📜 Информация о локации'}</h3>
+                <button class="detail-panel-close" title="Закрыть панель">✕</button>
             </div>
             <div class="detail-panel-content">
-                <div class="detail-panel-loading">Select a location to view details</div>
+                <div class="detail-panel-loading">Выберите локацию для просмотра деталей</div>
             </div>
         `;
         
@@ -82,7 +82,7 @@ class DetailPanelService {
 
     renderLocationDetails(location) {
         if (!location) {
-            this.panelContent.innerHTML = '<div class="detail-panel-loading">Location not found</div>';
+            this.panelContent.innerHTML = '<div class="detail-panel-loading">Локация не найдена</div>';
             return;
         }
 
@@ -110,14 +110,14 @@ class DetailPanelService {
         
         if (location.ruler && location.ruler.trim() !== '') {
             rulerOwnerValue = location.ruler;
-            rulerOwnerLabel = 'Ruler';
+            rulerOwnerLabel = 'Правитель';
         } else if (location.owner && location.owner.trim() !== '') {
             rulerOwnerValue = location.owner;
-            rulerOwnerLabel = 'Owner';
+            rulerOwnerLabel = 'Владелец';
         } else if (location.family && location.family.trim() !== '') {
             // Backward compatibility: if family exists and no ruler/owner
             rulerOwnerValue = location.family;
-            rulerOwnerLabel = 'Ruler / Owner';
+            rulerOwnerLabel = 'Правитель / Владелец';
         }
         
         this.panelContent.innerHTML = `
@@ -127,23 +127,23 @@ class DetailPanelService {
                 
                 ${showType ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Type</span>
+                    <span class="detail-panel-label">Тип</span>
                     <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
                 ` : ''}
                 
                 ${location.region ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Region</span>
+                    <span class="detail-panel-label">Регион</span>
                     <span class="detail-panel-value-inline">${this.escapeHtml(location.region)}</span>
                 </div>
                 ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-description">
-                    <span class="detail-panel-label">Description</span>
+                    <span class="detail-panel-label">Описание</span>
                     <div class="detail-panel-description-wrapper">
                         <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
-                        <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
+                        <button class="detail-panel-description-toggle" id="description-toggle">Читать далее</button>
                     </div>
                 </div>
                 
@@ -155,22 +155,22 @@ class DetailPanelService {
                 ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Visibility</span>
+                    <span class="detail-panel-label">Видимость</span>
                     <span class="detail-panel-value-inline ${location.known ? 'status-known' : 'status-hidden'}">
-                        ${location.known ? '👁️ Visible' : '🔒 Hidden'}
+                        ${location.known ? '👁️ Видима' : '🔒 Скрыта'}
                     </span>
                 </div>
                 
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Coordinates</span>
+                    <span class="detail-panel-label">Координаты</span>
                     <span class="detail-panel-value-inline detail-panel-coords">
-                        ${location.coords ? `${location.coords[0].toFixed(2)}%, ${location.coords[1].toFixed(2)}%` : 'N/A'}
+                        ${location.coords ? `${location.coords[0].toFixed(2)}%, ${location.coords[1].toFixed(2)}%` : 'Н/Д'}
                     </span>
                 </div>
                 
                 ${location.image ? `
                 <div class="detail-panel-section">
-                    <span class="detail-panel-label">Image</span>
+                    <span class="detail-panel-label">Изображение</span>
                     <div class="detail-panel-image">
                         <img src="${location.image}" alt="${location.name}" loading="lazy" onerror="this.style.display='none'">
                     </div>
@@ -184,8 +184,8 @@ class DetailPanelService {
                 
                 ${location.createdAt ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Created</span>
-                    <span class="detail-panel-value-inline detail-panel-id">${new Date(location.createdAt).toLocaleDateString()}</span>
+                    <span class="detail-panel-label">Создано</span>
+                    <span class="detail-panel-value-inline detail-panel-id">${new Date(location.createdAt).toLocaleDateString('ru-RU')}</span>
                 </div>
                 ` : ''}
             </div>
@@ -211,14 +211,14 @@ class DetailPanelService {
         
         if (location.ruler && location.ruler.trim() !== '') {
             rulerOwnerValue = location.ruler;
-            rulerOwnerLabel = 'Ruler';
+            rulerOwnerLabel = 'Правитель';
         } else if (location.owner && location.owner.trim() !== '') {
             rulerOwnerValue = location.owner;
-            rulerOwnerLabel = 'Owner';
+            rulerOwnerLabel = 'Владелец';
         } else if (location.family && location.family.trim() !== '') {
             // Backward compatibility: if family exists and no ruler/owner
             rulerOwnerValue = location.family;
-            rulerOwnerLabel = 'Ruler / Owner';
+            rulerOwnerLabel = 'Правитель / Владелец';
         }
         
         this.panelContent.innerHTML = `
@@ -228,23 +228,23 @@ class DetailPanelService {
                 
                 ${showType ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Type</span>
+                    <span class="detail-panel-label">Тип</span>
                     <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
                 ` : ''}
                 
                 ${location.region ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">Region</span>
+                    <span class="detail-panel-label">Регион</span>
                     <span class="detail-panel-value-inline">${this.escapeHtml(location.region)}</span>
                 </div>
                 ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-description">
-                    <span class="detail-panel-label">Description</span>
+                    <span class="detail-panel-label">Описание</span>
                     <div class="detail-panel-description-wrapper">
                         <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
-                        <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
+                        <button class="detail-panel-description-toggle" id="description-toggle">Читать далее</button>
                     </div>
                 </div>
                 
@@ -301,12 +301,12 @@ class DetailPanelService {
         
         if (this.descriptionExpanded) {
             descriptionText.classList.add('expanded');
-            toggleBtn.textContent = 'Show less';
+            toggleBtn.textContent = 'Свернуть';
             wrapper.classList.add('expanded');
             section.classList.add('expanded');
         } else {
             descriptionText.classList.remove('expanded');
-            toggleBtn.textContent = 'Read more';
+            toggleBtn.textContent = 'Читать далее';
             wrapper.classList.remove('expanded');
             section.classList.remove('expanded');
         }
