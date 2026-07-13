@@ -11,13 +11,13 @@ class AuthService {
                 username: 'dungeonmaster', 
                 password: 'dm_access_2024', 
                 role: 'DM',
-                displayName: 'Dungeon Master'
+                displayName: 'Мастер'
             },
             { 
                 username: 'orasca', 
                 password: 'orasca_2026', 
                 role: 'player',
-                displayName: 'Наблюдатель'
+                displayName: 'Игрок'
             }
         ];
     }
