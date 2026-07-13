@@ -22,7 +22,6 @@ class DMToolsPanel {
         this.mobileBtn = null;
         this.desktopBtn = null;
 
-        // Bind context
         this.handleCoordinatePick = this.handleCoordinatePick.bind(this);
         this.togglePicker = this.togglePicker.bind(this);
         this.handleAddLocation = this.handleAddLocation.bind(this);
@@ -41,7 +40,6 @@ class DMToolsPanel {
     }
 
     createPanel() {
-        // Desktop DM Tools panel open button
         this.desktopBtn = document.createElement('button');
         this.desktopBtn.id = 'dm-tools-open-btn';
         this.desktopBtn.className = 'dm-tools-open-btn';
@@ -55,8 +53,6 @@ class DMToolsPanel {
         document.body.appendChild(this.desktopBtn);
 
         this.desktopBtn.addEventListener('click', this.toggle);
-
-        // DM Tools panel
         this.panelContainer = document.createElement('div');
         this.panelContainer.id = 'dm-tools-panel';
         this.panelContainer.className = 'dm-tools-panel hidden';
@@ -153,7 +149,6 @@ class DMToolsPanel {
     checkMobileButton() {
         this.mobileBtn = document.getElementById('mobile-dm-tools-btn');
         if (this.mobileBtn) {
-            // Mobile button is disabled via CSS - just log it
             console.log('📱 Mobile DM Tools button found (disabled)');
         } else {
             console.warn('⚠️ Mobile DM Tools button not found in DOM');
@@ -161,13 +156,11 @@ class DMToolsPanel {
     }
 
     setupEventListeners() {
-        // Close panel
         const closeBtn = document.getElementById('dm-tools-close-btn');
         if (closeBtn) {
             closeBtn.addEventListener('click', () => this.close());
         }
 
-        // Coordinates
         this.coordInput = document.getElementById('dm-coord-input');
         this.pickBtn = document.getElementById('dm-pick-btn');
 
@@ -182,16 +175,12 @@ class DMToolsPanel {
             this.pickBtn.addEventListener('click', this.togglePicker);
         }
 
-        // Form
         this.form = document.getElementById('dm-location-form');
         if (this.form) {
             this.form.addEventListener('submit', this.handleAddLocation);
         }
 
-        // Populate selects
         this.populateSelects();
-
-        // Control buttons
         this.exportBtn = document.getElementById('dm-export-btn');
         this.clearBtn = document.getElementById('dm-clear-btn');
 
@@ -279,7 +268,6 @@ class DMToolsPanel {
     handleAddLocation(e) {
         e.preventDefault();
 
-        // Gather data directly from form fields
         const nameInput = document.getElementById('dm-location-name');
         const aliasInput = document.getElementById('dm-location-alias');
         const typeSelect = document.getElementById('dm-location-type');
@@ -288,13 +276,11 @@ class DMToolsPanel {
         const imageInput = document.getElementById('dm-location-image');
         const knownCheckbox = document.getElementById('dm-location-known');
 
-        // Check that all elements exist
         if (!nameInput || !typeSelect) {
             this.showNotification('❌ Error: form fields not found', 'error');
             return;
         }
 
-        // Build data object
         const locationData = {
             name: nameInput.value.trim(),
             alias: aliasInput ? aliasInput.value.trim() : '',
@@ -308,7 +294,6 @@ class DMToolsPanel {
 
         console.log('📝 Gathering form data:', locationData);
 
-        // Check coordinates
         if (!locationData.coords) {
             const coordsValue = this.coordInput?.value;
             if (coordsValue && coordsValue.startsWith('[')) {
@@ -319,7 +304,6 @@ class DMToolsPanel {
                         locationData.coords = parsed;
                     }
                 } catch (err) {
-                    // Ignore
                 }
             }
         }
@@ -475,7 +459,6 @@ class DMToolsPanel {
     }
 
     updateButtonStates(isOpen) {
-        // Desktop button
         if (this.desktopBtn) {
             if (isOpen) {
                 this.desktopBtn.classList.add('active');
@@ -484,7 +467,6 @@ class DMToolsPanel {
             }
         }
 
-        // Mobile button is disabled, no visual state update needed
     }
 }
 
