@@ -110,14 +110,14 @@ class DetailPanelService {
         
         if (location.ruler && location.ruler.trim() !== '') {
             rulerOwnerValue = location.ruler;
-            rulerOwnerLabel = 'RULER';
+            rulerOwnerLabel = 'Ruler';
         } else if (location.owner && location.owner.trim() !== '') {
             rulerOwnerValue = location.owner;
-            rulerOwnerLabel = 'OWNER';
+            rulerOwnerLabel = 'Owner';
         } else if (location.family && location.family.trim() !== '') {
             // Backward compatibility: if family exists and no ruler/owner
             rulerOwnerValue = location.family;
-            rulerOwnerLabel = 'RULER / OWNER';
+            rulerOwnerLabel = 'Ruler / Owner';
         }
         
         this.panelContent.innerHTML = `
@@ -127,20 +127,20 @@ class DetailPanelService {
                 
                 ${showType ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">TYPE</span>
+                    <span class="detail-panel-label">Type</span>
                     <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
                 ` : ''}
                 
                 ${location.region ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">REGION</span>
+                    <span class="detail-panel-label">Region</span>
                     <span class="detail-panel-value-inline">${this.escapeHtml(location.region)}</span>
                 </div>
                 ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-description">
-                    <span class="detail-panel-label">DESCRIPTION</span>
+                    <span class="detail-panel-label">Description</span>
                     <div class="detail-panel-description-wrapper">
                         <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
                         <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
@@ -155,14 +155,14 @@ class DetailPanelService {
                 ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">VISIBILITY</span>
+                    <span class="detail-panel-label">Visibility</span>
                     <span class="detail-panel-value-inline ${location.known ? 'status-known' : 'status-hidden'}">
                         ${location.known ? '👁️ Visible' : '🔒 Hidden'}
                     </span>
                 </div>
                 
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">COORDINATES</span>
+                    <span class="detail-panel-label">Coordinates</span>
                     <span class="detail-panel-value-inline detail-panel-coords">
                         ${location.coords ? `${location.coords[0].toFixed(2)}%, ${location.coords[1].toFixed(2)}%` : 'N/A'}
                     </span>
@@ -170,7 +170,7 @@ class DetailPanelService {
                 
                 ${location.image ? `
                 <div class="detail-panel-section">
-                    <span class="detail-panel-label">IMAGE</span>
+                    <span class="detail-panel-label">Image</span>
                     <div class="detail-panel-image">
                         <img src="${location.image}" alt="${location.name}" loading="lazy" onerror="this.style.display='none'">
                     </div>
@@ -184,7 +184,7 @@ class DetailPanelService {
                 
                 ${location.createdAt ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">CREATED</span>
+                    <span class="detail-panel-label">Created</span>
                     <span class="detail-panel-value-inline detail-panel-id">${new Date(location.createdAt).toLocaleDateString()}</span>
                 </div>
                 ` : ''}
@@ -205,6 +205,22 @@ class DetailPanelService {
         // Check if TYPE should be shown (hide for POI)
         const showType = location.type !== 'poi';
         
+        // Get ruler or owner value
+        let rulerOwnerValue = null;
+        let rulerOwnerLabel = null;
+        
+        if (location.ruler && location.ruler.trim() !== '') {
+            rulerOwnerValue = location.ruler;
+            rulerOwnerLabel = 'Ruler';
+        } else if (location.owner && location.owner.trim() !== '') {
+            rulerOwnerValue = location.owner;
+            rulerOwnerLabel = 'Owner';
+        } else if (location.family && location.family.trim() !== '') {
+            // Backward compatibility: if family exists and no ruler/owner
+            rulerOwnerValue = location.family;
+            rulerOwnerLabel = 'Ruler / Owner';
+        }
+        
         this.panelContent.innerHTML = `
             <div class="detail-panel-item detail-panel-item-player">
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
@@ -212,18 +228,32 @@ class DetailPanelService {
                 
                 ${showType ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">TYPE</span>
+                    <span class="detail-panel-label">Type</span>
                     <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
                 ` : ''}
                 
+                ${location.region ? `
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">Region</span>
+                    <span class="detail-panel-value-inline">${this.escapeHtml(location.region)}</span>
+                </div>
+                ` : ''}
+                
                 <div class="detail-panel-section detail-panel-section-description">
-                    <span class="detail-panel-label">DESCRIPTION</span>
+                    <span class="detail-panel-label">Description</span>
                     <div class="detail-panel-description-wrapper">
                         <div class="detail-panel-description-text" id="description-text">${descriptionHtml}</div>
                         <button class="detail-panel-description-toggle" id="description-toggle">Read more</button>
                     </div>
                 </div>
+                
+                ${rulerOwnerValue ? `
+                <div class="detail-panel-section detail-panel-section-inline">
+                    <span class="detail-panel-label">${rulerOwnerLabel}</span>
+                    <span class="detail-panel-value-inline">${this.escapeHtml(rulerOwnerValue)}</span>
+                </div>
+                ` : ''}
             </div>
         `;
 
@@ -292,7 +322,7 @@ class DetailPanelService {
     getTypeDisplayName(type) {
         const typeNames = {
             cities: 'Город',
-            feyspires: 'Фейский Шпиль',
+            feyspires: 'Фейский шпиль',
             settlements: 'Поселение',
             farms: 'Ферма',
             ruins: 'Руины',
@@ -300,9 +330,9 @@ class DetailPanelService {
             caves: 'Пещера',
             secrets: 'Секрет',
             forts: 'Форт',
-            shrines: 'Храм',
+            shrines: 'Святилище',
             poi: 'Точка интереса',
-            enclaves: 'Анклав Драконьего дома',
+            enclaves: 'Анклав Драконьего Дома',
         };
         return typeNames[type] || type;
     }
