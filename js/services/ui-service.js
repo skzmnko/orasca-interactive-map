@@ -10,6 +10,7 @@ class UIService {
         this.panelCloseBtn = null;
         this.mobileFilterBtn = null;
         this.mobileSearchBtn = null;
+        this.mobileResetBtn = null;
         this.mobileTopPanel = null;
         this.searchResults = null;
         this.searchInput = null;
@@ -34,6 +35,7 @@ class UIService {
         this.panelCloseBtn = document.getElementById('panel-close-btn');
         this.mobileFilterBtn = document.getElementById('mobile-filter-btn');
         this.mobileSearchBtn = document.getElementById('mobile-search-btn');
+        this.mobileResetBtn = document.getElementById('mobile-reset-btn');
         this.mobileTopPanel = document.getElementById('mobile-top-panel');
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
@@ -80,6 +82,7 @@ class UIService {
             panelCloseBtn: !!this.panelCloseBtn,
             mobileFilterBtn: !!this.mobileFilterBtn,
             mobileSearchBtn: !!this.mobileSearchBtn,
+            mobileResetBtn: !!this.mobileResetBtn,
             isMobile: this.isMobile,
             isPanelOpen: this.isPanelOpen
         });
@@ -250,6 +253,16 @@ class UIService {
             this.mobileSearchBtn.addEventListener('click', () => {
                 console.log('Mobile search button clicked');
                 this.toggleMobileSearch();
+            });
+        }
+
+        // Mobile reset view button
+        if (this.mobileResetBtn) {
+            this.mobileResetBtn.addEventListener('click', () => {
+                console.log('Mobile reset view button clicked');
+                if (window.mapService) {
+                    window.mapService.resetView();
+                }
             });
         }
         

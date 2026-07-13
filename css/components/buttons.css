@@ -100,6 +100,13 @@
     box-shadow: var(--mg-glow);
 }
 
+/* Hide reset view button on mobile */
+@media (max-width: 768px) {
+    .map-controls #reset-view {
+        display: none !important;
+    }
+}
+
 /* Desktop Profile Button */
 .desktop-profile-btn {
     position: fixed;
@@ -324,7 +331,6 @@
         align-items: center;
         justify-content: flex-end;
         will-change: transform;
-        /* Ensure panel is completely hidden when closed */
         visibility: visible;
         opacity: 1;
     }
@@ -333,7 +339,6 @@
         transform: translateY(0);
     }
     
-    /* When closed, panel is completely above the viewport */
     .profile-panel:not(.open) {
         transform: translateY(-100%);
     }
