@@ -17,7 +17,6 @@ class UIService {
         this.isPanelOpen = true;
         this.isMobile = false;
         
-        // Profile elements
         this.desktopProfileBtn = null;
         this.mobileProfileBtn = null;
         this.profilePanel = null;
@@ -40,7 +39,6 @@ class UIService {
         this.searchInput = document.getElementById('search');
         this.searchResults = document.getElementById('search-results');
         
-        // Profile elements
         this.desktopProfileBtn = document.getElementById('desktop-profile-btn');
         this.mobileProfileBtn = document.getElementById('mobile-profile-btn');
         this.profilePanel = document.getElementById('profile-panel');
@@ -141,7 +139,6 @@ class UIService {
             this.profileUsername.textContent = user.displayName || user.username;
         }
         if (this.profileRole && user) {
-            // Переведено на русский
             this.profileRole.textContent = user.role === 'DM' ? 'Мастер' : 'Игрок';
         }
 
@@ -257,7 +254,6 @@ class UIService {
             });
         }
 
-        // Mobile reset view button
         if (this.mobileResetBtn) {
             this.mobileResetBtn.addEventListener('click', () => {
                 console.log('Mobile reset view button clicked');
