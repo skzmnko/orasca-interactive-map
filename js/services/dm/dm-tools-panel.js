@@ -19,6 +19,8 @@ class DMToolsPanel {
         this.countDisplay = null;
 
         this.form = null;
+        this.mobileBtn = null;
+        this.desktopBtn = null;
 
         // Bind context
         this.handleCoordinatePick = this.handleCoordinatePick.bind(this);
@@ -27,30 +29,32 @@ class DMToolsPanel {
         this.handleExport = this.handleExport.bind(this);
         this.handleClear = this.handleClear.bind(this);
         this.renderLocationList = this.renderLocationList.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     initialize() {
         this.createPanel();
         this.setupEventListeners();
         this.renderLocationList();
+        this.checkMobileButton();
         console.log('🛠️ DM Tools Panel initialized');
     }
 
     createPanel() {
-        // DM Tools panel open button
-        const openBtn = document.createElement('button');
-        openBtn.id = 'dm-tools-open-btn';
-        openBtn.className = 'dm-tools-open-btn';
-        openBtn.setAttribute('title', 'DM Tools');
-        openBtn.innerHTML = `
+        // Desktop DM Tools panel open button
+        this.desktopBtn = document.createElement('button');
+        this.desktopBtn.id = 'dm-tools-open-btn';
+        this.desktopBtn.className = 'dm-tools-open-btn';
+        this.desktopBtn.setAttribute('title', 'DM Tools');
+        this.desktopBtn.innerHTML = `
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                 <circle cx="12" cy="10" r="3"/>
             </svg>
         `;
-        document.body.appendChild(openBtn);
+        document.body.appendChild(this.desktopBtn);
 
-        openBtn.addEventListener('click', () => this.toggle());
+        this.desktopBtn.addEventListener('click', this.toggle);
 
         // DM Tools panel
         this.panelContainer = document.createElement('div');
@@ -144,6 +148,16 @@ class DMToolsPanel {
             </div>
         `;
         document.body.appendChild(this.panelContainer);
+    }
+
+    checkMobileButton() {
+        this.mobileBtn = document.getElementById('mobile-dm-tools-btn');
+        if (this.mobileBtn) {
+            // Mobile button is disabled via CSS - just log it
+            console.log('📱 Mobile DM Tools button found (disabled)');
+        } else {
+            console.warn('⚠️ Mobile DM Tools button not found in DOM');
+        }
     }
 
     setupEventListeners() {
@@ -435,6 +449,7 @@ class DMToolsPanel {
             this.panelContainer.classList.remove('hidden');
             this.panelContainer.classList.add('visible');
         }
+        this.updateButtonStates(true);
         this.renderLocationList();
         console.log('🛠️ DM Tools panel opened');
     }
@@ -455,7 +470,21 @@ class DMToolsPanel {
             this.panelContainer.classList.add('hidden');
             this.panelContainer.classList.remove('visible');
         }
+        this.updateButtonStates(false);
         console.log('🛠️ DM Tools panel closed');
+    }
+
+    updateButtonStates(isOpen) {
+        // Desktop button
+        if (this.desktopBtn) {
+            if (isOpen) {
+                this.desktopBtn.classList.add('active');
+            } else {
+                this.desktopBtn.classList.remove('active');
+            }
+        }
+
+        // Mobile button is disabled, no visual state update needed
     }
 }
 

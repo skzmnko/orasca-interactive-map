@@ -42,6 +42,75 @@
     flex-shrink: 0;
 }
 
+/* Mobile action buttons - common styles */
+.mobile-search-btn,
+.mobile-filter-btn,
+.mobile-dm-tools-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mg-bg-secondary);
+    border: 1px solid var(--mg-border);
+    border-radius: 5px;
+    color: var(--mg-text-secondary);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    height: 32px;
+    width: 32px;
+}
+
+.mobile-search-btn:hover,
+.mobile-filter-btn:hover {
+    background: var(--mg-hover);
+    border-color: var(--mg-accent-muted);
+    color: var(--mg-text-accent);
+    box-shadow: var(--mg-glow);
+}
+
+.mobile-search-btn:active,
+.mobile-filter-btn:active {
+    transform: scale(0.95);
+}
+
+.mobile-search-btn.active,
+.mobile-filter-btn.active {
+    background: var(--mg-accent-light);
+    border-color: var(--mg-accent);
+    color: var(--mg-text-accent);
+    box-shadow: var(--mg-glow);
+}
+
+/* DM Tools button - disabled state (inherits base sizes from above) */
+.mobile-dm-tools-btn {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(0.6);
+}
+
+.mobile-dm-tools-btn:hover {
+    background: var(--mg-bg-secondary);
+    border-color: var(--mg-border);
+    color: var(--mg-text-secondary);
+    box-shadow: none;
+    transform: none;
+}
+
+.mobile-search-btn svg,
+.mobile-filter-btn svg,
+.mobile-dm-tools-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
 /* Mobile Search Panel */
 .mobile-search-panel {
     position: fixed;
@@ -59,7 +128,7 @@
     padding: 12px 16px 8px 16px;
     flex-direction: column;
     gap: 8px;
-    max-height: 60vh; /* Ограничиваем общую высоту панели */
+    max-height: 60vh;
 }
 
 .mobile-search-panel.open {
@@ -104,7 +173,7 @@
     background: var(--mg-bg-secondary);
     border: 1px solid var(--mg-border);
     border-radius: var(--mg-radius-lg);
-    max-height: 200px; /* Увеличено с текущего значения для отображения 5+ результатов */
+    max-height: 200px;
     overflow-y: auto;
     display: none;
     margin-top: 4px;
@@ -112,4 +181,32 @@
 
 #mobile-search-results.has-results {
     display: block;
+}
+
+/* Responsive for very small screens */
+@media (max-width: 480px) {
+    .mobile-top-panel {
+        height: var(--mg-mobile-top-panel-height);
+        padding: 0 10px;
+        gap: 8px;
+    }
+
+    .mobile-panel-title {
+        font-size: 0.8rem;
+    }
+
+    .mobile-search-btn,
+    .mobile-filter-btn,
+    .mobile-dm-tools-btn {
+        height: 28px;
+        width: 28px;
+        border-radius: 4px;
+    }
+
+    .mobile-search-btn svg,
+    .mobile-filter-btn svg,
+    .mobile-dm-tools-btn svg {
+        width: 14px;
+        height: 14px;
+    }
 }

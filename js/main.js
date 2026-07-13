@@ -105,7 +105,8 @@ class Application {
         SearchService.initialize();
         this.addLogoutButton();
 
-        // Initialize DM Tools only for DM users
+        // Initialize DM Tools for DM users (both desktop and mobile)
+        // Mobile button is handled in dm-tools-panel.js via #mobile-dm-tools-btn
         if (AuthService.isDM()) {
             this.dmToolsPanel = DMToolsPanel;
             this.dmToolsPanel.initialize();
