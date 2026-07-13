@@ -9,7 +9,7 @@ class LayerService {
         this.layerControls = {
             'cities-layer': 'cities',
             'feyspires-layer': 'feyspires',
-            'settlements-layer': 'settlements',
+            'settlements-layer': ['settlements', 'farms'],
             'ruins-layer': 'ruins',
             'dungeons-layer': ['dungeons', 'caves'],
             'secrets-layer': 'secrets',
@@ -22,7 +22,7 @@ class LayerService {
 
     initializeLayers() {
         const layerTypes = [
-            'cities', 'feyspires', 'settlements', 'ruins', 'dungeons', 'tombs', 'caves', 'secrets', 
+            'cities', 'feyspires', 'settlements', 'farms', 'ruins', 'dungeons', 'tombs', 'caves', 'secrets', 
             'forts', 'shrines', 'poi'
         ];
 

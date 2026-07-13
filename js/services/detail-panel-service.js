@@ -128,7 +128,7 @@ class DetailPanelService {
                 
                 ${location.family ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">FAMILY</span>
+                    <span class="detail-panel-label">RULER / OWNER</span>
                     <span class="detail-panel-value-inline">${this.escapeHtml(location.family)}</span>
                 </div>
                 ` : ''}
@@ -265,17 +265,18 @@ class DetailPanelService {
 
     getTypeDisplayName(type) {
         const typeNames = {
-            cities: 'City',
-            feyspires: 'Feyspire',
-            settlements: 'Settlement',
-            ruins: 'Ruins',
-            dungeons: 'Dungeon',
-            caves: 'Cave',
-            secrets: 'Secret',
-            forts: 'Fort',
-            shrines: 'Shrine',
-            poi: 'Point of Interest',
-            enclaves: 'Enclave',
+            cities: 'Город',
+            feyspires: 'Фейский Шпиль',
+            settlements: 'Поселение',
+            farms: 'Ферма',
+            ruins: 'Руины',
+            dungeons: 'Подземелье',
+            caves: 'Пещера',
+            secrets: 'Секрет',
+            forts: 'Форт',
+            shrines: 'Храм',
+            poi: 'Точка интереса',
+            enclaves: 'Анклав Драконьего дома',
         };
         return typeNames[type] || type;
     }
