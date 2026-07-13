@@ -106,10 +106,8 @@ class Application {
         LayerService.bindLayerControls();
         SearchService.initialize();
 
-        // Manage mobile DM Tools button visibility
         this.updateMobileDMButtonVisibility();
 
-        // Initialize DM Tools only for DM users on desktop
         if (AuthService.isDM() && !this.isMobile) {
             this.dmToolsPanel = DMToolsPanel;
             this.dmToolsPanel.initialize();
@@ -138,8 +136,6 @@ class Application {
 
         const isDM = AuthService.isDM();
         
-        // Button should ONLY be visible on mobile devices AND for DM users
-        // On desktop it should be hidden (desktop has its own button)
         if (this.isMobile && isDM) {
             mobileDmBtn.style.display = 'flex';
             console.log('📱 Mobile DM Tools button shown (DM user on mobile)');
