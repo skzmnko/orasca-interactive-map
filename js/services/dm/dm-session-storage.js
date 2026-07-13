@@ -76,36 +76,29 @@ class DMSessionStorage {
             throw new Error('No locations to export');
         }
 
-        // Export data, removing id, createdAt and fields with false value
         const exportData = this.locations.map(location => {
-            // Base fields that are always exported
             const exported = {
                 name: location.name,
                 type: location.type,
-                coords: location.coords.map(c => Number(c.toFixed(2))) // Round to 2 decimal places
+                coords: location.coords.map(c => Number(c.toFixed(2)))
             };
 
-            // Add alias if present
             if (location.alias && location.alias.trim() !== '') {
                 exported.alias = location.alias;
             }
 
-            // Add region if present
             if (location.region && location.region.trim() !== '') {
                 exported.region = location.region;
             }
 
-            // Add description if present
             if (location.description && location.description.trim() !== '') {
                 exported.description = location.description;
             }
 
-            // Add image if present and not default
             if (location.image && location.image.trim() !== '' && location.image !== 'images/locations/example.jpg') {
                 exported.image = location.image;
             }
 
-            // Add known only if true (if false - skip)
             if (location.known === true) {
                 exported.known = true;
             }
