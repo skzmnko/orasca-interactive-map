@@ -101,15 +101,36 @@ class DetailPanelService {
                 .join('\n')
             : '';
         
+        // Check if TYPE should be shown (hide for POI)
+        const showType = location.type !== 'poi';
+        
+        // Get ruler or owner value
+        let rulerOwnerValue = null;
+        let rulerOwnerLabel = null;
+        
+        if (location.ruler && location.ruler.trim() !== '') {
+            rulerOwnerValue = location.ruler;
+            rulerOwnerLabel = 'RULER';
+        } else if (location.owner && location.owner.trim() !== '') {
+            rulerOwnerValue = location.owner;
+            rulerOwnerLabel = 'OWNER';
+        } else if (location.family && location.family.trim() !== '') {
+            // Backward compatibility: if family exists and no ruler/owner
+            rulerOwnerValue = location.family;
+            rulerOwnerLabel = 'RULER / OWNER';
+        }
+        
         this.panelContent.innerHTML = `
             <div class="detail-panel-item">
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
                 ${location.alias ? `<div class="detail-panel-alias">${this.escapeHtml(location.alias)}</div>` : ''}
                 
+                ${showType ? `
                 <div class="detail-panel-section detail-panel-section-inline">
                     <span class="detail-panel-label">TYPE</span>
                     <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
+                ` : ''}
                 
                 ${location.region ? `
                 <div class="detail-panel-section detail-panel-section-inline">
@@ -126,10 +147,10 @@ class DetailPanelService {
                     </div>
                 </div>
                 
-                ${location.family ? `
+                ${rulerOwnerValue ? `
                 <div class="detail-panel-section detail-panel-section-inline">
-                    <span class="detail-panel-label">RULER / OWNER</span>
-                    <span class="detail-panel-value-inline">${this.escapeHtml(location.family)}</span>
+                    <span class="detail-panel-label">${rulerOwnerLabel}</span>
+                    <span class="detail-panel-value-inline">${this.escapeHtml(rulerOwnerValue)}</span>
                 </div>
                 ` : ''}
                 
@@ -181,15 +202,20 @@ class DetailPanelService {
                 .join('\n')
             : '';
         
+        // Check if TYPE should be shown (hide for POI)
+        const showType = location.type !== 'poi';
+        
         this.panelContent.innerHTML = `
             <div class="detail-panel-item detail-panel-item-player">
                 <div class="detail-panel-name">${this.escapeHtml(location.name)}</div>
                 ${location.alias ? `<div class="detail-panel-alias">${this.escapeHtml(location.alias)}</div>` : ''}
                 
+                ${showType ? `
                 <div class="detail-panel-section detail-panel-section-inline">
                     <span class="detail-panel-label">TYPE</span>
                     <span class="detail-panel-value-inline">${this.getTypeDisplayName(location.type)}</span>
                 </div>
+                ` : ''}
                 
                 <div class="detail-panel-section detail-panel-section-description">
                     <span class="detail-panel-label">DESCRIPTION</span>

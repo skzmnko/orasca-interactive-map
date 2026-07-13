@@ -11,6 +11,8 @@ class LocationFactory {
             image,
             alias,
             family,
+            ruler,
+            owner,
             known = false
         } = data;
 
@@ -28,6 +30,8 @@ class LocationFactory {
             image: imagePath,
             alias: alias || '',
             family: family || '',
+            ruler: ruler || '',
+            owner: owner || '',
             known: known,
             createdAt: new Date().toISOString()
         };
