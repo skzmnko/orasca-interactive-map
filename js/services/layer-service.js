@@ -38,8 +38,6 @@ class LayerService {
     }
 
     hideGeographicLayers() {
-        // No layers are hidden by default now
-        // All layers including enclaves are shown by default
         console.log('✅ All layers visible by default');
     }
 
