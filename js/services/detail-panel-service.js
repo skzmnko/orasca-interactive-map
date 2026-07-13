@@ -101,10 +101,8 @@ class DetailPanelService {
                 .join('\n')
             : '';
         
-        // Check if TYPE should be shown (hide for POI)
         const showType = location.type !== 'poi';
         
-        // Get ruler or owner value
         let rulerOwnerValue = null;
         let rulerOwnerLabel = null;
         
@@ -115,7 +113,6 @@ class DetailPanelService {
             rulerOwnerValue = location.owner;
             rulerOwnerLabel = 'Владелец';
         } else if (location.family && location.family.trim() !== '') {
-            // Backward compatibility: if family exists and no ruler/owner
             rulerOwnerValue = location.family;
             rulerOwnerLabel = 'Правитель / Владелец';
         }
@@ -202,10 +199,8 @@ class DetailPanelService {
                 .join('\n')
             : '';
         
-        // Check if TYPE should be shown (hide for POI)
         const showType = location.type !== 'poi';
         
-        // Get ruler or owner value
         let rulerOwnerValue = null;
         let rulerOwnerLabel = null;
         
@@ -216,7 +211,6 @@ class DetailPanelService {
             rulerOwnerValue = location.owner;
             rulerOwnerLabel = 'Владелец';
         } else if (location.family && location.family.trim() !== '') {
-            // Backward compatibility: if family exists and no ruler/owner
             rulerOwnerValue = location.family;
             rulerOwnerLabel = 'Правитель / Владелец';
         }
