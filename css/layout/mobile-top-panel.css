@@ -111,6 +111,15 @@
     flex-shrink: 0;
 }
 
+/* Hide mobile buttons on desktop (they are shown only on mobile via media query) */
+@media (min-width: 769px) {
+    .mobile-search-btn,
+    .mobile-filter-btn,
+    .mobile-dm-tools-btn {
+        display: none !important;
+    }
+}
+
 /* Mobile Search Panel */
 .mobile-search-panel {
     position: fixed;

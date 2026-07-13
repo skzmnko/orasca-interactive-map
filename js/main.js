@@ -31,6 +31,7 @@ class Application {
         this.uiService = null;
         this.loginPage = null;
         this.dmToolsPanel = null;
+        this.isMobile = window.innerWidth <= 768;
     }
 
     async initialize() {
@@ -79,6 +80,7 @@ class Application {
         console.log(`👤 Current user: ${AuthService.getCurrentUser().displayName}`);
         console.log(`🎭 Role: ${AuthService.getCurrentUser().role}`);
         console.log(`📍 Locations shown: ${this.filteredLocations.length} из ${this.locations.length}`);
+        console.log(`📱 Mobile device: ${this.isMobile ? 'Yes' : 'No'}`);
     }
 
     showLoginPage() {
@@ -105,12 +107,16 @@ class Application {
         SearchService.initialize();
         this.addLogoutButton();
 
-        // Initialize DM Tools for DM users (both desktop and mobile)
-        // Mobile button is handled in dm-tools-panel.js via #mobile-dm-tools-btn
-        if (AuthService.isDM()) {
+        // Manage mobile DM Tools button visibility
+        this.updateMobileDMButtonVisibility();
+
+        // Initialize DM Tools only for DM users on desktop
+        if (AuthService.isDM() && !this.isMobile) {
             this.dmToolsPanel = DMToolsPanel;
             this.dmToolsPanel.initialize();
-            console.log('🛠️ DM Tools initialized');
+            console.log('🛠️ DM Tools initialized (desktop mode)');
+        } else if (AuthService.isDM() && this.isMobile) {
+            console.log('📱 DM Tools panel disabled on mobile (only mobile button shown)');
         }
 
         LayerService.hideGeographicLayers();
@@ -125,6 +131,22 @@ class Application {
         window.authService = AuthService;
         window.detailPanelService = DetailPanelService;
         window.dmToolsPanel = DMToolsPanel;
+    }
+
+    updateMobileDMButtonVisibility() {
+        const mobileDmBtn = document.getElementById('mobile-dm-tools-btn');
+        if (!mobileDmBtn) return;
+
+        const isDM = AuthService.isDM();
+        
+        // Button should ONLY be visible on mobile devices AND for DM users
+        // On desktop it should be hidden (desktop has its own button)
+        if (this.isMobile && isDM) {
+            mobileDmBtn.style.display = 'flex';
+            console.log('📱 Mobile DM Tools button shown (DM user on mobile)');
+        } else {
+            mobileDmBtn.style.display = 'none';
+        }
     }
 
     addLogoutButton() {
